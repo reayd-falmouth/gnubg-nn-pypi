@@ -1,6 +1,6 @@
 PYPI_REPO := testpypi
 
-all: clean install build
+all: clean install wheel
 
 configure:
 	cp -rf patches/gnubg-nn/* gnubg-nn/
