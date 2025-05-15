@@ -67,7 +67,15 @@ jobs:
       - name: Install system dependencies on macOS
         run: |
             brew update
-            brew install autoconf automake pkg-config
+            brew install autoconf automake libtool pkg-config
+  
+      - name: Make libtool macros available
+        run: |
+            # libtoolize (or glibtoolize on Homebrew installs) installs the m4 files
+            # into your autoconf search path
+            libtoolize --force --copy
+            aclocal
+            autoheader
 
       - name: Generate configure script & configure
         run: make configure
