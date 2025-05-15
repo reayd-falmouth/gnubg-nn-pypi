@@ -19,7 +19,7 @@ c_sources = [f for f in c_sources if f not in ANALYZE_EXCLUDE]
 
 # your C++ sources as before
 cpp_sources = [
-    "py3mod.cpp",
+    "src/gnubg/py3mod.cpp",
     "gnubg-nn/gnubg/bearoffgammon.cc",
     "gnubg-nn/gnubg/racebg.cc",
     "gnubg-nn/gnubg/osr.cc",
@@ -42,12 +42,14 @@ gnubg_module = Extension(
 setup(
     name="gnubg",
     version="1.1",
-    packages=find_packages(),
+    packages=find_packages(where="src"),
     ext_modules=[gnubg_module],
     include_package_data=True,
+    package_dir={"": "src"},
     package_data={
         'gnubg': ['data/*.bd', 'data/*.weights', 'data/*.db'],
     },
+    exclude_package_data={"gnubg": ["py3mod.cpp"]},
     description='Python3 bindings for GNUBG neural evaluation',
     author='David Reay',
     author_email='dr323090@falmouth.ac.uk',

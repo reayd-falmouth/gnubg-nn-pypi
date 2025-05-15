@@ -32,9 +32,7 @@ jobs:
             zlib1g-dev
 
       - name: Generate configure script & configure
-        run: |
-          autoreconf -i
-          ./configure
+        run: make configure
 
       - name: Set up Python
         uses: actions/setup-python@v4.4.0

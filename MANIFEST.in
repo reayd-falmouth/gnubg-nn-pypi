@@ -1,1 +1,1 @@
-recursive-include gnubg/data *.bd *.weights *.db
+recursive-include src/gnubg_ext/data *.bd *.weights *.db

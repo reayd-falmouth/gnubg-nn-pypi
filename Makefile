@@ -1,8 +1,7 @@
 all: clean install build
 
 configure:
-	cp -f configure.ac gnubg-nn/
-	cp -f danalyze.cc gnubg-nn/analyze/
+	cp -rf patches/gnubg-nn/* gnubg-nn/
 	cd gnubg-nn && autoreconf -i &&	./configure
 
 clean:
@@ -16,7 +15,7 @@ build:
 	python3 setup.py sdist bdist_wheel
 
 test:
-	pip install dist/*.whl
+	pip install --force-reinstall dist/*.whl
 	python3 tests/test.py
 
 PYPI_REPO := testpypi
