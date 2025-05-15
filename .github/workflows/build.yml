@@ -1,31 +1,21 @@
-name: Build & publish wheels
+name: Build wheels
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
-permissions:
-  contents: read    # so checkout still works
-  id-token: write   # ← this unlocks ACTIONS_ID_TOKEN_REQUEST_TOKEN
+  workflow_run:
+    workflows: [ "CI Tests" ]
+    types:
+      - completed
 
 jobs:
-
-  publish:
-    environment: testpypi
-    name: manylinux
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
-          # fetch all submodules (use `true` for one level, or 'recursive' for nested)
           submodules: recursive
-          # if you need the full commit history in both superrepo and submodules
           fetch-depth: 0
 
       - name: Install system dependencies
@@ -43,22 +33,22 @@ jobs:
       - name: Generate configure script & configure
         run: make configure
 
-      - name: Set up python
-        uses: actions/setup-python@v4.4.0
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version-file: .python-version
 
-      - name: Set up Python & build
-        run: make install
+      - name: Install build tools
+        run: pip install --upgrade pip setuptools wheel cibuildwheel auditwheel
 
       - name: Build manylinux wheels
         env:
-          # skip PyPy builds entirely
+          # skip PyPy if you don’t need it
           CIBW_SKIP: "pp*"
         run: make wheel
 
-      - name: Upload to TestPyPI
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
-        run: make twine
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: manylinux-wheels
+          path: dist/*manylinux*.whl

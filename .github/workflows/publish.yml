@@ -1,0 +1,34 @@
+name: Publish wheels
+
+# allow manual dispatch, or run automatically when build completes
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read    # needed for download-artifact
+  id-token: write   # if you want to use OIDC for twine (optional)
+
+jobs:
+  publish:
+    # only run if the build succeeded
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    environment: testpypi
+
+    steps:
+      - name: Download built wheels
+        uses: actions/download-artifact@v3
+        with:
+          name: manylinux-wheels
+          path: dist
+
+      - name: Install Twine
+        run: pip install --upgrade pip twine
+
+      - name: Publish to TestPyPI
+        env:
+          # either a static token...
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
+          # …or use OIDC if you’ve set that up already
+        run: twine upload --repository testpypi dist/*.whl
