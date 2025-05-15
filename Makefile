@@ -15,14 +15,10 @@ install:
 
 build: wheel
 wheel:
-	python3 setup.py sdist bdist_wheel
+	#python3 setup.py sdist bdist_wheel
+	cibuildwheel --platform linux --output-dir dist
 
-repair: wheel
-	auditwheel repair dist/*.whl \
-      --plat manylinux2014_x86_64 \
-      -w dist
-
-twine: repair
+twine:
 	twine upload --verbose --repository $(PYPI_REPO) dist/*manylinux*.whl
 
 test:
