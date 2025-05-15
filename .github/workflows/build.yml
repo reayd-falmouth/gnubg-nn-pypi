@@ -57,14 +57,17 @@ jobs:
       - name: Install the built package and run tests
         run: make test
 
-      - name: Upload the dist directory as an artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: gnubg-1.1-cp310-cp310-linux_x86_64
-          path: dist/
+      - name: Set up Python & build
+        run: |
+          pip install --upgrade pip setuptools wheel
+          pip install cibuildwheel
+
+      - name: Build manylinux wheels
+        run: cibuildwheel --platform linux --output-dir wheelhouse
 
       - name: Upload to TestPyPI
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
-        run: make twine PYPI_REPO=testpypi
+        run: |
+          twine upload --repository testpypi wheelhouse/*manylinux*.whl
