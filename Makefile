@@ -3,7 +3,6 @@ PYPI_REPO := testpypi
 all: clean install build
 
 configure:
-	cp -rf patches/gnubg-nn/* gnubg-nn/
 	cd gnubg-nn && autoreconf -i &&	./configure
 
 clean:
@@ -17,7 +16,6 @@ build:
 	python3 setup.py sdist bdist_wheel
 
 wheel:
-
 	cibuildwheel --platform linux --output-dir dist
 
 twine:
@@ -26,6 +24,9 @@ twine:
 test:
 	pip install --force-reinstall dist/*.whl
 	python3 tests/test.py
+
+patch:
+	cp -rf patches/gnubg-nn/* gnubg-nn/
 
 # Check-in code after formatting
 checkin: ## Perform a check-in after formatting the code

@@ -31,6 +31,9 @@ jobs:
             libssl-dev \
             zlib1g-dev
 
+      - name: Apply Patch files
+        run: make patch
+
       - name: Generate configure script & configure
         run: make configure
 
