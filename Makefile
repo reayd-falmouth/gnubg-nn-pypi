@@ -1,6 +1,6 @@
 PYPI_REPO := testpypi
 
-all: clean install wheel
+all: clean install build
 
 configure:
 	cp -rf patches/gnubg-nn/* gnubg-nn/
@@ -13,9 +13,11 @@ clean:
 install:
 	pip install --upgrade pip setuptools wheel cibuildwheel twine
 
-build: wheel
+build:
+	python3 setup.py sdist bdist_wheel
+
 wheel:
-	#python3 setup.py sdist bdist_wheel
+
 	cibuildwheel --platform linux --output-dir dist
 
 twine:
