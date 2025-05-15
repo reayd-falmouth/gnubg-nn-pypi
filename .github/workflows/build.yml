@@ -52,6 +52,9 @@ jobs:
         run: make install
 
       - name: Build manylinux wheels
+        env:
+          # skip PyPy builds entirely
+          CIBW_SKIP: "pp*"
         run: make wheel
 
       - name: Upload to TestPyPI
