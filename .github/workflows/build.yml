@@ -69,5 +69,4 @@ jobs:
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
-        working-directory: py
         run: make twine PYPI_REPO=testpypi

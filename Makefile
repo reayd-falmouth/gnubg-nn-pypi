@@ -1,3 +1,5 @@
+PYPI_REPO := testpypi
+
 all: clean install build
 
 configure:
@@ -11,16 +13,20 @@ clean:
 install:
 	pip install --upgrade pip setuptools wheel cibuildwheel twine
 
-build:
+wheel:
 	python3 setup.py sdist bdist_wheel
+
+repair: wheel
+	auditwheel repair dist/*.whl \
+      --plat manylinux2014_x86_64 \
+      -w dist
+
+twine: repair
+	twine upload --verbose --repository $(PYPI_REPO) dist/*manylinux*.whl
 
 test:
 	pip install --force-reinstall dist/*.whl
 	python3 tests/test.py
-
-PYPI_REPO := testpypi
-twine:
-	twine upload --verbose --repository $(PYPI_REPO) dist/*
 
 # Check-in code after formatting
 checkin: ## Perform a check-in after formatting the code
