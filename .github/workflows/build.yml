@@ -79,6 +79,7 @@ jobs:
         run: |
           # libtoolize (or glibtoolize on Homebrew installs) installs the m4 files
           # into your autoconf search path
+          cd gnubg-nn
           glibtoolize --force --copy
           aclocal
           autoheader
