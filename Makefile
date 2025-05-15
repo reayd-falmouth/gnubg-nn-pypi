@@ -13,6 +13,7 @@ clean:
 install:
 	pip install --upgrade pip setuptools wheel cibuildwheel twine
 
+build: wheel
 wheel:
 	python3 setup.py sdist bdist_wheel
 

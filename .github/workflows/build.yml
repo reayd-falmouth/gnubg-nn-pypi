@@ -41,9 +41,7 @@ jobs:
             zlib1g-dev
 
       - name: Generate configure script & configure
-        run: |
-          autoreconf -i
-          ./configure
+        run: make configure
 
       - name: Set up python
         uses: actions/setup-python@v4.4.0
@@ -54,7 +52,7 @@ jobs:
         run: make install
 
       - name: Build Python extension
-        run: make build
+        run: make
 
       - name: Install the built package and run tests
         run: make test
