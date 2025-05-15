@@ -77,11 +77,11 @@ jobs:
 
       - name: Make libtool macros available
         run: |
-            # libtoolize (or glibtoolize on Homebrew installs) installs the m4 files
-            # into your autoconf search path
-            libtoolize --force --copy
-            aclocal
-            autoheader
+          # libtoolize (or glibtoolize on Homebrew installs) installs the m4 files
+          # into your autoconf search path
+          glibtoolize --force --copy
+          aclocal
+          autoheader
 
       - name: Generate configure script & configure
         run: make configure
