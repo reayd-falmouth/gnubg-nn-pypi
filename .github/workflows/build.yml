@@ -17,7 +17,7 @@ jobs:
 
   publish:
     environment: testpypi
-    name: py3mod
+    name: manylinux
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
