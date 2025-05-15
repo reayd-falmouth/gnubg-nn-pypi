@@ -48,15 +48,6 @@ jobs:
         with:
           python-version-file: .python-version
 
-      - name: Install Python dependencies
-        run: make install
-
-      - name: Build Python extension
-        run: make
-
-      - name: Install the built package and run tests
-        run: make test
-
       - name: Set up Python & build
         run: |
           pip install --upgrade pip setuptools wheel
