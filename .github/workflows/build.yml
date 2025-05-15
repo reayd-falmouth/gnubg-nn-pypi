@@ -1,19 +1,17 @@
+# .github/workflows/build-wheels.yml
 name: Build wheels
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
-  workflow_run:
-    workflows: [ "CI Tests" ]
-    types:
-      - completed
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-  build:
+  build-linux:
+    name: Build Linux (manylinux) wheels
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -36,22 +34,86 @@ jobs:
       - name: Generate configure script & configure
         run: make configure
 
-      - name: Set up Python
+      - name: Set up Python & build tools
         uses: actions/setup-python@v4
         with:
           python-version-file: .python-version
 
-      - name: Install build tools
+      - name: Install cibuildwheel & auditwheel
         run: pip install --upgrade pip setuptools wheel cibuildwheel auditwheel
 
       - name: Build manylinux wheels
         env:
-          # skip PyPy if you don’t need it
-          CIBW_SKIP: "pp*"
-        run: make wheel
+          CIBW_PLATFORM: linux
+          CIBW_SKIP: "pp*"           # skip PyPy if you don’t need it
+        run: cibuildwheel --output-dir wheelhouse/linux
 
-      - name: Upload wheels
-        uses: actions/upload-artifact@v4
+      - name: Upload Linux wheels
+        uses: actions/upload-artifact@v3
         with:
           name: manylinux-wheels
-          path: dist/*manylinux*.whl
+          path: wheelhouse/linux/*manylinux*.whl
+
+  build-macos:
+    name: Build macOS wheels
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Generate configure script & configure
+        run: make configure
+
+      - name: Set up Python & build tools
+        uses: actions/setup-python@v4
+        with:
+          python-version-file: .python-version
+
+      - name: Install cibuildwheel
+        run: pip install --upgrade pip setuptools wheel cibuildwheel
+
+      - name: Build macOS wheels
+        env:
+          CIBW_PLATFORM: macos
+          CIBW_SKIP: "pp*"           # skip PyPy if you don’t need it
+        run: cibuildwheel --output-dir wheelhouse/macos
+
+      - name: Upload macOS wheels
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos-wheels
+          path: wheelhouse/macos/*macosx*.whl
+
+  build-windows:
+    name: Build Windows wheels
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Set up Python & build tools
+        uses: actions/setup-python@v4
+        with:
+          python-version-file: .python-version
+
+      - name: Install cibuildwheel
+        run: pip install --upgrade pip setuptools wheel cibuildwheel
+
+      - name: Build Windows wheels
+        env:
+          CIBW_PLATFORM: windows
+          CIBW_SKIP: "pp*"           # skip PyPy if you don’t need it
+          CIBW_ARCHS_MACOS: "x86_64 arm64 universal2"    # ← build both Intel and ARM64 wheels
+        run: cibuildwheel --output-dir wheelhouse/windows
+
+      - name: Upload Windows wheels
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-wheels
+          path: wheelhouse/windows/*.whl
