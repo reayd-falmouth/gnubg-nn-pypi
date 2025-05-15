@@ -1,6 +1,14 @@
-import os
 from glob import glob
-from setuptools import setup, Extension, find_packages
+from setuptools import find_packages
+from setuptools import setup, Extension
+from setuptools.command.build_ext import build_ext as _build_ext
+
+class build_ext(_build_ext):
+    def build_extension(self, ext):
+        # Remove any blanket -std=c++11 for C files
+        if ext.language == "c":
+            ext.extra_compile_args = []
+        super().build_extension(ext)
 
 #--- choose which analyze files to exclude:
 ANALYZE_EXCLUDE = {
@@ -36,6 +44,7 @@ gnubg_module = Extension(
         ("LOADED_BO", "1"),
         ("OS_BEAROFF_DB", "1"),
     ],
+    language="c++",
     extra_compile_args=["-std=c++11"],
 )
 
@@ -49,6 +58,7 @@ setup(
     package_data={
         'gnubg': ['data/*.bd', 'data/*.weights', 'data/*.db'],
     },
+    cmdclass={"build_ext": build_ext},
     exclude_package_data={"gnubg": ["py3mod.cpp"]},
     description='Python3 bindings for GNUBG neural evaluation',
     author='David Reay',
