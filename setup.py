@@ -44,8 +44,10 @@ gnubg_module = Extension(
         ("LOADED_BO", "1"),
         ("OS_BEAROFF_DB", "1"),
     ],
-    language="c++",
-    extra_compile_args=["-std=c++11"],
+    extra_compile_args={
+        'c':   [],
+        'c++': ['-std=c++11'],
+    },
 )
 
 setup(
