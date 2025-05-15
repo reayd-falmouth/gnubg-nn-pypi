@@ -1,0 +1,3 @@
+[submodule "gnubg-nn"]
+	path = gnubg-nn
+	url = git://git.savannah.gnu.org/gnubg/gnubg-nn.git

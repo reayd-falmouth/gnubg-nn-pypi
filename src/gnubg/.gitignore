@@ -1,0 +1,8 @@
+*.c
+*.cc
+lib
+gnubg.egg-info
+!gnubg_os0.bd
+!gnubg_ts0.bd
+!gnubg.weights
+!gnubg_os.db

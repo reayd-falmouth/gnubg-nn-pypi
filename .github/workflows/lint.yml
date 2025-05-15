@@ -1,0 +1,41 @@
+name: C/C++ Lint
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read    # for checkout
+
+jobs:
+  lint-cpp:
+    name: Lint C/C++ code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install linting tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            clang-format \
+            cppcheck \
+            python3-pip
+          pip3 install cpplint
+
+      - name: Run cppcheck static analysis
+        run: |
+          cppcheck --enable=all --inconclusive --error-exitcode=1 .
+
+      - name: Verify formatting with clang-format
+        run: |
+          find . -regex '.*\.\(c\|cpp\|h\|hpp\)' -print0 \
+            | xargs -0 clang-format --dry-run --Werror
+
+      - name: Run cpplint style checks
+        run: |
+          find . -regex '.*\.\(c\|cpp\|h\|hpp\)' -print0 \
+            | xargs -0 cpplint --quiet

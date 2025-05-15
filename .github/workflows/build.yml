@@ -1,0 +1,73 @@
+name: Build Linux
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read    # so checkout still works
+  id-token: write   # ← this unlocks ACTIONS_ID_TOKEN_REQUEST_TOKEN
+
+jobs:
+
+  py3mod:
+    environment: testpypi
+    name: py3mod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          # fetch all submodules (use `true` for one level, or 'recursive' for nested)
+          submodules: recursive
+          # if you need the full commit history in both superrepo and submodules
+          fetch-depth: 0
+
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            build-essential \
+            autoconf automake \
+            pkg-config \
+            python3-dev \
+            libgtk-3-dev \
+            libssl-dev \
+            zlib1g-dev
+
+      - name: Generate configure script & configure
+        run: |
+          autoreconf -i
+          ./configure
+
+      - name: Set up python
+        uses: actions/setup-python@v4.4.0
+        with:
+          python-version-file: .python-version
+
+      - name: Install Python dependencies
+        run: make install
+
+      - name: Build Python extension
+        run: make build
+
+      - name: Install the built package and run tests
+        run: make test
+
+      - name: Upload the dist directory as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gnubg-1.1-cp310-cp310-linux_x86_64
+          path: dist/
+
+      - name: Upload to TestPyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
+        working-directory: py
+        run: make twine PYPI_REPO=testpypi
