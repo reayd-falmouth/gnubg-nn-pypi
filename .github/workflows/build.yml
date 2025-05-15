@@ -64,6 +64,11 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Install system dependencies on macOS
+        run: |
+            brew update
+            brew install autoconf automake pkg-config
+
       - name: Generate configure script & configure
         run: make configure
 
