@@ -44,9 +44,27 @@ AC_FUNC_REALLOC
 AC_FUNC_STRTOD
 AC_CHECK_FUNCS([memmove memset pow sqrt strcasecmp strchr strdup strncasecmp])
 
-AC_SEARCH_LIBS([dlopen], [dl dld], [], [
-  AC_MSG_ERROR([unable to find the dlopen() function])
-])
+dnl AC_SEARCH_LIBS([dlopen], [dl dld], [], [
+dnl   AC_MSG_ERROR([unable to find the dlopen() function])
+dnl ])
+
+# Skip testing for libdl on Windows/Cygwin/Mingw—dladdr() logic is in C code instead
+case "$host_os" in
+  *-*-mingw* | *-*-cygwin* )
+    have_dlopen=no
+    ;;
+  * )
+    AC_CHECK_LIB([dl], [dlopen],
+      [have_dlopen=yes; LIBS="$LIBS -ldl"],
+      [have_dlopen=no])
+    ;;
+esac
+
+if test "$have_dlopen" = yes; then
+  AC_DEFINE([HAVE_DLFCN_H], [1], [Define if you have dlfcn.h])
+else
+  AC_DEFINE([HAVE_DLFCN_H], [0], [Define if you do not have dlfcn.h])
+fi
 
 dnl
 dnl SSE
