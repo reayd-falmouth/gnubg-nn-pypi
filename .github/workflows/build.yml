@@ -132,7 +132,7 @@ jobs:
       - name: Install Autotools (autoconf, automake, m4, make)
         shell: msys2 {0}
         run: |
-          pacman -Sy --noconfirm autoconf automake m4 make
+          pacman -Sy --noconfirm autoconf automake libtool m4 make
 
       - name: Apply Patch files
         run: make patch
@@ -140,10 +140,7 @@ jobs:
       # Now run autoreconf/configure in MSYS2’s Bash
       - name: Generate configure script & run configure
         shell: msys2 {0}
-        run: |
-          cd gnubg-nn
-          autoreconf -i
-          ./configure
+        run: make configure
 
       - name: Set up Python & build tools
         uses: actions/setup-python@v4
