@@ -19,10 +19,6 @@
  * $Id: eval.c,v 1.16 2019/02/03 14:50:29 plm Exp $
  */
 
-#ifdef _MSC_VER
-  #define inline __inline
-#endif
-
 #if HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -156,7 +152,11 @@ bearoffcontext* pbc2 = NULL;
 #endif
 
 
-
+#ifdef _MSC_VER
+#  ifndef __cplusplus
+#    define inline __inline
+#  endif
+#endif
 static inline int
 max(int a, int b)
 {
