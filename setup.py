@@ -1,31 +1,35 @@
+import io
+import os
 from glob import glob
-from setuptools import find_packages
-from setuptools import setup, Extension
+from setuptools import find_packages, setup, Extension
 from setuptools.command.build_ext import build_ext as _build_ext
+
+# ----------------------------------------------------------
+# read the long description from README.md
+# ----------------------------------------------------------
+here = os.path.abspath(os.path.dirname(__file__))
+with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
+    long_description = f.read()
+
 
 class build_ext(_build_ext):
     def build_extension(self, ext):
-        # Remove any blanket -std=c++11 for C files
         if ext.language == "c":
             ext.extra_compile_args = []
         super().build_extension(ext)
 
-#--- choose which analyze files to exclude:
+
 ANALYZE_EXCLUDE = {
-    # "gnubg-nn/analyze/danalyze.cc",
-    # add other filenames here if you need to
+    # add any analyze files you want to skip here
 }
 
-# collect your C sources but skip the excluded ones
 c_sources = (
         glob("gnubg-nn/gnubg/*.c") +
         glob("gnubg-nn/gnubg/lib/*.c") +
         glob("gnubg-nn/analyze/*.cc")
 )
-# filter-out excluded paths
 c_sources = [f for f in c_sources if f not in ANALYZE_EXCLUDE]
 
-# your C++ sources as before
 cpp_sources = [
     "src/gnubg/py3mod.cpp",
     "gnubg-nn/gnubg/bearoffgammon.cc",
@@ -51,19 +55,36 @@ setup(
     name="gnubg",
     version="1.1",
     packages=find_packages(where="src"),
+    package_dir={"": "src"},
     ext_modules=[gnubg_module],
     include_package_data=True,
-    package_dir={"": "src"},
     package_data={
         'gnubg': ['data/*.bd', 'data/*.weights', 'data/*.db', 'tests/*.py'],
     },
     exclude_package_data={"gnubg": ["py3mod.cpp"]},
-    description='Python3 bindings for GNUBG neural evaluation',
+
+    # short summary
+    description="Python3 bindings for GNUBG neural evaluation",
+
+    # ←—— this is what makes PyPI show your README
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+
     author='David Reay',
     author_email='dr323090@falmouth.ac.uk',
-    project_urls = {
-        'GnuBG official website': 'http://www.gnubg.org/xml-rss2.php?catid=10',
-        'GitHub': 'https://github.com/reayd-falmouth/gnubg-nn-pypi',
-        'Official GnuBG Source': 'https://savannah.gnu.org/git/?group=gnubg',
-    }
+    project_urls={
+        'Homepage':       'https://gnubg.org',
+        'Documentation':  'https://gnubg.org/doc',
+        'Mailing List':   'https://lists.gnu.org/mailman/listinfo/gnubg',
+        'Source':         'https://github.com/gnubg/gnubg-nn-pypi',
+        'Contributing':   'https://github.com/gnubg/gnubg-nn-pypi/blob/main/CONTRIBUTING.md',
+        'Bug Tracker':    'https://github.com/gnubg/gnubg-nn-pypi/issues',
+        'Security':       'mailto:security@gnubg.org',
+    },
+    classifiers=[
+        'Programming Language :: Python :: 3',
+        'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
+        'Operating System :: OS Independent',
+    ],
+    python_requires='>=3.6',
 )
