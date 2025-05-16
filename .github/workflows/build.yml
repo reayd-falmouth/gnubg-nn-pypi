@@ -155,7 +155,7 @@ jobs:
         env:
           CIBW_PLATFORM: windows
           CIBW_SKIP: "pp*"
-          CL: "/DNOMINMAX"
+          CL: "/DNOMINMAX /W0"
         run: cibuildwheel --output-dir wheelhouse/windows
 
       - uses: actions/upload-artifact@v4
