@@ -23,7 +23,7 @@ twine:
 
 test:
 	pip install --force-reinstall dist/*.whl
-	python3 tests/test.py
+	python3 src/gnubg/tests/test.py
 
 patch:
 	cp -rf patches/gnubg-nn/* gnubg-nn/
