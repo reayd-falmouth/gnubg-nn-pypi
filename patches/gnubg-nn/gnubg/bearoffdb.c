@@ -39,13 +39,10 @@
 #else
   /* Unix/macOS */
   #include <unistd.h>
+  #include <sys/mman.h>
 #endif
 #include <errno.h>
 #include <string.h>
-
-#if !defined(_WIN32)
-#include <sys/mman.h>
-#endif
 
 #include <math.h>
 
@@ -330,10 +327,10 @@ GetDistUncompressed ( bearoffcontext *pbc, const unsigned int nPosID ) {
 
 }
 
-#ifdef WIN32
-#define HAVE_MMAP 0
+#if defined(_WIN32)
+  #define HAVE_MMAP 0
 #else
-#define HAVE_MMAP 1
+  #define HAVE_MMAP 1
 #endif
 
 static int
@@ -341,7 +338,7 @@ ReadIntoMemory ( bearoffcontext *pbc, const int iOffset, const int nSize ) {
 
   pbc->fMalloc = TRUE;
 
-#if HAVE_MMAP
+#if HAVE_MMAP && !defined(_WIN32)
   if ( ( pbc->p = mmap ( NULL, nSize, PROT_READ, 
                            MAP_SHARED, pbc->h, iOffset ) ) == (void *) -1 ) {
     /* perror ( "mmap" ); */
