@@ -157,6 +157,13 @@ bearoffcontext* pbc2 = NULL;
 #    define inline __inline
 #  endif
 #endif
+
+#ifdef max
+#  undef max
+#endif
+#ifdef min
+#  undef min
+#endif
 static inline int
 max(int a, int b)
 {
