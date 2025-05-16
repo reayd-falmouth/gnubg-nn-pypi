@@ -115,18 +115,29 @@ jobs:
   build-windows:
     name: Build Windows wheels
     runs-on: windows-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
           fetch-depth: 0
+
+      - name: Set up MSYS2 (with make, autoconf, automake)
+        uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          install: base-devel
+
+      - name: Generate configure script & run configure
+        shell: bash
+        run: |
+          make configure
 
       - name: Set up Python & build tools
         uses: actions/setup-python@v4
         with:
           python-version-file: .python-version
-          check-latest: true    # ← allow downloading uncached versions
+          check-latest: true
 
       - name: Install cibuildwheel
         run: pip install --upgrade pip setuptools wheel cibuildwheel
@@ -134,12 +145,11 @@ jobs:
       - name: Build Windows wheels
         env:
           CIBW_PLATFORM: windows
-          CIBW_SKIP: "pp*"           # skip PyPy if you don’t need it
-          CIBW_ARCHS_MACOS: "x86_64 arm64 universal2"    # ← build both Intel and ARM64 wheels
+          CIBW_SKIP: "pp*"
         run: cibuildwheel --output-dir wheelhouse/windows
 
-      - name: Upload Windows wheels
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: windows-wheels
           path: wheelhouse/windows/*.whl
+
