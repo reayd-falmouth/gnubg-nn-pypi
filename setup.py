@@ -55,7 +55,7 @@ setup(
     include_package_data=True,
     package_dir={"": "src"},
     package_data={
-        'gnubg': ['data/*.bd', 'data/*.weights', 'data/*.db'],
+        'gnubg': ['data/*.bd', 'data/*.weights', 'data/*.db', 'tests/*.py'],
     },
     exclude_package_data={"gnubg": ["py3mod.cpp"]},
     description='Python3 bindings for GNUBG neural evaluation',

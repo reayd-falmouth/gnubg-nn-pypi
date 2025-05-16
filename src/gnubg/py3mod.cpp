@@ -1,8 +1,18 @@
 // gnubgmodule.cpp - Python 3 extension module for gnubg
 
 #include <Python.h>
-#include <dlfcn.h>
-#include <libgen.h>
+
+#if defined(_WIN32)
+// Windows: use Win32 loader APIs
+  #include <windows.h>
+
+#elif defined(__unix__) || defined(__APPLE__)
+// Unix/macOS: use dladdr() + dirname()
+  #include <dlfcn.h>
+  #include <libgen.h>
+
+#endif
+
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -1739,7 +1749,54 @@ static struct PyModuleDef gnubgmodule = {
         GnubgMethods
 };
 
+//---------------------------------------------------------------------------
+// Cross‐platform helper to locate the “data/” alongside the shared module.
+static std::string find_data_dir(PyObject* module) {
+#if defined(_WIN32)
+    HMODULE h = NULL;
+    // Get handle for this module
+    if (GetModuleHandleExA(
+          GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
+          GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+          (LPCSTR)&PyInit_gnubg, &h)) {
+        char buf[MAX_PATH];
+        if (GetModuleFileNameA(h, buf, MAX_PATH)) {
+            std::string path(buf);
+            auto pos = path.find_last_of("\\/");
+            return path.substr(0, pos) + "\\data";
+        }
+    }
+    return ".";
 
+#elif defined(__unix__) || defined(__APPLE__)
+    Dl_info dl;
+    if (dladdr((void*)&find_data_dir, &dl) && dl.dli_fname) {
+        char* dup = strdup(dl.dli_fname);
+        std::string base = dirname(dup);
+        free(dup);
+        return base + "/data";
+    }
+    return ".";
+
+#else
+    // Fallback: Python’s __file__
+    PyObject* fobj = PyModule_GetFilenameObject(module);
+    if (!fobj) {
+        PyErr_Clear();
+        return ".";
+    }
+    const char* fname = PyUnicode_AsUTF8(fobj);
+    Py_DECREF(fobj);
+    if (!fname) return ".";
+    char* dup = strdup(fname);
+    std::string base = dirname(dup);
+    free(dup);
+    return base + "/data";
+#endif
+}
+
+//---------------------------------------------------------------------------
+// Module initialization
 PyMODINIT_FUNC
 PyInit_gnubg(void)
 {
@@ -1768,11 +1825,20 @@ PyInit_gnubg(void)
     PyModule_AddObject(m, "set", set_module);
 
     // Get the path to the GNUBG data directory
-    Dl_info dl_info;
-    dladdr((void*)PyInit_gnubg, &dl_info);
-    // Determine where we shipped our data
-    std::string base    = dirname(strdup(dl_info.dli_fname));
-    std::string datadir = base + "/data";
+//    Dl_info dl_info;
+//    dladdr((void*)PyInit_gnubg, &dl_info);
+//    // Determine where we shipped our data
+//    std::string base    = dirname(strdup(dl_info.dli_fname));
+//    std::string datadir = base + "/data";
+
+    // Locate our shipped data directory
+    std::string datadir = find_data_dir(m);
+    #ifndef _WIN32
+        // on Unix we used forward‐slash
+    #else
+        // on Win32 convert to forward‐slash for Analyze::init()
+        for (auto &c : datadir) if (c == '\\') c = '/';
+    #endif
 
     // If the user hasn't already pointed GNUBGHOME somewhere, default it
     if (!std::getenv("GNUBGHOME")) {
