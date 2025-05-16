@@ -6,8 +6,10 @@ from setuptools import find_packages, setup, Extension
 from setuptools.command.build_ext import build_ext as _build_ext
 
 extra_args = []
-if sysconfig.get_config_var('CC').startswith('gcc'):
-    extra_args.append('-std=c++11')
+cc = sysconfig.get_config_var('CC')
+if isinstance(cc, str) and cc.startswith('gcc'):
+    extra_compile_args.append('-std=c++11')
+
 
 # ----------------------------------------------------------
 # read the long description from README.md
