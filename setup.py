@@ -44,10 +44,7 @@ gnubg_module = Extension(
         ("LOADED_BO", "1"),
         ("OS_BEAROFF_DB", "1"),
     ],
-    extra_compile_args={
-        'c':   [],
-        'c++': ['-std=c++11'],
-    },
+    extra_compile_args=["-std=c++11"],
 )
 
 setup(
@@ -60,7 +57,6 @@ setup(
     package_data={
         'gnubg': ['data/*.bd', 'data/*.weights', 'data/*.db'],
     },
-    cmdclass={"build_ext": build_ext},
     exclude_package_data={"gnubg": ["py3mod.cpp"]},
     description='Python3 bindings for GNUBG neural evaluation',
     author='David Reay',
