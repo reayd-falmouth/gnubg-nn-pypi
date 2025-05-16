@@ -61,4 +61,9 @@ setup(
     description='Python3 bindings for GNUBG neural evaluation',
     author='David Reay',
     author_email='dr323090@falmouth.ac.uk',
+    project_urls = {
+        'GnuBG official website': 'http://www.gnubg.org/xml-rss2.php?catid=10',
+        'GitHub': 'https://github.com/reayd-falmouth/gnubg-nn-pypi',
+        'Official GnuBG Source': 'https://savannah.gnu.org/git/?group=gnubg',
+    }
 )

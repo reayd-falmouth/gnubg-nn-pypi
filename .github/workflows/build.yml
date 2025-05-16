@@ -128,6 +128,12 @@ jobs:
           update: true
           install: base-devel
 
+      # 2) Install the MSYS2 Autotools packages
+      - name: Install Autotools (autoconf, automake, m4, make)
+        shell: msys2 {0}
+        run: |
+          pacman -Sy --noconfirm autoconf automake m4 make
+
       - name: Apply Patch files
         run: make patch
 
