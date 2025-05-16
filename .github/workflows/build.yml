@@ -133,7 +133,7 @@ jobs:
 
       # Now run autoreconf/configure in MSYS2’s Bash
       - name: Generate configure script & run configure
-        shell: bash
+        shell: msys2 {0}
         run: |
           cd gnubg-nn
           autoreconf -i
