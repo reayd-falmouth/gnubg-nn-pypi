@@ -67,6 +67,11 @@
 #define BINARY 0
 #endif
 
+/* Strip off GCC-only __attribute__ on MSVC */
+#if !defined(__GNUC__)
+  #define __attribute__(x)  /* nothing */
+#endif
+
 static int anCombination[ 33 ][ 18 ];
 static int fCalculated = 0;
 
@@ -315,7 +320,7 @@ GetDistUncompressed ( bearoffcontext *pbc, const unsigned int nPosID ) {
     /* from disk */
 
     lseek ( pbc->h, iOffset, SEEK_SET );
-    int const o __attribute__((unused)) = read ( pbc->h, ac, pbc->fGammon ? 128 : 64 );
+    int const o = read ( pbc->h, ac, pbc->fGammon ? 128 : 64 );
     puch = ac;
   }
 
@@ -935,7 +940,7 @@ ReadTwoSidedBearoff ( bearoffcontext *pbc,
       pc = (unsigned char*)(((char *) pbc->p)+ 40 + 2 * iPos * k);
     else {
       lseek ( pbc->h, 40 + 2 * iPos * k, SEEK_SET );
-      int const o __attribute__((unused)) = read ( pbc->h, ac, k * 2 );
+      int const o = read ( pbc->h, ac, k * 2 );
       pc = ac;
     }
 
