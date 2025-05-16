@@ -128,10 +128,16 @@ jobs:
           update: true
           install: base-devel
 
+      - name: Apply Patch files
+        run: make patch
+
+      # Now run autoreconf/configure in MSYS2’s Bash
       - name: Generate configure script & run configure
         shell: bash
         run: |
-          make configure
+          cd gnubg-nn
+          autoreconf -i
+          ./configure
 
       - name: Set up Python & build tools
         uses: actions/setup-python@v4
