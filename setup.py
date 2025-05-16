@@ -1,5 +1,6 @@
 import io
 import os
+import sys
 import sysconfig
 from glob import glob
 from setuptools import find_packages, setup, Extension
@@ -21,6 +22,9 @@ define_macros += [
 cc = sysconfig.get_config_var('CC') or ''
 if cc.startswith('gcc'):
     extra_compile_args.append('-std=c++11')
+
+if sys.platform.startswith("win"):
+    define_macros.append(("HAVE_DLFCN_H", "0"))
 
 # ----------------------------------------------------------
 # read the long description from README.md
