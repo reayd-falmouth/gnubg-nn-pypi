@@ -16,6 +16,7 @@ define_macros += [
     ('NOMINMAX', '1'),
     ("LOADED_BO", "1"),
     ("OS_BEAROFF_DB", "1"),
+    ("HAVE_CONFIG_H", "1"),
 ]
 
 # 3) choose compiler flags
