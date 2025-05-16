@@ -73,13 +73,12 @@ setup(
     author='David Reay',
     author_email='dr323090@falmouth.ac.uk',
     project_urls={
-        'Homepage':       'https://gnubg.org',
-        'Documentation':  'https://gnubg.org/doc',
+        'Homepage':       'https://www.gnu.org/software/gnubg/',
+        'Documentation':  'http://www.gnubg.org/documentation/doku.php?id=gnu_backgammon_faq',
         'Mailing List':   'https://lists.gnu.org/mailman/listinfo/gnubg',
         'Source':         'https://github.com/gnubg/gnubg-nn-pypi',
         'Contributing':   'https://github.com/gnubg/gnubg-nn-pypi/blob/main/CONTRIBUTING.md',
         'Bug Tracker':    'https://github.com/gnubg/gnubg-nn-pypi/issues',
-        'Security':       'mailto:security@gnubg.org',
     },
     classifiers=[
         'Programming Language :: Python :: 3',
