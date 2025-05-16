@@ -1,6 +1,6 @@
 PYPI_REPO := testpypi
 
-all: clean install build
+all: clean install patch configure build test
 
 configure:
 	cd gnubg-nn && autoreconf -i &&	./configure
