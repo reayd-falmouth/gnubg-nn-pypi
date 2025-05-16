@@ -2,6 +2,13 @@
 
 #include <Python.h>
 
+// Windows doesn’t have strcasecmp or strdup or setenv:
+#if defined(_WIN32)
+  #include <stdlib.h>    // for _putenv_s
+  #define strcasecmp  _stricmp
+  #define strdup      _strdup
+#endif
+
 #if defined(_WIN32)
 // Windows: use Win32 loader APIs
   #include <windows.h>
@@ -48,6 +55,8 @@ extern "C" void outputf(const char* fmt, ...) {
 
 // bring in std::vector
 #include <vector>
+
+extern "C" PyMODINIT_FUNC PyInit_gnubg(void);
 
 // shorthand 26‐element board for bearoff/resign logic
 typedef short int AnalyzeBoard[26];
@@ -1844,7 +1853,12 @@ PyInit_gnubg(void)
     if (!std::getenv("GNUBGHOME")) {
         // third argument “1” means “always overwrite”, but since getenv was null
         // this just sets it for our process before Analyze::init()
-        setenv("GNUBGHOME", datadir.c_str(), 1);
+        #if defined(_WIN32)
+                // Overwrite GNUBGHOME in the current process
+            _putenv_s("GNUBGHOME", datadir.c_str());
+        #else
+                setenv("GNUBGHOME", datadir.c_str(), 1);
+        #endif
         //        std::cout << "Defaulting GNUBGHOME to: " << datadir << std::endl;
     }
     //    else {
