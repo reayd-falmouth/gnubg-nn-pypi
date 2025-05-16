@@ -5,11 +5,21 @@ from glob import glob
 from setuptools import find_packages, setup, Extension
 from setuptools.command.build_ext import build_ext as _build_ext
 
-extra_args = []
-cc = sysconfig.get_config_var('CC')
-if isinstance(cc, str) and cc.startswith('gcc'):
-    extra_compile_args.append('-std=c++11')
+# 1) initialize
+extra_compile_args = []
+define_macros      = []
 
+# 2) populate macros
+define_macros += [
+    ('_CRT_SECURE_NO_WARNINGS', '1'),
+    ('NOMINMAX', '1'),
+    ('inline', '__inline'),
+]
+
+# 3) choose compiler flags
+cc = sysconfig.get_config_var('CC') or ''
+if cc.startswith('gcc'):
+    extra_compile_args.append('-std=c++11')
 
 # ----------------------------------------------------------
 # read the long description from README.md
@@ -26,7 +36,7 @@ class build_ext(_build_ext):
         super().build_extension(ext)
 
 
-ANALYZE_EXCLUDE = {
+EXCLUDES = {
     # add any analyze files you want to skip here
 }
 
@@ -35,7 +45,7 @@ c_sources = (
         glob("gnubg-nn/gnubg/lib/*.c") +
         glob("gnubg-nn/analyze/*.cc")
 )
-c_sources = [f for f in c_sources if f not in ANALYZE_EXCLUDE]
+c_sources = [f for f in c_sources if f not in EXCLUDES]
 
 cpp_sources = [
     "src/gnubg/py3mod.cpp",
@@ -51,15 +61,8 @@ gnubg_module = Extension(
         "gnubg-nn/", "gnubg-nn/gnubg", "gnubg-nn/gnubg/lib",
         "gnubg-nn/analyze", "gnubg-nn/py"
     ],
-    define_macros=[
-        ("LOADED_BO", "1"),
-        ("OS_BEAROFF_DB", "1"),
-        ('_CRT_SECURE_NO_WARNINGS', '1'),  # silences fopen/fscanf deprecation
-        ('NOMINMAX',            '1'),     # stops Windows headers defining min/max macros
-        # remap inline → __inline for MSVC C mode
-        ('inline',             '__inline'),
-    ],
-    extra_compile_args=extra_args,
+    define_macros=define_macros,
+    extra_compile_args=extra_compile_args,
 )
 
 setup(
