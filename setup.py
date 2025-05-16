@@ -85,4 +85,5 @@ setup(
         'Operating System :: OS Independent',
     ],
     python_requires='>=3.6',
+    define_macros=[ ('NOMINMAX', None) ],
 )
