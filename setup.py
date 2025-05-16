@@ -5,15 +5,7 @@ from glob import glob
 from setuptools import find_packages, setup, Extension
 from setuptools.command.build_ext import build_ext as _build_ext
 
-extra_args = [
-    # disable conversion/data-loss warnings
-    '/wd4244',  # C4244: conversion from 'double' to 'float'
-    '/wd4305',  # C4305: truncation from 'double' to 'float'
-    '/wd4028',  # C4028: parameter mismatch
-    '/wd4996',  # C4996: unsafe CRT functions
-    '/wd4005',  # C4005: macro redefinition
-    '/wd9002',  # C9002: ignoring unknown option (e.g. -std=c++11)
-]
+extra_args = []
 if sysconfig.get_config_var('CC').startswith('gcc'):
     extra_args.append('-std=c++11')
 
