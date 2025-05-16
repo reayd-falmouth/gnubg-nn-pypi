@@ -13,7 +13,6 @@ define_macros      = []
 define_macros += [
     ('_CRT_SECURE_NO_WARNINGS', '1'),
     ('NOMINMAX', '1'),
-    ('inline', '__inline'),
     ("LOADED_BO", "1"),
     ("OS_BEAROFF_DB", "1"),
 ]
