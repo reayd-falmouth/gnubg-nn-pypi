@@ -756,14 +756,18 @@ extern int
 NeuralNetTrain(neuralnet* pnn, float arInput[], float arOutput[],
 	       float arDesired[], float rAlpha)
 {
-  int i, j;    
-  Intermediate ar[ pnn->cHidden ];
-  
-  float
-    arOutputError[ pnn->cOutput ],
-    arHiddenError[ pnn->cHidden ],
-    *pr,
-    *prWeight;
+    Intermediate* ar = malloc(pnn->cHidden * sizeof(Intermediate));
+    float* arOutputError = malloc(pnn->cOutput * sizeof(float));
+    float* arHiddenError = malloc(pnn->cHidden * sizeof(float));
+    float* pr;
+    float* prWeight;
+
+    if (!ar || !arOutputError || !arHiddenError) {
+        free(ar);
+        free(arOutputError);
+        free(arHiddenError);
+        return -1; // Or another error code you use
+    }
 
   Evaluate(pnn, arInput, ar, arOutput, 0);
 
@@ -814,8 +818,11 @@ NeuralNetTrain(neuralnet* pnn, float arInput[], float arOutput[],
     pnn->arHiddenThreshold[ i ] += rAlpha * arHiddenError[ i ];
 
   pnn->nTrained++;
-    
-  return 0;
+
+    free(ar);
+    free(arOutputError);
+    free(arHiddenError);
+    return 0;
 }
 
 extern int
