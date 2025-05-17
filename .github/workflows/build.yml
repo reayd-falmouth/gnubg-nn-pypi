@@ -110,7 +110,7 @@ jobs:
           path: wheelhouse/macos/*macosx*.whl
 
   build-windows:
-    name: Build Windows wheels
+    name: Build Windows wheels (MinGW-w64)
     runs-on: windows-latest
 
     steps:
@@ -119,24 +119,27 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Set up MSYS2 (with make, autoconf, automake)
+      - name: Set up MSYS2
         uses: msys2/setup-msys2@v2
         with:
           update: true
-          install: base-devel
-
-      # 2) Install the MSYS2 Autotools packages
-      - name: Install Autotools (autoconf, automake, m4, make)
-        shell: msys2 {0}
-        run: |
-          pacman -Sy --noconfirm autoconf automake libtool m4 make mingw-w64-x86_64-gcc
+          install: >-
+            base-devel
+            mingw-w64-x86_64-toolchain
+            autoconf
+            automake
+            libtool
+            m4
+            make
 
       - name: Apply Patch files
+        shell: msys2 {0}
         run: make patch
 
-      # Now run autoreconf/configure in MSYS2’s Bash
-      - name: Generate configure script & run configure
+      - name: Generate configure script & run configure (MinGW environment)
         shell: msys2 {0}
+        env:
+          CC: x86_64-w64-mingw32-gcc
         run: make configure
 
       - name: Set up Python & build tools
@@ -148,10 +151,16 @@ jobs:
       - name: Install cibuildwheel
         run: pip install --upgrade pip setuptools wheel cibuildwheel
 
-      - name: Build Windows wheels
+      - name: Build Windows wheels using MinGW-w64
+        shell: bash  # Important: Run in bash to pick up MSYS2 PATH
         env:
           CIBW_PLATFORM: windows
+          CIBW_ENVIRONMENT: >
+            CC=x86_64-w64-mingw32-gcc
+            CXX=x86_64-w64-mingw32-g++
           CIBW_SKIP: "pp*"
+          CIBW_BEFORE_BUILD: >
+            bash -c "pacman -Sy --noconfirm mingw-w64-x86_64-toolchain"
         run: cibuildwheel --output-dir wheelhouse/windows
 
       - uses: actions/upload-artifact@v4
