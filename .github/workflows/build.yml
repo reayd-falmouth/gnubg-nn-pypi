@@ -131,12 +131,13 @@ jobs:
             libtool
             m4
             make
+            pkgconf
 
       - name: Apply Patch files
         shell: msys2 {0}
         run: make patch
 
-      - name: Generate configure script & run configure (MinGW environment)
+      - name: Generate configure script & run configure
         shell: msys2 {0}
         env:
           CC: x86_64-w64-mingw32-gcc
@@ -152,19 +153,17 @@ jobs:
         run: pip install --upgrade pip setuptools wheel cibuildwheel
 
       - name: Build Windows wheels using MinGW-w64
-        shell: bash  # Important: Run in bash to pick up MSYS2 PATH
+        shell: bash
         env:
           CIBW_PLATFORM: windows
+          CIBW_SKIP: "pp*"
           CIBW_ENVIRONMENT: >
             CC=x86_64-w64-mingw32-gcc
             CXX=x86_64-w64-mingw32-g++
-          CIBW_SKIP: "pp*"
-          CIBW_BEFORE_BUILD: >
-            bash -c "pacman -Sy --noconfirm mingw-w64-x86_64-toolchain"
+            PATH=/c/msys64/mingw64/bin:$PATH
         run: cibuildwheel --output-dir wheelhouse/windows
 
       - uses: actions/upload-artifact@v4
         with:
           name: windows-wheels
           path: wheelhouse/windows/*.whl
-
