@@ -65,7 +65,7 @@ extensions = [
         extra_compile_args=extra_compile_args_c
     ),
     Extension(
-        "gnubg.gnubg_cpp",
+        "gnubg.gnubg",
         sources=cpp_sources,
         include_dirs=common_includes,
         define_macros=define_macros,
