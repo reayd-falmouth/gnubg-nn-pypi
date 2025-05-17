@@ -4085,46 +4085,72 @@ getInputs(CONST int anBoard[2][25], CONST int* which, float* values)
     }
   }
 }
-
-#if defined( HAVE_DLFCN_H )
+/* in config.h you should have:
+ *   #define HAVE_DLFCN_H 1   (on Unix)
+ *   #define HAVE_DLFCN_H 0   (on Windows)
+ */
 
 #if HAVE_DLFCN_H
-#  include <dlfcn.h>
+#include <dlfcn.h>
+#else
+/* stub the flags so code still parses, even if we never call dlopen */
+  #ifndef RTLD_GLOBAL
+  #  define RTLD_GLOBAL 0
+  #endif
+  #ifndef RTLD_NOW
+  #  define RTLD_NOW    0
+  #endif
 #endif
 
-const NetInputFuncs*
+/* real loader implementation only on platforms with dlfcn.h */
+#if HAVE_DLFCN_H
+
+CONST NetInputFuncs*
 ifFromFile(const char* name)
 {
-  void* i = dlopen(name, RTLD_GLOBAL|RTLD_NOW);
+    void* handle = dlopen(name, RTLD_NOW|RTLD_GLOBAL);
+    if (!handle)
+        return NULL;
 
-  if( ! i ) {
-    return 0;
-  }
+    /* look up the symbol "inputs" */
+    CONST NetInputFuncs* tbl = (CONST NetInputFuncs*)dlsym(handle, "inputs");
+    if (!tbl) {
+        dlclose(handle);
+        return NULL;
+    }
 
-  void* s = dlsym(i, "inputs");
-
-  if( ! s ) {
-    dlclose(i);
-    
-    return 0;
-  }
-
-  ((NetInputFuncs*)s)->lib = i;
-  
-  return s;
-} 
+    /* hang onto the handle so we can close it later */
+    ((NetInputFuncs*)tbl)->lib = handle;
+    return tbl;
+}
 
 int
 closeInputs(const NetInputFuncs* f)
 {
-  if( f != NULL && f->lib ) {
-    if( dlclose(f->lib) != 0 ) {
-      printf("%s\n", dlerror());
-      return 1;
+    if (f != NULL && f->lib) {
+        if (dlclose(f->lib) != 0) {
+            printf("%s\n", dlerror());
+            return 1;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
-#endif
+#else  /* !HAVE_DLFCN_H */
 
+/* stub out both functions so your linker never sees any dlopen/dlsym */
+CONST NetInputFuncs*
+ifFromFile(const char* name)
+{
+    (void)name;
+    return NULL;
+}
+
+int
+closeInputs(const NetInputFuncs* f)
+{
+    (void)f;
+    return 0;
+}
+
+#endif  /* HAVE_DLFCN_H */
