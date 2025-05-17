@@ -405,7 +405,7 @@ inputFuncs[] =
   { "contactE1", CalculateContactInputsE1,  NUM_INPUTS_E1,  E1InputName, 0} ,
 };
 
-const NetInputFuncs*
+CONST NetInputFuncs*
 ifByName(const char* name)
 {
   unsigned int i;
