@@ -406,11 +406,11 @@ inputFuncs[] =
 };
 
 CONST NetInputFuncs*
-ifByName(const char* name)
+ifByName(CONST char* name)
 {
   unsigned int i;
   for(i = 0; i < sizeof(inputFuncs)/sizeof(inputFuncs[0]); ++i) {
-    NetInputFuncs* p = &inputFuncs[i];
+    CONST NetInputFuncs* p = &inputFuncs[i];
     if( strcmp(name, p->name) == 0 ) {
       return p;
     }
