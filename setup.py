@@ -27,7 +27,6 @@ if cc.startswith('gcc'):
 
 if sys.platform.startswith("win"):
     define_macros.append(("HAVE_DLFCN_H", "0"))
-    extra_compile_args.append('/Wall')
 
 # ----------------------------------------------------------
 # read the long description from README.md
