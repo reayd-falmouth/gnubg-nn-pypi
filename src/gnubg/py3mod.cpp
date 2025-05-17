@@ -1804,17 +1804,6 @@ static std::string find_data_dir(PyObject* module) {
 #endif
 }
 
-// Stub for complication
-PyMODINIT_FUNC PyInit_gnubg_c(void) {
-    return PyModule_Create(&(PyModuleDef){
-            PyModuleDef_HEAD_INIT,
-            "gnubg_c",
-            "Low-level C bindings for GNUBG (stub).",
-            -1,
-            NULL, NULL, NULL, NULL, NULL
-    });
-}
-
 
 //---------------------------------------------------------------------------
 // Module initialization

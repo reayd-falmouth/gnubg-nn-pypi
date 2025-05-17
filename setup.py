@@ -16,9 +16,9 @@ define_macros = [
     ("HAVE_CONFIG_H", "1"),
 ]
 
-# Windows-specific warnings to suppress
+# Platform-specific compile args
 extra_compile_args_c = ["/wd4244", "/wd4305", "/wd4028", "/wd4090"] if is_windows else []
-extra_compile_args_cpp = []
+extra_compile_args_cpp = ["-std=c++11"] if not is_macos else []
 
 here = os.path.abspath(os.path.dirname(__file__))
 with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
@@ -27,16 +27,16 @@ with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
 class build_ext(_build_ext):
     def build_extensions(self):
         for ext in self.extensions:
-            ext.extra_compile_args = ext.extra_compile_args or []
-
-            if ext.language == "c++":
-                if "-std=c++11" not in ext.extra_compile_args:
-                    ext.extra_compile_args.append("-std=c++11")
-            elif is_macos:
-                # Strip any C++ std flags that were incorrectly added to C extensions
-                ext.extra_compile_args = [
-                    arg for arg in ext.extra_compile_args if not arg.startswith("-std=")
-                ]
+            args = []
+            for src in ext.sources:
+                if src.endswith((".cc", ".cpp")):
+                    args += extra_compile_args_cpp
+                elif src.endswith(".c"):
+                    args += extra_compile_args_c
+            if is_macos:
+                # Remove incompatible flags
+                args = [arg for arg in args if not arg.startswith("-std=")]
+            ext.extra_compile_args = args
         super().build_extensions()
 
 # Source files
@@ -46,7 +46,7 @@ c_sources = (
 )
 cpp_sources = (
         glob("gnubg-nn/analyze/*.cc") +
-        ["src/gnubg/py3mod.cpp", "gnubg-nn/gnubg/bearoffgammon.cc",
+        ["src/gnubg/gnubgmodule.cpp", "gnubg-nn/gnubg/bearoffgammon.cc",
          "gnubg-nn/gnubg/racebg.cc", "gnubg-nn/gnubg/osr.cc"]
 )
 
@@ -57,20 +57,11 @@ common_includes = [
 
 extensions = [
     Extension(
-        "gnubg.gnubg_c",
-        sources=c_sources,
-        include_dirs=common_includes,
-        define_macros=define_macros,
-        language="c",
-        extra_compile_args=extra_compile_args_c
-    ),
-    Extension(
         "gnubg.gnubg",
-        sources=cpp_sources,
+        sources=c_sources + cpp_sources,
         include_dirs=common_includes,
         define_macros=define_macros,
-        language="c++",
-        extra_compile_args=extra_compile_args_cpp
+        language="c++"
     )
 ]
 
@@ -85,7 +76,7 @@ setup(
     package_data={
         'gnubg': ['data/*.bd', 'data/*.weights', 'data/*.db', 'tests/*.py'],
     },
-    exclude_package_data={"gnubg": ["py3mod.cpp"]},
+    exclude_package_data={"gnubg": ["gnubgmodule.cpp"]},
     description="Python3 bindings for GNUBG neural evaluation",
     long_description=long_description,
     long_description_content_type="text/markdown",
