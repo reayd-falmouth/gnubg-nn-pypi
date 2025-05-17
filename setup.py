@@ -1,11 +1,9 @@
 import io
 import os
-import sysconfig
 from glob import glob
 from setuptools import find_packages, setup, Extension
 from setuptools.command.build_ext import build_ext as _build_ext
 
-# 1) initialize
 define_macros = [
     ('_CRT_SECURE_NO_WARNINGS', '1'),
     ('NOMINMAX', '1'),
@@ -14,59 +12,58 @@ define_macros = [
     ("HAVE_CONFIG_H", "1"),
 ]
 
-# ----------------------------------------------------------
-# read the long description from README.md
-# ----------------------------------------------------------
 here = os.path.abspath(os.path.dirname(__file__))
 with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
-
 class build_ext(_build_ext):
     def build_extensions(self):
         for ext in self.extensions:
-            cxx_args = []
-            if any(src.endswith(('.cc', '.cpp')) for src in ext.sources):
-                cxx_args.append('-std=c++11')
-            ext.extra_compile_args = cxx_args
+            if ext.language == "c++":
+                ext.extra_compile_args = ['-std=c++11']
+            else:
+                ext.extra_compile_args = []
         super().build_extensions()
 
-
-EXCLUDES = {
-    # Add specific files to exclude from build here if needed
-}
-
+# Separate sources
 c_sources = (
         glob("gnubg-nn/gnubg/*.c") +
-        glob("gnubg-nn/gnubg/lib/*.c") +
-        glob("gnubg-nn/analyze/*.cc")
+        glob("gnubg-nn/gnubg/lib/*.c")
 )
-c_sources = [f for f in c_sources if f not in EXCLUDES]
+cpp_sources = (
+        glob("gnubg-nn/analyze/*.cc") +
+        ["src/gnubg/py3mod.cpp", "gnubg-nn/gnubg/bearoffgammon.cc",
+         "gnubg-nn/gnubg/racebg.cc", "gnubg-nn/gnubg/osr.cc"]
+)
 
-cpp_sources = [
-    "src/gnubg/py3mod.cpp",
-    "gnubg-nn/gnubg/bearoffgammon.cc",
-    "gnubg-nn/gnubg/racebg.cc",
-    "gnubg-nn/gnubg/osr.cc",
+common_includes = [
+    "gnubg-nn/", "gnubg-nn/gnubg", "gnubg-nn/gnubg/lib",
+    "gnubg-nn/analyze", "gnubg-nn/py"
 ]
 
-gnubg_module = Extension(
-    "gnubg.gnubg",
-    sources=cpp_sources + c_sources,
-    include_dirs=[
-        "gnubg-nn/", "gnubg-nn/gnubg", "gnubg-nn/gnubg/lib",
-        "gnubg-nn/analyze", "gnubg-nn/py"
-    ],
-    define_macros=define_macros,
-    language="c++"
-)
+extensions = [
+    Extension(
+        "gnubg.gnubg_c",
+        sources=c_sources,
+        include_dirs=common_includes,
+        define_macros=define_macros,
+        language="c"
+    ),
+    Extension(
+        "gnubg.gnubg_cpp",
+        sources=cpp_sources,
+        include_dirs=common_includes,
+        define_macros=define_macros,
+        language="c++"
+    )
+]
 
 setup(
     name="gnubg",
     version="1.1",
     packages=find_packages(where="src", include=["gnubg", "gnubg.data", "gnubg.tests"]),
     package_dir={"": "src"},
-    ext_modules=[gnubg_module],
+    ext_modules=extensions,
     cmdclass={"build_ext": build_ext},
     include_package_data=True,
     package_data={
