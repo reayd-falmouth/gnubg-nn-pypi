@@ -1,8 +1,12 @@
 import io
 import os
+import sys
 from glob import glob
 from setuptools import find_packages, setup, Extension
 from setuptools.command.build_ext import build_ext as _build_ext
+
+is_windows = sys.platform == "win32"
+is_macos = sys.platform == "darwin"
 
 define_macros = [
     ('_CRT_SECURE_NO_WARNINGS', '1'),
@@ -12,6 +16,10 @@ define_macros = [
     ("HAVE_CONFIG_H", "1"),
 ]
 
+# Windows-specific warnings to suppress
+extra_compile_args_c = ["/wd4244", "/wd4305", "/wd4028", "/wd4090"] if is_windows else []
+extra_compile_args_cpp = []
+
 here = os.path.abspath(os.path.dirname(__file__))
 with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
@@ -19,13 +27,19 @@ with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
 class build_ext(_build_ext):
     def build_extensions(self):
         for ext in self.extensions:
+            ext.extra_compile_args = ext.extra_compile_args or []
+
             if ext.language == "c++":
-                ext.extra_compile_args = ['-std=c++11']
-            else:
-                ext.extra_compile_args = []
+                if "-std=c++11" not in ext.extra_compile_args:
+                    ext.extra_compile_args.append("-std=c++11")
+            elif is_macos:
+                # Strip any C++ std flags that were incorrectly added to C extensions
+                ext.extra_compile_args = [
+                    arg for arg in ext.extra_compile_args if not arg.startswith("-std=")
+                ]
         super().build_extensions()
 
-# Separate sources
+# Source files
 c_sources = (
         glob("gnubg-nn/gnubg/*.c") +
         glob("gnubg-nn/gnubg/lib/*.c")
@@ -47,14 +61,16 @@ extensions = [
         sources=c_sources,
         include_dirs=common_includes,
         define_macros=define_macros,
-        language="c"
+        language="c",
+        extra_compile_args=extra_compile_args_c
     ),
     Extension(
         "gnubg.gnubg_cpp",
         sources=cpp_sources,
         include_dirs=common_includes,
         define_macros=define_macros,
-        language="c++"
+        language="c++",
+        extra_compile_args=extra_compile_args_cpp
     )
 ]
 
