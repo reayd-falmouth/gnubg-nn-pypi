@@ -32,7 +32,6 @@ using std::map;
 
 #include "bgdefs.h"
 #include "misc.h"
-#include "minmax.h"
 
 #include "equities.h"
 
@@ -45,8 +44,6 @@ using std::map;
 #include <iostream>
 using std::cout;
 using std::endl;
-
-using std::min;
 
 static unsigned int const roll2dice1[21] =
 { 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6};
@@ -106,7 +103,7 @@ estimateNR(const unsigned char* const auch)
     }
   }
 
-  int pip = min(xpip, opip);
+  int pip = std::min(xpip, opip);
 
   return (pip / (2.0 * 8.16));
 }
@@ -136,7 +133,7 @@ positionFdt(uint const                  xAway,
 #endif
       );
     
-    float const lp = min(c.xLow, d.xLow);
+    float const lp = std::min(c.xLow, d.xLow);
     float const gain = d.yHigh - c.yHigh;
     float const lose = c.e(lp) - d.e(lp);
     if( lose != 0.0 ) {
@@ -1112,7 +1109,7 @@ numberOfOppMoves(int const board[2][25])
   int n1 = int(0.5 + (8.78776 * x[2] + 5.84057 * x[3] +
     -4.43768 * x[0] + -1.06146 * x[1] + 7.48450));
 
-  int n = min(n0, n1);
+  int n = std::min(n0, n1);
   
   if( n < 0 ) {
     n = 0;
