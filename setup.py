@@ -18,7 +18,12 @@ define_macros = [
 
 # Platform-specific compile args
 extra_compile_args_c = ["/wd4244", "/wd4305", "/wd4028", "/wd4090"] if is_windows else []
-extra_compile_args_cpp = ["-std=c++11"] if not is_macos else []
+if is_windows:
+    extra_compile_args_cpp = ["/std:c++14"]
+elif is_macos:
+    extra_compile_args_cpp = []
+else:
+    extra_compile_args_cpp = ["-std=c++11"]
 
 here = os.path.abspath(os.path.dirname(__file__))
 with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
