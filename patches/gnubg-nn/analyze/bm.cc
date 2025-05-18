@@ -23,7 +23,7 @@
 #include <assert.h>
 #include <stdlib.h>
 
-#include "minmax.h"
+#include <algorithm>
 
 #include <algorithm>
 
@@ -33,7 +33,6 @@
 #include "bms.h"
 #include "bm.h"
 
-using std::min;
 using std::sort;
 
 #undef DEBUG
@@ -338,7 +337,7 @@ findBestMove_1_33(int        anMove[8],
       {
 	Data eval;
       
-	uint const nCan = min(4U, uint(ml.cMoves));
+	uint const nCan = std::min(4U, uint(ml.cMoves));
 	
 	Data candidates[nCan];
 	int  iCandidates[nCan];
@@ -574,9 +573,9 @@ findBestMove(int        anMove[8],
       plySearch const& s = p[nPlies < sizep ? nPlies : sizep - 1];
       
       uint const k = ml.cMoves;
-      ml.cMoves = min(s.nMoves, k);
+      ml.cMoves = std::min(s.nMoves, k);
 
-      int const limit = min(k, ml.cMoves + s.nAdditional);
+      int const limit = std::min(k, ml.cMoves + s.nAdditional);
       
       for( /**/; ml.cMoves < limit; ++ml.cMoves) {
 	if( ml.amMoves[ml.cMoves].rScore < ml.amMoves[0].rScore - s.th ) {
