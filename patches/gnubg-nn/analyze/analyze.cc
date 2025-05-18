@@ -557,17 +557,21 @@ Analyze::analyze(Result&                r,
 
 	// Save move boards, which are destroyed by EvaluatePosition
       
-	unsigned char aucs[r.nMoves][10];
-	for(uint i = 0; i < r.nMoves; i++) {
-	  memcpy(aucs[i], ml.amMoves[i].auch, sizeof(aucs[i]));
-	}
+//	unsigned char aucs[r.nMoves][10];
+//	for(uint i = 0; i < r.nMoves; i++) {
+//	  memcpy(aucs[i], ml.amMoves[i].auch, sizeof(aucs[i]));
+//	}
+      std::vector<std::array<unsigned char, 10>> aucs(r.nMoves);
+      for(uint i = 0; i < r.nMoves; i++) {
+          memcpy(aucs[i].data(), ml.amMoves[i].auch, 10);
+      }
       
 	GNUbgBoard tmpBoard;
       
 	for(uint i = 0; i < r.nMoves; i++) {
 	  float* const ar = r.moves[i].probs;
-	
-	  PositionFromKey(tmpBoard, aucs[i]);
+
+        PositionFromKey(tmpBoard, aucs[i].data());
 
 	  SwapSides(tmpBoard);
 
