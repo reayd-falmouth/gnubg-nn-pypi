@@ -23,9 +23,6 @@
 #if defined( __GNUG__ )
 #pragma implementation
 #endif
-#ifdef _MSC_VER
-#define strcasecmp _stricmp
-#endif
 
 #include <iostream> /**/
 
