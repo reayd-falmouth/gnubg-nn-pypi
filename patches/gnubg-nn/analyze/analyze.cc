@@ -61,6 +61,9 @@ static int strcasecmp(const char* s1, const char* s2) {
 #include <strings.h>  // For strcasecmp on POSIX
 #endif
 
+#include <vector>
+#include <array>
+#include <cstring>  // for memcpy
 
 using namespace std;
 
@@ -428,35 +431,32 @@ Analyze::Result::setBlunder(float const range)
 void
 Analyze::rollMoves(Analyze::Result& r, movelist& ml, bool const xOnPlay)
 {
-  // Save move boards. they are destroyed by EvaluatePosition
-      
-  unsigned char aucs[r.nMoves][10];
-  for(uint i = 0; i < r.nMoves; i++) {
-    memcpy(aucs[i], ml.amMoves[i].auch, sizeof(aucs[i]));
-  }
-      
-  Analyze::GNUbgBoard tmpBoard;
+    // Save move boards. they are destroyed by EvaluatePosition
+    std::vector<std::array<unsigned char, 10>> aucs(r.nMoves);
+    for (uint i = 0; i < r.nMoves; i++) {
+        memcpy(aucs[i].data(), ml.amMoves[i].auch, aucs[i].size());
+    }
 
-  float arStdDev[NUM_OUTPUTS];
-  uint const nPlies = 0;
-  uint const nTruncate = 500;
-  
-  for(uint i = 0; i < r.nMoves; i++) {
-    float* const ar = r.moves[i].probs;
-	
-    PositionFromKey(tmpBoard, aucs[i]);
+    Analyze::GNUbgBoard tmpBoard;
 
-    SwapSides(tmpBoard);
+    float arStdDev[NUM_OUTPUTS];
+    uint const nPlies = 0;
+    uint const nTruncate = 500;
 
-//     Rollout(tmpBoard, ar, arStdDev, nPlies, nTruncate,
-// 	    r.moveRolloutGames, 1, !xOnPlay, 0);
-    rollout(tmpBoard, !xOnPlay, ar, arStdDev, nPlies, nTruncate,
-	    r.moveRolloutGames, i);
-    
-    InvertEvaluation(ar);
-  }
+    for (uint i = 0; i < r.nMoves; i++) {
+        float* const ar = r.moves[i].probs;
 
-  r.sortByMatchMCW(xOnPlay);
+        PositionFromKey(tmpBoard, aucs[i].data());
+
+        SwapSides(tmpBoard);
+
+        rollout(tmpBoard, !xOnPlay, ar, arStdDev, nPlies, nTruncate,
+                r.moveRolloutGames, i);
+
+        InvertEvaluation(ar);
+    }
+
+    r.sortByMatchMCW(xOnPlay);
 }
 
 
@@ -1190,127 +1190,3 @@ Analyze::rollout(GNUbgBoard const board,
     }
   }
 }
-
-//  uint
-//  numberOfOppMoves(int const board[ 2 ][ 25 ])
-//  {
-//    float x[4];
-  
-//    for(uint side = 0; side < 2; ++side) {
-//      const int* const anBoard = board[1-side];
-//      const int* const anBoardOpp = board[side];
-    
-//      int nOppBack;
-    
-//      for(nOppBack = 24; nOppBack >= 0; --nOppBack) {
-//        if( anBoardOpp[nOppBack] ) {
-//  	break;
-//        }
-//      }
-    
-//      nOppBack = 23 - nOppBack;
-
-//      uint n = 0;
-    
-//      for(uint i = nOppBack + 1; i < 25; ++i) {
-//        if( anBoard[ i ] ) {
-//  	n += ( i + 1 - nOppBack ) * anBoard[ i ];
-//        }
-//      }
-    
-//      x[side] = n / (15 + 152.0);
-
-//      n = 0;
-//      for(uint i = 0; i < 6; i++ ) {
-//        n += anBoardOpp[ i ] > 1;
-//      }
-    
-//      x[2 + side] = ( 36 - ( n - 6 ) * ( n - 6 ) ) / 36.0; 
-//    }
-
-//    int n = int(0.5 + (8.78776 * x[0] + 5.84057 * x[1] +
-//      -4.43768 * x[2] + -1.06146 * x[3] + 7.48450));
-
-//    if( n < 0 ) {
-//      n = 0;
-//    }
-
-//    return n;
-//  }
-  
-//  void
-//  ap(double const favAdvPerMove, float probs[5], int const anBoard[2][25])
-//  {
-//    assert( favAdvPerMove >= 0 );
-  
-//    float const w = probs[WIN];
-  
-//    if( w == 0.0 || w == 1.0 ) {
-//      return;
-//    }
-  
-//    uint const opNmoves = numberOfOppMoves(anBoard);
-
-//    float gives = favAdvPerMove * opNmoves;
-
-//    float win = w + gives;
-  
-//    if( win >= 1.0 ) {
-//      win = (1 + w) / 2.0;
-//    }
-
-//    float const r = win / w;
-
-//    float const r1 = (1 - win) / (1 - w);
-  
-//    probs[WINGAMMON] *= r;
-//    probs[WINBACKGAMMON] *= r;
-
-//    probs[LOSEGAMMON] *= r1;
-//    probs[LOSEBACKGAMMON] *= r1;
-
-//    probs[WIN] = win;
-//  }
-  
-//  void
-//  adj(float* const    p,
-//      float* const    probs,
-//      double const    favAdvPerMove,
-//      unsigned char*  pauch)
-//  {
-//    int b[2][25];
-  
-//    for(uint k = 0; k < 21*21; ++k) {
-//      PositionFromKey(b, pauch + k * 10);
-    
-//      ap(favAdvPerMove, probs + k * NUM_OUTPUTS, b);
-//    }
-
-//    bool const dr[21] =
-//      {true,
-//       false, true,
-//       false, false, true,
-//       false, false, false, true,
-//       false, false, false, false, true,
-//       false, false, false, false, false, true};
-  
-//    for(uint n = 0; n < NUM_OUTPUTS; ++n) {
-//      p[n] = 0.0;
-//    }
-  
-//    for(uint k = 0; k < 21; ++k) {
-//      float const f1 = dr[k] ? 1.0/36.0 : 2.0/36.0;
-    
-//      const float* pk1 = probs + k * 21 * NUM_OUTPUTS;
-	
-//      for(uint k1 = 0; k1 < 21; ++k1) {
-	
-//        float const f2 = f1 * (dr[k1] ? 1.0/36.0 : 2.0/36.0);
-	
-//        for(uint n = 0; n < NUM_OUTPUTS; ++n, ++pk1) {
-//  	p[n] += f2 * *pk1;
-//        }
-//      }
-//    }
-//  }
-
