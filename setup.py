@@ -21,9 +21,9 @@ extra_compile_args_c = ["/wd4244", "/wd4305", "/wd4028", "/wd4090"] if is_window
 if is_windows:
     extra_compile_args_cpp = ["/std:c++14"]
 elif is_macos:
-    extra_compile_args_cpp = []
+    extra_compile_args_cpp = ["-std=c++14"]
 else:
-    extra_compile_args_cpp = ["-std=c++11"]
+    extra_compile_args_cpp = ["-std=c++14"]
 
 here = os.path.abspath(os.path.dirname(__file__))
 with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
