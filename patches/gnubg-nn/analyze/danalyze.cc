@@ -750,13 +750,12 @@ Analyze::R1::setDecision(void)
 
 void
 Analyze::R1::analyze(GNUbgBoard const        b,
-		     bool const              xOnPlay_,
-		     uint const              nPlies_,
-		     const Advantage* const  ad,
-		     //uint const              nPliesEval_,
+		     bool               xOnPlay_,
+		     uint               nPlies_,
+		     const Advantage*   ad,
 		     const float*            prb,
-		     bool const              optimize,
-		     bool const              cbfMoves_)
+		     bool               optimize,
+		     bool               cbfMoves_)
 {
   nPlies = nPlies_;
   xOnPlay = xOnPlay_;

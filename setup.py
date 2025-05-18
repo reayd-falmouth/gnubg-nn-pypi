@@ -51,8 +51,12 @@ c_sources = (
 )
 cpp_sources = (
         glob("gnubg-nn/analyze/*.cc") +
-        ["src/gnubg/gnubgmodule.cpp", "gnubg-nn/gnubg/bearoffgammon.cc",
-         "gnubg-nn/gnubg/racebg.cc", "gnubg-nn/gnubg/osr.cc"]
+        [
+            "src/gnubg/gnubgmodule.cpp",
+            "gnubg-nn/gnubg/bearoffgammon.cc",
+            "gnubg-nn/gnubg/racebg.cc",
+            "gnubg-nn/gnubg/osr.cc",
+        ]
 )
 
 common_includes = [
