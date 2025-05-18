@@ -491,9 +491,11 @@ sizep = sizeof(p)/sizeof(p[0]);
 void
 setPlyBounds(uint np, uint nm, uint na, float th)
 {
-  if( np > 0 && np < sizep ) {
-      p[np] = plySearch{nm, na, th};
-  }
+    if (np > 0 && np < sizep) {
+        p[np].nMoves = nm;
+        p[np].nAdditional = na;
+        p[np].th = th;
+    }
 }
 
 static void
