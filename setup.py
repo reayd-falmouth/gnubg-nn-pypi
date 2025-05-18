@@ -25,6 +25,9 @@ elif is_macos:
 else:
     extra_compile_args_cpp = ["-std=c++14"]
 
+extra_compile_args_cpp.append("/MAP")
+extra_compile_args_cpp.append("/VERBOSE")
+
 here = os.path.abspath(os.path.dirname(__file__))
 with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
