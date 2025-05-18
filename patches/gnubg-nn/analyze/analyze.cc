@@ -64,6 +64,7 @@ static int strcasecmp(const char* s1, const char* s2) {
 #include <vector>
 #include <array>
 #include <cstring>  // for memcpy
+#include <algorithm>
 
 using namespace std;
 
@@ -1168,7 +1169,8 @@ Analyze::rollout(GNUbgBoard const board,
     }
   
     for(uint i = 0; i < NUM_OUTPUTS; ++i) {
-      float const x = min(max(ar[i], 0.0f), 1.0f);
+//      float const x = min(max(ar[i], 0.0f), 1.0f);
+        float const x = std::min(std::max(ar[i], 0.0f), 1.0f);
       arOutput[i] += x;
       if( arStdDev ) {
 	arVariance[i] += x * x;
