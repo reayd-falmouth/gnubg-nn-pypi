@@ -161,7 +161,7 @@ jobs:
           path: wheelhouse/windows/*.whl
 
       - name: Upload linker .map files
-        continue-on-error: trye
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: windows-link-maps
