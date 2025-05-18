@@ -629,11 +629,10 @@ Analyze::analyze(Result&                r,
     probs(p1, board, xOnPlay, 2, 2);
     wide = false;
 
-    uint const hr = max(roll1, roll2);
-    
-    uint const k = (hr*(hr-1))/2 + min(roll1,roll2) - 1;
-    
-    float l = rollLuck(r, prr, k, cube,
+      uint const hr = std::max(roll1, roll2);
+      uint const k = (hr * (hr - 1)) / 2 + std::min(roll1, roll2) - 1;
+
+      float l = rollLuck(r, prr, k, cube,
 		       xOnPlay ? xAway : oAway,
 		       xOnPlay ? oAway : xAway,
 		       xOwns == xOnPlay,
@@ -715,9 +714,6 @@ Analyze::analyze(Result&                r,
 
   return true;
 }
-
-
-
 
 
 void
