@@ -56,12 +56,16 @@ cpp_sources = (
             "gnubg-nn/gnubg/bearoffgammon.cc",
             "gnubg-nn/gnubg/racebg.cc",
             "gnubg-nn/gnubg/osr.cc",
+            "gnubg-nn/analyze/danalyze.cc",
         ]
 )
 
 common_includes = [
-    "gnubg-nn/", "gnubg-nn/gnubg", "gnubg-nn/gnubg/lib",
-    "gnubg-nn/analyze", "gnubg-nn/py"
+    "gnubg-nn/",
+    "gnubg-nn/gnubg",
+    "gnubg-nn/gnubg/lib",
+    "gnubg-nn/analyze",
+    "gnubg-nn/py",
 ]
 
 extensions = [
