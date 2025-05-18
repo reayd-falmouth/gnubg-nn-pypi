@@ -152,7 +152,7 @@ jobs:
         env:
           CIBW_PLATFORM: windows
           CIBW_SKIP: "pp*"
-        run: cibuildwheel --output-dir wheelhouse/windows
+        run: cibuildwheel --debug-traceback --output-dir wheelhouse/windows
 
       - uses: actions/upload-artifact@v4
         with:
