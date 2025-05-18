@@ -35,9 +35,10 @@ using std::map;
 
 #include "equities.h"
 
+#include "analyze.h"
+
 #include "danalyze.h"
 
-#include "analyze.h"
 #include "bm.h"
 
 #include <cstdio>
@@ -749,27 +750,26 @@ Analyze::R1::setDecision(void)
 }
 
 void
-Analyze::R1::analyze(GNUbgBoard const        b,
-		     bool               xOnPlay_,
-		     uint               nPlies_,
-		     const Advantage*   ad,
-		     const float*            prb,
-		     bool               optimize,
-		     bool               cbfMoves_)
+Analyze::R1::analyze(GNUbgBoard const board,
+                          bool xOnPlay,
+                          uint nPlies,
+                          const Advantage* ad,
+                          const float* prb,
+                          bool optimize,
+                          bool cbfMoves)
 {
-  nPlies = nPlies_;
-  xOnPlay = xOnPlay_;
-  //nPliesEval = nPliesEval_;
-  fullEval = !optimize;
-  advantage = ad;
-  cbfMoves = cbfMoves_;
+    this->nPlies = nPlies;
+    this->xOnPlay = xOnPlay;
+    fullEval = !optimize;
+    advantage = ad;
+    this->cbfMoves = cbfMoves;
 
   if( ! prb ) {
     float p[NUM_OUTPUTS];
     for(uint k = 0; k < NUM_OUTPUTS; ++k) {
       p[k] = 0.0;
     }
-    cubeless(p, b, nPlies, xOnPlay_, 1, cbfMoves);
+    cubeless(p, board, nPlies, xOnPlay, 1, cbfMoves);
 
     if ( nPlies & 1 ) {
       InvertEvaluation(p);
@@ -780,7 +780,7 @@ Analyze::R1::analyze(GNUbgBoard const        b,
     setProbs(prb);
   }
   
-  cubefulEquities(b);
+  cubefulEquities(board);
 
   locC.clear();
 
