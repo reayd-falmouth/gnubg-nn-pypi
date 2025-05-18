@@ -432,7 +432,7 @@ void
 Analyze::rollMoves(Analyze::Result& r, movelist& ml, bool const xOnPlay)
 {
     // Save move boards. they are destroyed by EvaluatePosition
-    std::vector<std::array<unsigned char, 10>> aucs(r.nMoves);
+    std::vector< std::vector<unsigned char> > aucs(r.nMoves, std::vector<unsigned char>(10));
     for (uint i = 0; i < r.nMoves; i++) {
         memcpy(aucs[i].data(), ml.amMoves[i].auch, aucs[i].size());
     }
