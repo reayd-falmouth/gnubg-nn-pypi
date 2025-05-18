@@ -561,7 +561,7 @@ Analyze::analyze(Result&                r,
 //	for(uint i = 0; i < r.nMoves; i++) {
 //	  memcpy(aucs[i], ml.amMoves[i].auch, sizeof(aucs[i]));
 //	}
-      std::vector<std::array<unsigned char, 10>> aucs(r.nMoves);
+      std::vector<std::array<unsigned char, 10> > aucs(r.nMoves);
       for(uint i = 0; i < r.nMoves; i++) {
           memcpy(aucs[i].data(), ml.amMoves[i].auch, 10);
       }
