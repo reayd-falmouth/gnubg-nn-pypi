@@ -152,33 +152,46 @@ jobs:
         env:
           CIBW_PLATFORM: windows
           CIBW_SKIP: "pp*"
-          LDFLAGS: "/MAP"
+          # <-- add /MAP here so link.exe spits out a .map
+          LINK: "/MAP /VERBOSE"
         run: cibuildwheel --output-dir wheelhouse/windows
 
-      # after your Build Windows wheels step
+      # at the bottom of your `build-windows` job
       - name: Dump R1::analyze symbols
-        if: always()                # run even if the build failed
-        shell: powershell           # or `cmd`, see note below
+        if: always()            # run even if the build failed
+        shell: powershell
         run: |
-          # 1) Load the VS compiler environment (adjust path if you use a different VS version)
-          & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86
+          # 1) locate vswhere and find your VS install path
+          $vswhere = "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe"
+          if (-not (Test-Path $vswhere)) {
+            Write-Error "vswhere not found at $vswhere"
+            exit 1
+          }
+          $installPath = & $vswhere -latest -products * `
+            -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 `
+            -property installationPath
+          Write-Host "Visual Studio installed at: $installPath"
           
-          # 2) Locate the object files
-          $playerObj   = Get-ChildItem build -Recurse -Filter player.obj   | Select-Object -Expand FullName
-          $danalyzeObj = Get-ChildItem build -Recurse -Filter danalyze.obj | Select-Object -Expand FullName
+          # 2) load the MSVC environment (x86 host, since your build was win32)
+          & "$installPath\VC\Auxiliary\Build\vcvarsall.bat" x86
           
-          Write-Host "=== player.obj symbols ==="
+          # 3) find the two .obj files
+          $playerObj   = Get-ChildItem build -Recurse -Filter player.obj   | Select -Expand FullName
+          $danalyzeObj = Get-ChildItem build -Recurse -Filter danalyze.obj | Select -Expand FullName
+          
+          Write-Host "`n=== Symbols in player.obj ==="
           dumpbin /symbols $playerObj   | Select-String "Analyze::R1::analyze"
           
-          Write-Host "=== danalyze.obj symbols ==="
+          Write-Host "`n=== Symbols in danalyze.obj ==="
           dumpbin /symbols $danalyzeObj | Select-String "Analyze::R1::analyze"
+
 
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: windows-link-maps
-          path: |
-            build/temp.win32-*/Release/*.map
+          path: build/temp.win32-*/Release/*.map
+
 
       - uses: actions/upload-artifact@v4
         with:
