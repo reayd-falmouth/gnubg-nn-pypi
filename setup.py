@@ -31,24 +31,24 @@ with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
 
 class build_ext(_build_ext):
     def build_extensions(self):
-            # figure out which compiler distutils is using
         ctype = self.compiler.compiler_type
 
         for ext in self.extensions:
-            args = []
+            cpp_args = []
+            c_args = []
+
             for src in ext.sources:
                 if src.endswith((".cc", ".cpp")):
-                    # C++ files: MSVC wants "/std:c++14", others "-std=c++14"
                     if ctype == "msvc":
-                        args.append("/std:c++14")
+                        cpp_args.append("/std:c++14")
                     else:
-                        args.append("-std=c++14")
-                elif src.endswith(".c"):
-                    # C files: only MSVC needs warning-suppress flags
-                    if ctype == "msvc":
-                            args += ["/wd4244", "/wd4305", "/wd4028", "/wd4090"]
+                        cpp_args.append("-std=c++14")
+                elif src.endswith(".c") and ctype == "msvc":
+                    c_args += ["/wd4244", "/wd4305", "/wd4028", "/wd4090"]
 
-            ext.extra_compile_args = args
+            # Separate args for C and C++
+            ext.extra_compile_args = cpp_args + c_args
+
         super().build_extensions()
 
 # Source files
