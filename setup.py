@@ -45,21 +45,34 @@ class build_ext(_build_ext):
         super().build_extensions()
 
 # Source files
-c_sources = (
-        glob("gnubg-nn/gnubg/*.c") +
-        glob("gnubg-nn/gnubg/lib/*.c")
-)
+c_sources = [
+    'gnubg-nn/gnubg/bearoffdb.c',
+    'gnubg-nn/gnubg/eggmoveg.c',
+    'gnubg-nn/gnubg/eval.c',
+    'gnubg-nn/gnubg/inputs.c',
+    'gnubg-nn/gnubg/mt19937int.c',
+    'gnubg-nn/gnubg/positionid.c',
+    'gnubg-nn/gnubg/pub_eval.c',
+    'gnubg-nn/gnubg/lib/hash.c',
+    'gnubg-nn/gnubg/lib/neuralnet.c',
+    'gnubg-nn/gnubg/lib/nsse.c'
+]
 print(f"c_sources: {c_sources}")
 
-cpp_sources = (
-        glob("gnubg-nn/analyze/*.cc") +
-        [
-            "src/gnubg/gnubgmodule.cpp",
-            "gnubg-nn/gnubg/bearoffgammon.cc",
-            "gnubg-nn/gnubg/racebg.cc",
-            "gnubg-nn/gnubg/osr.cc",
-        ]
-)
+cpp_sources = [
+    'src/gnubg/gnubgmodule.cpp',
+    'gnubg-nn/analyze/analyze.cc',
+    'gnubg-nn/analyze/bm.cc',
+    'gnubg-nn/analyze/bms.cc',
+    'gnubg-nn/analyze/danalyze.cc',
+    'gnubg-nn/analyze/dice_gen.cc',
+    'gnubg-nn/analyze/equities.cc',
+    'gnubg-nn/analyze/mec.cc',
+    'gnubg-nn/analyze/player.cc',
+    'gnubg-nn/gnubg/bearoffgammon.cc',
+    'gnubg-nn/gnubg/racebg.cc',
+    'gnubg-nn/gnubg/osr.cc'
+]
 print(f"cpp_sources: {cpp_sources}")
 
 common_includes = [

@@ -154,6 +154,10 @@ jobs:
           CIBW_SKIP: "pp*"
           # <-- add /MAP here so link.exe spits out a .map
           LINK: "/MAP /VERBOSE"
+          CIBW_ENVIRONMENT: >
+            set CC=clang-cl &&
+            set CXX=clang-cl &&
+            set LINK=lld-link
         run: cibuildwheel --output-dir wheelhouse/windows
 
       # at the bottom of your `build-windows` job
