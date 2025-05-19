@@ -152,16 +152,15 @@ jobs:
         env:
           CIBW_PLATFORM: windows
           CIBW_SKIP: "pp*"
-          CL: "/link /MAP /VERBOSE"
+          LDFLAGS: "/MAP"
         run: cibuildwheel --output-dir wheelhouse/windows
 
-      - name: Upload linker .map files
+      - uses: actions/upload-artifact@v4
         continue-on-error: true
-        uses: actions/upload-artifact@v4
         with:
           name: windows-link-maps
           path: |
-              **/*.map
+            build/temp.win32-*/Release/*.map
 
       - uses: actions/upload-artifact@v4
         with:

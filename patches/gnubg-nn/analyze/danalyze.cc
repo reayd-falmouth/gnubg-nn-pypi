@@ -29,18 +29,13 @@ using std::endl;
 #endif
 #include <map>
 using std::map;
-
+#include <algorithm>
 #include "bgdefs.h"
 #include "misc.h"
-
 #include "equities.h"
-
 #include "analyze.h"
-
 #include "danalyze.h"
-
 #include "bm.h"
-
 #include <cstdio>
 #include <iostream>
 using std::cout;
