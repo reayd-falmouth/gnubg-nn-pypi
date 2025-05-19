@@ -54,7 +54,13 @@ jobs:
       - name: Install built wheel (Linux)
         run: |
           pyver=$(python -c "import sys; print(f'cp{sys.version_info.major}{sys.version_info.minor}')")
-          pip install wheelhouse/linux/*$pyver*.whl
+          echo "Looking for: *${pyver}*x86_64*.whl in wheelhouse/linux"
+          whl=$(ls wheelhouse/linux/*${pyver}*x86_64*.whl | head -n 1)
+          if [ -z "$whl" ]; then
+            echo "❌ No matching wheel found for Python version ${pyver} and arch x86_64"
+            exit 1
+          fi
+          pip install "$whl"
 
       - name: Run tests
         run: python3 -m unittest discover -s gnubg.tests
