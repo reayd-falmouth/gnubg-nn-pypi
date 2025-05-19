@@ -143,8 +143,9 @@ setup(
         'Documentation':  'http://www.gnubg.org/documentation/doku.php?id=gnu_backgammon_faq',
         'Mailing List':   'https://lists.gnu.org/mailman/listinfo/gnubg',
         'Source':         'https://github.com/gnubg/gnubg-nn-pypi',
-        'Contributing':   'https://github.com/gnubg/gnubg-nn-pypi/blob/main/CONTRIBUTING.md',
-        'Bug Tracker':    'https://github.com/gnubg/gnubg-nn-pypi/issues',
+        'GNUBG Project':  'https://git.savannah.gnu.org/cgit/gnubg/gnubg-nn.git',
+        'Contributing':   'https://savannah.gnu.org/people/',
+        'Credits':          'https://git.savannah.gnu.org/cgit/gnubg.git/tree/credits.sh',
     },
     classifiers=[
         'Programming Language :: Python :: 3',
