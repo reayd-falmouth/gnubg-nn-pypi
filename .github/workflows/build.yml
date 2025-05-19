@@ -109,91 +109,97 @@ jobs:
           name: macos-wheels
           path: wheelhouse/macos/*macosx*.whl
 
-  build-windows:
-    name: Build Windows wheels
+  build-windows-mingw:
+    name: Build Windows (MSYS2 / MinGW) wheels
     runs-on: windows-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Set up MSYS2 (with make, autoconf, automake)
+      - name: Set up MSYS2 + MINGW Python
         uses: msys2/setup-msys2@v2
         with:
           update: true
-          install: base-devel
+          install: |
+            mingw-w64-x86_64-toolchain
+            mingw-w64-x86_64-python3
+            mingw-w64-x86_64-python3-pip
 
-      # 2) Install the MSYS2 Autotools packages
-      - name: Install Autotools (autoconf, automake, m4, make)
+      - name: Build wheel under MSYS2
         shell: msys2 {0}
         run: |
-          pacman -Sy --noconfirm autoconf automake libtool m4 make mingw-w64-x86_64-gcc
+          # Ensure we're in the MINGW64 environment
+          export PATH="/c/msys64/mingw64/bin:$PATH"
+          cd gnubg-nn
+  
+          # Prepare the code exactly as you do on *nix
+          make patch
+          ./configure --host=x86_64-w64-mingw32
+  
+          # Build the C++ parts
+          make
+  
+          # Build a Python wheel using MSYS2’s Python + gcc
+          python3 -m pip install --upgrade pip setuptools wheel
+          python3 -m pip wheel . --wheel-dir=../wheelhouse/windows
 
-      - name: Apply Patch files
-        run: make patch
-
-      # Now run autoreconf/configure in MSYS2’s Bash
-      - name: Generate configure script & run configure
-        shell: msys2 {0}
-        run: make configure
-
-      - name: Set up Python & build tools
-        uses: actions/setup-python@v4
+      - name: Upload Windows wheels
+        uses: actions/upload-artifact@v4
         with:
-          python-version-file: .python-version
-          check-latest: true
+          name: windows-wheels-mingw
+          path: wheelhouse/windows/*.whl
 
-      - name: Install cibuildwheel
-        run: pip install --upgrade pip setuptools wheel cibuildwheel
-
-      - name: Build Windows wheels
-        env:
-          CIBW_PLATFORM: windows
-          CIBW_SKIP: "pp*"
-          # <-- add /MAP here so link.exe spits out a .map
-          LINK: "/MAP" # /VERBOSE"
-        run: cibuildwheel --output-dir wheelhouse/windows
-
-      # at the bottom of your `build-windows` job
-#      - name: Dump R1::analyze symbols
-#        if: always()            # run even if the build failed
-#        shell: powershell
+#  build-windows:
+#    name: Build Windows wheels
+#    runs-on: windows-latest
+#
+#    steps:
+#      - uses: actions/checkout@v4
+#        with:
+#          submodules: recursive
+#          fetch-depth: 0
+#
+#      - name: Set up MSYS2 (with make, autoconf, automake)
+#        uses: msys2/setup-msys2@v2
+#        with:
+#          update: true
+#          install: base-devel
+#
+#      # 2) Install the MSYS2 Autotools packages
+#      - name: Install Autotools (autoconf, automake, m4, make)
+#        shell: msys2 {0}
 #        run: |
-#          # 1) locate vswhere and find your VS install path
-#          $vswhere = "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe"
-#          if (-not (Test-Path $vswhere)) {
-#            Write-Error "vswhere not found at $vswhere"
-#            exit 1
-#          }
-#          $installPath = & $vswhere -latest -products * `
-#            -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 `
-#            -property installationPath
-#          Write-Host "Visual Studio installed at: $installPath"
+#          pacman -Sy --noconfirm autoconf automake libtool m4 make mingw-w64-x86_64-gcc
 #
-#          # 2) load the MSVC environment (x86 host, since your build was win32)
-#          & "$installPath\VC\Auxiliary\Build\vcvarsall.bat" x86
+#      - name: Apply Patch files
+#        run: make patch
 #
-#          # 3) find the two .obj files
-#          $playerObj   = Get-ChildItem build -Recurse -Filter player.obj   | Select -Expand FullName
-#          $danalyzeObj = Get-ChildItem build -Recurse -Filter danalyze.obj | Select -Expand FullName
+#      # Now run autoreconf/configure in MSYS2’s Bash
+#      - name: Generate configure script & run configure
+#        shell: msys2 {0}
+#        run: make configure
 #
-#          Write-Host "`n=== Symbols in player.obj ==="
-#          dumpbin /symbols $playerObj   | Select-String "Analyze::R1::analyze"
+#      - name: Set up Python & build tools
+#        uses: actions/setup-python@v4
+#        with:
+#          python-version-file: .python-version
+#          check-latest: true
 #
-#          Write-Host "`n=== Symbols in danalyze.obj ==="
-#          dumpbin /symbols $danalyzeObj | Select-String "Analyze::R1::analyze"
+#      - name: Install cibuildwheel
+#        run: pip install --upgrade pip setuptools wheel cibuildwheel
 #
+#      - name: Build Windows wheels
+#        env:
+#          CIBW_PLATFORM: windows
+#          CIBW_SKIP: "pp*"
+#          # <-- add /MAP here so link.exe spits out a .map
+#          LINK: "/MAP" # /VERBOSE"
+#        run: cibuildwheel --output-dir wheelhouse/windows
 #
 #      - uses: actions/upload-artifact@v4
-#        if: always()
 #        with:
-#          name: windows-link-maps
-#          path: build/temp.win32-*/Release/*.map
-
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: windows-wheels
-          path: wheelhouse/windows/*.whl
+#          name: windows-wheels
+#          path: wheelhouse/windows/*.whl
