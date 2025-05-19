@@ -56,7 +56,6 @@ cpp_sources = (
             "gnubg-nn/gnubg/bearoffgammon.cc",
             "gnubg-nn/gnubg/racebg.cc",
             "gnubg-nn/gnubg/osr.cc",
-            "gnubg-nn/analyze/danalyze.cc",
         ]
 )
 
