@@ -154,47 +154,43 @@ jobs:
           CIBW_SKIP: "pp*"
           # <-- add /MAP here so link.exe spits out a .map
           LINK: "/MAP /VERBOSE"
-          CIBW_ENVIRONMENT: >
-            set CC=clang-cl &&
-            set CXX=clang-cl &&
-            set LINK=lld-link
         run: cibuildwheel --output-dir wheelhouse/windows
 
       # at the bottom of your `build-windows` job
-      - name: Dump R1::analyze symbols
-        if: always()            # run even if the build failed
-        shell: powershell
-        run: |
-          # 1) locate vswhere and find your VS install path
-          $vswhere = "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe"
-          if (-not (Test-Path $vswhere)) {
-            Write-Error "vswhere not found at $vswhere"
-            exit 1
-          }
-          $installPath = & $vswhere -latest -products * `
-            -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 `
-            -property installationPath
-          Write-Host "Visual Studio installed at: $installPath"
-          
-          # 2) load the MSVC environment (x86 host, since your build was win32)
-          & "$installPath\VC\Auxiliary\Build\vcvarsall.bat" x86
-          
-          # 3) find the two .obj files
-          $playerObj   = Get-ChildItem build -Recurse -Filter player.obj   | Select -Expand FullName
-          $danalyzeObj = Get-ChildItem build -Recurse -Filter danalyze.obj | Select -Expand FullName
-          
-          Write-Host "`n=== Symbols in player.obj ==="
-          dumpbin /symbols $playerObj   | Select-String "Analyze::R1::analyze"
-          
-          Write-Host "`n=== Symbols in danalyze.obj ==="
-          dumpbin /symbols $danalyzeObj | Select-String "Analyze::R1::analyze"
-
-
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: windows-link-maps
-          path: build/temp.win32-*/Release/*.map
+#      - name: Dump R1::analyze symbols
+#        if: always()            # run even if the build failed
+#        shell: powershell
+#        run: |
+#          # 1) locate vswhere and find your VS install path
+#          $vswhere = "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe"
+#          if (-not (Test-Path $vswhere)) {
+#            Write-Error "vswhere not found at $vswhere"
+#            exit 1
+#          }
+#          $installPath = & $vswhere -latest -products * `
+#            -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 `
+#            -property installationPath
+#          Write-Host "Visual Studio installed at: $installPath"
+#
+#          # 2) load the MSVC environment (x86 host, since your build was win32)
+#          & "$installPath\VC\Auxiliary\Build\vcvarsall.bat" x86
+#
+#          # 3) find the two .obj files
+#          $playerObj   = Get-ChildItem build -Recurse -Filter player.obj   | Select -Expand FullName
+#          $danalyzeObj = Get-ChildItem build -Recurse -Filter danalyze.obj | Select -Expand FullName
+#
+#          Write-Host "`n=== Symbols in player.obj ==="
+#          dumpbin /symbols $playerObj   | Select-String "Analyze::R1::analyze"
+#
+#          Write-Host "`n=== Symbols in danalyze.obj ==="
+#          dumpbin /symbols $danalyzeObj | Select-String "Analyze::R1::analyze"
+#
+#
+#      - uses: actions/upload-artifact@v4
+#        if: always()
+#        with:
+#          name: windows-link-maps
+#          path: build/temp.win32-*/Release/*.map
 
 
       - uses: actions/upload-artifact@v4
