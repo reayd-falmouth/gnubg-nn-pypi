@@ -1503,52 +1503,6 @@ static PyObject* set_ps(PyObject* self, PyObject* args) {
     return Py_None;
 }
 
-// Set equities table function
-//static PyObject* set_equities(PyObject* self, PyObject* args) {
-//    const char* which;
-//    if (PyTuple_Size(args) == 1) {
-//        if (!PyArg_ParseTuple(args, "s", &which)) {
-//            return NULL;
-//        }
-//
-//        if (strcasecmp("gnur", which) == 0) {
-//            Equities::set(Equities::gnur);
-//        } else if (strcasecmp("jacobs", which) == 0) {
-//            Equities::set(Equities::Jacobs);
-//        } else if (strcasecmp("woolsey", which) == 0) {
-//            Equities::set(Equities::WoolseyHeinrich);
-//        } else if (strcasecmp("snowie", which) == 0) {
-//            Equities::set(Equities::Snowie);
-//        } else if (strcasecmp("mec26", which) == 0) {
-//            Equities::set(Equities::mec26);
-//        } else if (strcasecmp("mec57", which) == 0) {
-//            Equities::set(Equities::mec57);
-//        } else {
-//            PyErr_SetString(PyExc_RuntimeError, "Not a valid equities table name");
-//            return NULL;
-//        }
-//    } else if (PyTuple_Size(args) == 2) {
-//        double w, gr;
-//        if (!PyArg_ParseTuple(args, "dd", &w, &gr)) {
-//            return NULL;
-//        }
-//
-//        if (!(w > 0.0f && w < 1.0f && gr > 0.0f && gr < 1.0f)) {
-//            PyErr_SetString(PyExc_ValueError, "Weights and growth rates must be in [0, 1] range");
-//            return NULL;
-//        }
-//
-//        // Set the custom equities table
-//        Equities::set(w, gr);
-//    } else {
-//        PyErr_SetString(PyExc_TypeError, "Expected either one string or two floats (weight, growth_rate)");
-//        return NULL;
-//    }
-//
-//    Py_INCREF(Py_None);
-//    return Py_None;
-//}
-
 // Set match score function
 static PyObject* set_score(PyObject* self, PyObject* args) {
     int usAway, opAway, crawford = 0;
@@ -1833,13 +1787,6 @@ PyInit_gnubg(void)
 
     // Add the 'set' submodule to the main module
     PyModule_AddObject(m, "set", set_module);
-
-    // Get the path to the GNUBG data directory
-//    Dl_info dl_info;
-//    dladdr((void*)PyInit_gnubg, &dl_info);
-//    // Determine where we shipped our data
-//    std::string base    = dirname(strdup(dl_info.dli_fname));
-//    std::string datadir = base + "/data";
 
     // Locate our shipped data directory
     std::string datadir = find_data_dir(m);

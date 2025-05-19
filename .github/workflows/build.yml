@@ -155,8 +155,26 @@ jobs:
           LDFLAGS: "/MAP"
         run: cibuildwheel --output-dir wheelhouse/windows
 
+      # after your Build Windows wheels step
+      - name: Dump R1::analyze symbols
+        if: always()                # run even if the build failed
+        shell: powershell           # or `cmd`, see note below
+        run: |
+          # 1) Load the VS compiler environment (adjust path if you use a different VS version)
+          & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86
+          
+          # 2) Locate the object files
+          $playerObj   = Get-ChildItem build -Recurse -Filter player.obj   | Select-Object -Expand FullName
+          $danalyzeObj = Get-ChildItem build -Recurse -Filter danalyze.obj | Select-Object -Expand FullName
+          
+          Write-Host "=== player.obj symbols ==="
+          dumpbin /symbols $playerObj   | Select-String "Analyze::R1::analyze"
+          
+          Write-Host "=== danalyze.obj symbols ==="
+          dumpbin /symbols $danalyzeObj | Select-String "Analyze::R1::analyze"
+
       - uses: actions/upload-artifact@v4
-        continue-on-error: true
+        if: always()
         with:
           name: windows-link-maps
           path: |
