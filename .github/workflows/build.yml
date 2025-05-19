@@ -130,8 +130,8 @@ jobs:
             mingw-w64-x86_64-meson
             mingw-w64-x86_64-ninja
 
-      - name: Apply Patch files
-        run: make patch
+#      - name: Apply Patch files
+#        run: make patch
 
       - name: Build wheel under MSYS2
         shell: msys2 {0}
@@ -182,8 +182,8 @@ jobs:
         run: |
           pacman -Sy --noconfirm autoconf automake libtool m4 make mingw-w64-x86_64-gcc
 
-      - name: Apply Patch files
-        run: make patch
+#      - name: Apply Patch files
+#        run: make patch
 
       - name: Build wheel under MSYS2
         shell: msys2 {0}
