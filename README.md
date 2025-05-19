@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="https://raw.githubusercontent.com/reayd-falmouth/gnubg-nn-pypi/refs/heads/main/img/gnubg_logo.png" width="100">
+<img src="img/gerwinski-gnu-head.png" width=200">
 
 gnubg-nn-pypi
 </h1>
@@ -20,8 +20,6 @@ GNUBG NeuralNet Python bindings bring the powerful GNUBG backgammon neural-netwo
 * **GNUBG Project:** [https://git.savannah.gnu.org/cgit/gnubg/gnubg-nn.git](https://git.savannah.gnu.org/cgit/gnubg/gnubg-nn.git)
 * **Contributing:** [https://savannah.gnu.org/people/](https://savannah.gnu.org/people/)
 * **Credits:** [https://git.savannah.gnu.org/cgit/gnubg.git/tree/credits.sh](https://git.savannah.gnu.org/cgit/gnubg.git/tree/credits.sh)
-* **Bug reports:** mailto:bug-gnubg@gnu.org
-* **Report a security vulnerability:** mailto:security@gnubg.org
 
 It provides:
 

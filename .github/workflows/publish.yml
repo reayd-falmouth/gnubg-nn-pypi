@@ -183,6 +183,35 @@ jobs:
             --global-option "--compiler=mingw32" \
             --wheel-dir=./wheelhouse/windows
 
+      - name: Build wheel under MSYS2
+        shell: msys2 {0}
+        run: |
+          export PATH="/c/msys64/mingw64/bin:$PATH"
+          cd gnubg-nn
+          
+          autoreconf -vfi
+          ./configure --host=x86_64-w64-mingw32
+          make
+          
+          cd ..
+          
+          python3 -m pip install --upgrade pip setuptools wheel delvewheel
+          
+          python3 -m pip wheel . \
+            --global-option build_ext \
+            --global-option "--compiler=mingw32" \
+            --wheel-dir=./wheelhouse/windows
+          
+          # Find the generated wheel (assumes only one)
+          WHEEL_PATH=$(find ./wheelhouse/windows -name "*.whl" | head -n 1)
+          
+          # Repair and rewrite the platform tag to win_amd64
+          python3 -m delvewheel repair "$WHEEL_PATH" \
+            --wheel-dir ./wheelhouse/windows
+          
+          # Optional: list result
+          ls -lh ./wheelhouse/windows
+
       - name: Upload Windows wheels
         uses: actions/upload-artifact@v4
         with:
@@ -242,7 +271,9 @@ jobs:
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
-        run: twine upload --verbose --repository testpypi dist/*.whl
+        run: |
+          ls -la 
+          twine upload --verbose --repository testpypi dist/*.whl
 
       - name: Create GitHub release (if needed)
         uses: softprops/action-gh-release@v2
