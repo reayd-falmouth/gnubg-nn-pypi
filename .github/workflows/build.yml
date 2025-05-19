@@ -153,12 +153,7 @@ jobs:
           CIBW_PLATFORM: windows
           CIBW_SKIP: "pp*"
           CL: "/link /MAP /VERBOSE"
-        run: cibuildwheel --debug-traceback --output-dir wheelhouse/windows
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: windows-wheels
-          path: wheelhouse/windows/*.whl
+        run: cibuildwheel --output-dir wheelhouse/windows
 
       - name: Upload linker .map files
         continue-on-error: true
@@ -167,3 +162,8 @@ jobs:
           name: windows-link-maps
           path: |
               **/*.map
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-wheels
+          path: wheelhouse/windows/*.whl

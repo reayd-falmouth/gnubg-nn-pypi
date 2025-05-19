@@ -49,6 +49,8 @@ c_sources = (
         glob("gnubg-nn/gnubg/*.c") +
         glob("gnubg-nn/gnubg/lib/*.c")
 )
+print(f"c_sources: {c_sources}")
+
 cpp_sources = (
         glob("gnubg-nn/analyze/*.cc") +
         [
@@ -58,6 +60,7 @@ cpp_sources = (
             "gnubg-nn/gnubg/osr.cc",
         ]
 )
+print(f"cpp_sources: {cpp_sources}")
 
 common_includes = [
     "gnubg-nn/",
@@ -66,6 +69,7 @@ common_includes = [
     "gnubg-nn/analyze",
     "gnubg-nn/py",
 ]
+print(f"common_includes: {common_includes}")
 
 extensions = [
     Extension(
