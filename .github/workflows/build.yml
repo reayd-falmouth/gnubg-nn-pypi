@@ -182,8 +182,8 @@ jobs:
       - name: Install Autotools (autoconf, automake, m4, make)
         shell: msys2 {0}
         run: |
-          pacman -Sy --noconfirm autoconf automake libtool m4 make mingw-w64-x86_64-gcc
-          pacman -Sy --needed mingw-w64-x86_64-autotools
+          pacman -Sy --noconfirm autoconf automake libtool m4 make mingw-w64-x86_64-gcc 
+          pacman -Sy --noconfirm --needed mingw-w64-x86_64-autotools
 
       - name: Apply Patch files
         run: make patch
