@@ -211,6 +211,12 @@ jobs:
         run: |
           echo "tag=${{ github.event.inputs.tag || github.ref_name }}" >> $GITHUB_OUTPUT
 
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
       - name: Download Linux wheels
         uses: actions/download-artifact@v4
         with:
