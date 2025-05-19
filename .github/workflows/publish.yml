@@ -200,6 +200,7 @@ jobs:
           python3 -m unittest discover -s gnubg.tests
 
   publish:
+    name: Publish to testpypi
     needs: [build-linux,build-macos,build-windows-mingw]
     runs-on: ubuntu-latest
     environment: testpypi
