@@ -191,22 +191,20 @@ jobs:
       - name: Build wheel under MSYS2
         shell: msys2 {0}
         run: |
-          # Ensure we're in the MINGW64 environment
           export PATH="/c/msys64/mingw64/bin:$PATH"
           cd gnubg-nn
           
           autoreconf -vfi
-          
-          # Prepare the code exactly as you do on *nix
           ./configure --host=x86_64-w64-mingw32
-  
-          # Build the C++ parts
           make
-  
+          
           cd ..
-          # Build a Python wheel using MSYS2’s Python + gcc
           python3 -m pip install --upgrade pip setuptools wheel
-          python3 -m pip wheel . --wheel-dir=../wheelhouse/windows
+          python3 -m pip wheel . \
+            --global-option build_ext \
+            --global-option "--compiler=mingw32" \
+            --wheel-dir=../wheelhouse/windows
+
 
       - name: Upload Windows wheels
         uses: actions/upload-artifact@v4
