@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="img/gerwinski-gnu-head.png" width=200">
+<img src="https://raw.githubusercontent.com/reayd-falmouth/gnubg-nn-pypi/refs/heads/main/img/gerwinski-gnu-head.png" width="200">
 
 gnubg-nn-pypi
 </h1>
