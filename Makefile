@@ -10,7 +10,7 @@ clean:
 	rm -rf gnubg/gnubg.egg-info
 
 install:
-	pip install --upgrade pip setuptools wheel cibuildwheel twine
+	pip install --upgrade pip setuptools wheel cibuildwheel twine meson ninja
 
 build:
 	python3 setup.py sdist bdist_wheel
