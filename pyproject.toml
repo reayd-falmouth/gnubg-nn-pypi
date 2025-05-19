@@ -1,7 +1,7 @@
 [build-system]
 requires = [
-    "meson>=0.63.0",
-    "meson-python>=0.8.0"
+  "meson>=0.61.5,<0.63.0",
+  "meson-python>=0.8.0"
 ]
 build-backend = "meson_python.build"
 
