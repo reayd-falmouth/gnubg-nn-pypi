@@ -144,7 +144,6 @@ jobs:
         run: |
           # Put MinGW64 tools first on PATH
           export PATH="/c/msys64/mingw64/bin:$PATH"
-          cd gnubg-nn
                   
           # Configure & build with Meson
           meson setup builddir --buildtype release --prefix=/usr/local
@@ -152,7 +151,7 @@ jobs:
           
           # Build a Python wheel using MSYS2’s Python + gcc
           python3 -m pip install --upgrade pip setuptools wheel
-          python3 -m pip wheel . --wheel-dir ../wheelhouse/windows
+          python3 -m pip wheel . --wheel-dir wheelhouse/windows
 
       - name: Upload Windows wheels
         uses: actions/upload-artifact@v4
