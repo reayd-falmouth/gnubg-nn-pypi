@@ -203,7 +203,7 @@ jobs:
           python3 -m pip wheel . \
             --global-option build_ext \
             --global-option "--compiler=mingw32" \
-            --wheel-dir=../wheelhouse/windows
+            --wheel-dir=./wheelhouse/windows
 
 
       - name: Upload Windows wheels
