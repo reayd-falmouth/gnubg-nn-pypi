@@ -139,10 +139,7 @@ jobs:
           # Put MinGW64 tools first on PATH
           export PATH="/c/msys64/mingw64/bin:$PATH"
           cd gnubg-nn
-          
-          # (Optional) apply your patch step
-          make patch
-          
+                  
           # Configure & build with Meson
           meson setup builddir --buildtype release --prefix=/usr/local
           ninja -C builddir
