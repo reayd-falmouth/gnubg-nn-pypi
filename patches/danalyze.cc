@@ -29,17 +29,19 @@ using std::endl;
 #endif
 #include <map>
 using std::map;
-#include <algorithm>
+
 #include "bgdefs.h"
 #include "misc.h"
+#include "minmax.h"
+
 #include "equities.h"
-#include "analyze.h"
+
 #include "danalyze.h"
+
+#include "analyze.h"
 #include "bm.h"
-#include <cstdio>
-#include <iostream>
-using std::cout;
-using std::endl;
+
+using std::min;
 
 static unsigned int const roll2dice1[21] =
 { 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6};
@@ -745,26 +747,28 @@ Analyze::R1::setDecision(void)
 }
 
 void
-Analyze::R1::analyze(GNUbgBoard const board,
-                          bool xOnPlay,
-                          uint nPlies,
-                          const Advantage* ad,
-                          const float* prb,
-                          bool optimize,
-                          bool cbfMoves)
+Analyze::R1::analyze(GNUbgBoard const        b,
+		     bool const              xOnPlay_,
+		     uint const              nPlies_,
+		     const Advantage* const  ad,
+		     //uint const              nPliesEval_,
+		     const float*            prb,
+		     bool const              optimize,
+		     bool const              cbfMoves_)
 {
-    this->nPlies = nPlies;
-    this->xOnPlay = xOnPlay;
-    fullEval = !optimize;
-    advantage = ad;
-    this->cbfMoves = cbfMoves;
+  nPlies = nPlies_;
+  xOnPlay = xOnPlay_;
+  //nPliesEval = nPliesEval_;
+  fullEval = !optimize;
+  advantage = ad;
+  cbfMoves = cbfMoves_;
 
   if( ! prb ) {
     float p[NUM_OUTPUTS];
     for(uint k = 0; k < NUM_OUTPUTS; ++k) {
       p[k] = 0.0;
     }
-    cubeless(p, board, nPlies, xOnPlay, 1, cbfMoves);
+    cubeless(p, b, nPlies, xOnPlay_, 1, cbfMoves);
 
     if ( nPlies & 1 ) {
       InvertEvaluation(p);
@@ -775,7 +779,7 @@ Analyze::R1::analyze(GNUbgBoard const board,
     setProbs(prb);
   }
   
-  cubefulEquities(board);
+  cubefulEquities(b);
 
   locC.clear();
 
