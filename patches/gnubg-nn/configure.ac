@@ -5,6 +5,7 @@ AC_REVISION($Revision: 1.8 $)
 AC_INIT([gnubg-nn],[0.17],[bug-gnubg@gnu.org])
 AC_CONFIG_MACRO_DIR([m4])
 dnl AC_CONFIG_SRCDIR([py/py3mod.cpp])
+AC_CHECK_FUNCS([strcasecmp])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE
 
