@@ -42,10 +42,23 @@ gnubg-nn-pypi has some basic unit testing. After installation, run:
 ```bash
 python3 -m unittest discover -s gnubg.tests
 ```
+## AI-Assisted Development
+
+Parts of this project were developed with the assistance of generative AI tools.
+
+Specifically, the following models were used:
+
+- **GPT-4o** (OpenAI ChatGPT)
+- **o4-mini-high** (OpenAI ChatGPT)
+
+These models were used to assist with code generation, documentation drafting, and architectural guidance. All outputs were reviewed and curated by a human before inclusion.
+
+> ⚠️ **Disclaimer:**  
+> Although human-reviewed, some AI-generated content may contain mistakes, inaccuracies, or outdated practices. Contributors and users should critically assess all code, comments, and documentation. We welcome corrections and improvements via pull requests or issues.
 
 ## Code of Conduct
 
-This project is driven by a diverse community. Please read our [Code of Conduct](https://github.com/gnubg/gnubg-nn-pypi/blob/main/CODE_OF_CONDUCT.md) to learn how to interact positively.
+Please read the [Code of Conduct](https://github.com/gnubg/gnubg-nn-pypi/blob/main/CODE_OF_CONDUCT.md) to learn how to interact positively.
 
 ## Contributing
 
