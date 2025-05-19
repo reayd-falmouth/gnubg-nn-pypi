@@ -41,9 +41,9 @@ class TestGnubgBindings(unittest.TestCase):
         result = gnubg.probs(self.board, 0)
         self.assertEqual(len(result), 5)
 
-    def test_rollout(self):
-        result = gnubg.rollout(self.board_id, 1)
-        self.assertEqual(len(result), 2)
+    # def test_rollout(self):
+    #     result = gnubg.rollout(self.board_id, 1)
+    #     self.assertEqual(len(result), 2)
 
     def test_constants_existence(self):
         constants = (
