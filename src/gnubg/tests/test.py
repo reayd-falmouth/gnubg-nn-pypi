@@ -58,29 +58,29 @@ board[0][0] = 15   # X on the bar
 board[1][24] = 15  # O on the bar
 
 # load it through the module
-board = gnubg.boardfromid("4HPwATDgc/ABMA")
+board = gnubg.board_from_position_id("4HPwATDgc/ABMA")
 print("BoardFromID:", board)
-print("Key of that board:", gnubg.id(board))
+print("Key of that board:", gnubg.position_id(board))
 d1, d2 = gnubg.roll()
 print(f"Rolled: {d1}, {d2}")
-print("Key-roundtrip -> board:", gnubg.boardfromkey(gnubg.keyofboard(board)))
+print("Key-roundtrip -> board:", gnubg.board_from_position_key(gnubg.key_of_board(board)))
 print("Class:", gnubg.classify(board))
-print("PUB eval bestmove:", gnubg.pubbestmove(board, d1, d2))
-print("PUB eval score:", gnubg.pubevalscore(board))
+print("PUB eval bestmove:", gnubg.pub_best_move(board, d1, d2))
+print("PUB eval score:", gnubg.pub_eval_score(board))
 
 print()
 print("=== full evaluator bestmove ===")
-best = gnubg.bestmove(board, d1, d2)
+best = gnubg.best_move(board, d1, d2)
 print("  simple:", best)
-best_all = gnubg.bestmove(board, d1, d2, b=1, r=1, list=1)
+best_all = gnubg.best_move(board, d1, d2, b=1, r=1, list=1)
 print("  with extras:", best_all)
 
 print()
 print("=== other core bindings ===")
-print("bearoffid2pos(1000)    ->", gnubg.bearoffid2pos(1000))
-print("bearoffprobs(1000)[:5] ->", gnubg.bearoffprobs(1000)[:5])
+print("bearoffid2pos(1000)    ->", gnubg.bearoff_id_2_pos(1000))
+print("bearoffprobs(1000)[:5] ->", gnubg.bearoff_probabilities(1000)[:5])
 print("moves(board,2,3)       ->", gnubg.moves(board, 2, 3)[:3], "...")  # first 3 moves
-print("probs(board,0)         ->", gnubg.probs(board, 0))
+print("probs(board,0)         ->", gnubg.probabilities(board, 0))
 print("roll()                 ->", gnubg.roll())
 print("rollout(board,1)       ->", gnubg.rollout("4HPwATDgc/ABMA", 1))
 # print("crollout(board,1)      ->", gnubg.crollout("4HPwATDgc/ABMA"), "...")
@@ -112,6 +112,6 @@ print(" set.* calls completed without error")
 
 print()
 print("=== trainer and onecrace ===")
-print(" onecrace(10)        ->", gnubg.onecrace(10))
+print(" onecrace(10)        ->", gnubg.one_checker_race(10))
 # t = gnubg.trainer({"pos": board, "n": 0})  # a Trainer object
 # print(" trainer object      ->", t)

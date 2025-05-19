@@ -7,11 +7,11 @@ faulthandler.enable()
 class TestGnubgBindings(unittest.TestCase):
     def setUp(self):
         self.board_id = "4HPwATDgc/ABMA"
-        self.board = gnubg.boardfromid(self.board_id)
+        self.board = gnubg.board_from_position_id(self.board_id)
 
     def test_board_key_roundtrip(self):
-        key = gnubg.keyofboard(self.board)
-        roundtrip = gnubg.boardfromkey(key)
+        key = gnubg.key_of_board(self.board)
+        roundtrip = gnubg.board_from_position_key(key)
         self.assertEqual(self.board, [list(row) for row in roundtrip])
 
     def test_roll_output(self):
@@ -21,24 +21,24 @@ class TestGnubgBindings(unittest.TestCase):
 
     def test_bestmove_simple(self):
         d1, d2 = gnubg.roll()
-        result = gnubg.bestmove(self.board, d1, d2)
+        result = gnubg.best_move(self.board, d1, d2)
         self.assertIsInstance(result, tuple)
 
     def test_bestmove_extras(self):
         d1, d2 = gnubg.roll()
-        result = gnubg.bestmove(self.board, d1, d2, b=1, r=1, list=1)
+        result = gnubg.best_move(self.board, d1, d2, b=1, r=1, list=1)
         self.assertIsInstance(result, tuple)
 
     def test_bearoff_functions(self):
-        self.assertIsInstance(gnubg.bearoffid2pos(1000), tuple)
-        self.assertEqual(len(gnubg.bearoffprobs(1000)[:5]), 5)
+        self.assertIsInstance(gnubg.bearoff_id_2_pos(1000), tuple)
+        self.assertEqual(len(gnubg.bearoff_probabilities(1000)[:5]), 5)
 
     def test_moves_function(self):
         result = gnubg.moves(self.board, 2, 3)
         self.assertIsInstance(result, tuple)
 
     def test_probs_function(self):
-        result = gnubg.probs(self.board, 0)
+        result = gnubg.probabilities(self.board, 0)
         self.assertEqual(len(result), 5)
 
     # def test_rollout(self):
@@ -69,7 +69,7 @@ class TestGnubgBindings(unittest.TestCase):
         gnubg.set.cube(2, b'X')  # just verify no exceptions raised
 
     def test_onecrace(self):
-        result = gnubg.onecrace(10)
+        result = gnubg.one_checker_race(10)
         self.assertIsInstance(result, tuple)
 
     # Optional: trainer object test (uncomment if stable)

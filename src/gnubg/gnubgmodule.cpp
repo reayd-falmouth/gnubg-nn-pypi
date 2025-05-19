@@ -1604,30 +1604,30 @@ py_onecrace(PyObject*, PyObject* const args)
 
 static PyMethodDef GnubgMethods[] = {
         {"classify", py_classify, METH_VARARGS, "Classify a board position."},
-        {"pubbestmove", py_pubbestmove, METH_VARARGS, "Get best move using public evaluation."},
-        {"boardfromid", py_boardfromid, METH_VARARGS, "Convert a GNUBG Position ID to a board list"},
-        {"boardfromkey",
+        {"pub_best_move", py_pubbestmove, METH_VARARGS, "Get best move using public evaluation."},
+        {"board_from_position_id", py_boardfromid, METH_VARARGS, "Convert a GNUBG Position ID to a board list"},
+        {"board_from_position_key",
                 (PyCFunction)py_boardfromkey,
                 METH_VARARGS,
                 "boardfromkey(key: str) -> (two 25-tuples)" },
-        { "keyofboard",
+        { "key_of_board",
                 py_keyofboard,
                 METH_VARARGS,
                 "keyofboard(board) -> position key string" },
-        {"id", py_id, METH_VARARGS, "Convert board to Position ID (base64)"},
-        {"pubevalscore", py_pubevalscore, METH_VARARGS, "Public evaluation score for the board"},
+        {"position_id", py_id, METH_VARARGS, "Convert board to Position ID (base64)"},
+        {"pub_eval_score", py_pubevalscore, METH_VARARGS, "Public evaluation score for the board"},
         {"roll", py_rolldice, METH_VARARGS, "Roll two dice (uses GNUBG RNG)"},
-        { "bestmove",
+        { "best_move",
                 (PyCFunction)py_bestmove,
                 METH_VARARGS|METH_KEYWORDS,
                 "bestmove(pos, dice1, dice2, n=0, s=0, b=0, r=0, list=0, reduced=0)\n"
                 "Returns either a tuple of moves, or (moves, board?, resign?, list?)."
         },
-        { "bearoffid2pos",
+        { "bearoff_id_2_pos",
                 py_bearoffid2pos,
                 METH_VARARGS,
                 "bearoffid2pos(id) -> tuple of 6 ints giving the bearoff position" },
-        { "bearoffprobs",
+        { "bearoff_probabilities",
                 py_bearoffprobs,
                 METH_VARARGS,
                 "bearoffprobs(id_or_6tuple) → tuple of bearoff probabilities" },
@@ -1635,7 +1635,7 @@ static PyMethodDef GnubgMethods[] = {
                 py_moves,
                 METH_VARARGS,
                 "moves(board, die1, die2, verbose=0) → tuple of move-keys or (key,steps) pairs" },
-        { "probs",
+        { "probabilities",
                 py_probs,
                 METH_VARARGS,
                 "probs(board, nPlies, nr=1296)\n\n"
@@ -1657,13 +1657,13 @@ static PyMethodDef GnubgMethods[] = {
                 "  nt     : truncation length\n"
                 "  std    : if nonzero, also return stderr array\n\n"
                 "Returns a 5-tuple of floats, or if std=1 a pair of 5-tuples." },
-        { "crollout",
+        { "cubeful_rollout",
                 (PyCFunction)py_cubefullRollout,
                 METH_VARARGS | METH_KEYWORDS,
                 "cubefullRollout(pos, ngames=576, side='X', ply=0) -> 13-element tuple\n"
                 "Simulate a set of cube rolls and return the results as 13 floats." },
 //        {"equities", (PyCFunction)py_set_equities, METH_VARARGS, "Set the equities table or set custom weight and growth rate."},
-        {"onecrace", py_onecrace, METH_VARARGS, "OCR function to compute value and standard deviation for a given number."},
+        {"one_checker_race", py_onecrace, METH_VARARGS, "OCR function to compute value and standard deviation for a given number."},
         {NULL, NULL, 0, NULL}
 };
 
