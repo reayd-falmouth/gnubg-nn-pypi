@@ -1,7 +1,7 @@
 GNUBG NeuralNet Python Bindings - Authors
 =========================================
 
-Main Authors and Maintainers
+PyPi Authors and Maintainers
 ----------------------------
 
 David Reay <dr323090@falmouth.ac.uk>
