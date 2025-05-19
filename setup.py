@@ -29,26 +29,46 @@ here = os.path.abspath(os.path.dirname(__file__))
 with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
+# class build_ext(_build_ext):
+#     def build_extensions(self):
+#         for ext in self.extensions:
+#             args = []
+#             for src in ext.sources:
+#                 if src.endswith((".cc", ".cpp")):
+#                     args += extra_compile_args_cpp
+#                 elif src.endswith(".c"):
+#                     args += extra_compile_args_c
+#             if is_macos:
+#                 # Remove incompatible flags
+#                 args = [arg for arg in args if not arg.startswith("-std=")]
+#             ext.extra_compile_args = args
+#         super().build_extensions()
 class build_ext(_build_ext):
     def build_extensions(self):
         ctype = self.compiler.compiler_type
 
         for ext in self.extensions:
+            args = []
             # Detect if the extension has any C++ files
             has_cpp = any(src.endswith(('.cpp', '.cc', '.cxx')) for src in ext.sources)
 
             # Use the predefined args
             if ctype == "msvc":
-                ext.extra_compile_args = (
+                args = (
                         (["/std:c++14"] if has_cpp else []) +
                         ["/wd4244", "/wd4305", "/wd4028", "/wd4090"]
                 )
             else:
-                ext.extra_compile_args = (
+                args = (
                         (["-std=c++14"] if has_cpp else []) +
                         []
                 )
 
+            if is_macos:
+                # Remove incompatible flags
+                args = [arg for arg in args if not arg.startswith("-std=")]
+
+            ext.extra_compile_args = args
         super().build_extensions()
 
 # Source files
