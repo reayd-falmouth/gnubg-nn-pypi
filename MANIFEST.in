@@ -1,0 +1,1 @@
+recursive-include src/gnubg/data *.bd *.weights *.db

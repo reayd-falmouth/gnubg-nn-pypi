@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: gnubg
+Version: 1.1
+Summary: Python3 bindings for GNUBG neural evaluation
+Author: David Reay
+Author-email: dr323090@falmouth.ac.uk
+License-File: LICENSE
+Dynamic: author
+Dynamic: author-email
+Dynamic: license-file
+Dynamic: summary
