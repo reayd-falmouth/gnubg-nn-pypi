@@ -34,20 +34,20 @@ class build_ext(_build_ext):
         ctype = self.compiler.compiler_type
 
         for ext in self.extensions:
-            cpp_args = []
-            c_args = []
+            # Detect if the extension has any C++ files
+            has_cpp = any(src.endswith(('.cpp', '.cc', '.cxx')) for src in ext.sources)
 
-            for src in ext.sources:
-                if src.endswith((".cc", ".cpp")):
-                    if ctype == "msvc":
-                        cpp_args.append("/std:c++14")
-                    else:
-                        cpp_args.append("-std=c++14")
-                elif src.endswith(".c") and ctype == "msvc":
-                    c_args += ["/wd4244", "/wd4305", "/wd4028", "/wd4090"]
-
-            # Separate args for C and C++
-            ext.extra_compile_args = cpp_args + c_args
+            # Use the predefined args
+            if ctype == "msvc":
+                ext.extra_compile_args = (
+                        (["/std:c++14"] if has_cpp else []) +
+                        ["/wd4244", "/wd4305", "/wd4028", "/wd4090"]
+                )
+            else:
+                ext.extra_compile_args = (
+                        (["-std=c++14"] if has_cpp else []) +
+                        []
+                )
 
         super().build_extensions()
 
