@@ -51,9 +51,10 @@ jobs:
           CIBW_SKIP: "pp*"           # skip PyPy if you don’t need it
         run: cibuildwheel --output-dir wheelhouse/linux
 
-      - name: Install built wheel for test
+      - name: Install built wheel (Linux)
         run: |
-          pip install wheelhouse/linux/*.whl
+          pyver=$(python -c "import sys; print(f'cp{sys.version_info.major}{sys.version_info.minor}')")
+          pip install wheelhouse/linux/*$pyver*.whl
 
       - name: Run tests
         run: python3 -m unittest discover -s gnubg.tests
@@ -110,9 +111,10 @@ jobs:
           CIBW_ARCHS_MACOS: "universal2"
         run: cibuildwheel --output-dir wheelhouse/macos
 
-      - name: Install built wheel for test
+      - name: Install built wheel (macOS)
         run: |
-          pip install wheelhouse/macos/*.whl
+          pyver=$(python -c "import sys; print(f'cp{sys.version_info.major}{sys.version_info.minor}')")
+          pip install wheelhouse/macos/*$pyver*.whl
 
       - name: Run tests
         run: python3 -m unittest discover -s gnubg.tests
@@ -169,16 +171,17 @@ jobs:
             --global-option "--compiler=mingw32" \
             --wheel-dir=./wheelhouse/windows
 
-      - name: Install built wheel for test
+      - name: Create virtualenv
         shell: msys2 {0}
         run: |
           export PATH="/c/msys64/mingw64/bin:$PATH"
-          python3 -m pip install ./wheelhouse/windows/*.whl
+          python3 -m venv venv
+          source venv/bin/activate
+          pyver=$(python3 -c "import sys; print(f'cp{sys.version_info.major}{sys.version_info.minor}')")
+          python3 -m pip install --break-system-packages wheelhouse/windows/*$pyver*.whl
 
       - name: Run tests
-        shell: msys2 {0}
-        run: |
-          python3 -m unittest discover -s gnubg.tests
+        run: python3 -m unittest discover -s gnubg.tests
 
       - name: Upload Windows wheels
         uses: actions/upload-artifact@v4
