@@ -41,6 +41,7 @@ functions = [
     'trainer'
 ]
 # test_module.py
+import unittest
 import faulthandler
 
 faulthandler.enable()

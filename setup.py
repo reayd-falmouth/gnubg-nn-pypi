@@ -130,7 +130,7 @@ setup(
     cmdclass={"build_ext": build_ext},
     include_package_data=True,
     package_data={
-        'gnubg': ['data/*.bd', 'data/*.weights', 'data/*.db', 'tests/*.py'],
+        'gnubg': ['data/*.bd', 'data/*.weights', 'data/*.db'],
     },
     exclude_package_data={"gnubg": ["gnubgmodule.cpp"]},
     description="Python3 bindings for GNUBG neural evaluation",

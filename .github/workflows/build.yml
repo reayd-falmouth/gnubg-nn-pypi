@@ -161,3 +161,31 @@ jobs:
         with:
           name: windows-wheels-mingw
           path: wheelhouse/windows/*.whl
+
+  test-wheels:
+    name: Test Built Wheels
+    runs-on: ubuntu-latest
+    needs: [build-linux, build-macos, build-windows-mingw]  # wait for all builds
+    strategy:
+      matrix:
+        artifact: [manylinux-wheels, macos-wheels, windows-wheels-mingw]
+    steps:
+      - name: Download ${{ matrix.artifact }}
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: dist
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10  # or match .python-version
+
+      - name: Install wheel
+        run: |
+          pip install --upgrade pip
+          pip install dist/*.whl
+
+      - name: Run tests
+        run: python3 -m unittest discover -s gnubg.tests
+
