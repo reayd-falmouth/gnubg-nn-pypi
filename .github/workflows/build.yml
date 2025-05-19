@@ -109,55 +109,55 @@ jobs:
           name: macos-wheels
           path: wheelhouse/macos/*macosx*.whl
 
-  build-windows-meson:
-    name: Build Windows (MSYS2 / MinGW) wheels via Meson
-    runs-on: windows-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
-
-      - name: Set up MSYS2 with Meson, Ninja & Python
-        uses: msys2/setup-msys2@v2
-        with:
-          update: true
-          install: |
-            base-devel
-            mingw-w64-x86_64-toolchain
-            mingw-w64-x86_64-python3
-            mingw-w64-x86_64-python-pip
-            mingw-w64-x86_64-meson
-            mingw-w64-x86_64-ninja
-
-      - name: Install Autotools (autoconf, automake, m4, make)
-        shell: msys2 {0}
-        run: |
-          pacman -Sy --noconfirm autoconf automake libtool m4 make mingw-w64-x86_64-gcc
-
-#      - name: Apply Patch files
-#        run: make patch
-
-      - name: Build wheel under MSYS2
-        shell: msys2 {0}
-        run: |
-          # Put MinGW64 tools first on PATH
-          export PATH="/c/msys64/mingw64/bin:$PATH"
-                  
-          # Configure & build with Meson
-          meson setup builddir --buildtype release --prefix=/usr/local
-          ninja -C builddir
-          
-          # Build a Python wheel using MSYS2’s Python + gcc
-          python3 -m pip install --upgrade pip setuptools wheel
-          python3 -m pip wheel . --wheel-dir wheelhouse/windows
-
-      - name: Upload Windows wheels
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows-wheels-mingw
-          path: wheelhouse/windows/*.whl
+#  build-windows-meson:
+#    name: Build Windows (MSYS2 / MinGW) wheels via Meson
+#    runs-on: windows-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v4
+#        with:
+#          submodules: recursive
+#          fetch-depth: 0
+#
+#      - name: Set up MSYS2 with Meson, Ninja & Python
+#        uses: msys2/setup-msys2@v2
+#        with:
+#          update: true
+#          install: |
+#            base-devel
+#            mingw-w64-x86_64-toolchain
+#            mingw-w64-x86_64-python3
+#            mingw-w64-x86_64-python-pip
+#            mingw-w64-x86_64-meson
+#            mingw-w64-x86_64-ninja
+#
+#      - name: Install Autotools (autoconf, automake, m4, make)
+#        shell: msys2 {0}
+#        run: |
+#          pacman -Sy --noconfirm autoconf automake libtool m4 make mingw-w64-x86_64-gcc
+#
+##      - name: Apply Patch files
+##        run: make patch
+#
+#      - name: Build wheel under MSYS2
+#        shell: msys2 {0}
+#        run: |
+#          # Put MinGW64 tools first on PATH
+#          export PATH="/c/msys64/mingw64/bin:$PATH"
+#
+#          # Configure & build with Meson
+#          meson setup builddir --buildtype release --prefix=/usr/local
+#          ninja -C builddir
+#
+#          # Build a Python wheel using MSYS2’s Python + gcc
+#          python3 -m pip install --upgrade pip setuptools wheel
+#          python3 -m pip wheel . --wheel-dir wheelhouse/windows
+#
+#      - name: Upload Windows wheels
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: windows-wheels-mingw
+#          path: wheelhouse/windows/*.whl
 
   build-windows-mingw:
     name: Build Windows (MSYS2 / MinGW) wheels
@@ -183,6 +183,7 @@ jobs:
         shell: msys2 {0}
         run: |
           pacman -Sy --noconfirm autoconf automake libtool m4 make mingw-w64-x86_64-gcc
+          pacman -S --needed mingw-w64-x86_64-autotools
 
       - name: Apply Patch files
         run: make patch
@@ -193,7 +194,9 @@ jobs:
           # Ensure we're in the MINGW64 environment
           export PATH="/c/msys64/mingw64/bin:$PATH"
           cd gnubg-nn
-  
+          
+          autoreconf -vfi
+          
           # Prepare the code exactly as you do on *nix
           ./configure --host=x86_64-w64-mingw32
   
