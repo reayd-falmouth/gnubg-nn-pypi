@@ -123,7 +123,7 @@ extensions = [
 
 setup(
     name="gnubg",
-    version="1.1",
+    version="1.1.0.dev2",
     packages=find_packages(where="src", include=["gnubg", "gnubg.data", "gnubg.tests"]),
     package_dir={"": "src"},
     ext_modules=extensions,
@@ -152,4 +152,5 @@ setup(
         'Operating System :: OS Independent',
     ],
     python_requires='>=3.6',
+    license_files = ('LICENSE',),
 )

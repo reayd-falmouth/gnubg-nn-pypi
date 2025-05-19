@@ -36,12 +36,12 @@ or C/C++ code:
 
 The `gnubg-nn-pypi` project exposes core GNUBG functionality to Python.
 
-GitHub Repo: https://github.com/gnubg/gnubg-nn-pypi
+GitHub Repo: https://github.com/reayd-falmouth/gnubg-nn-pypi
 
 You can contribute by:
 
 - **Reporting Bugs:**  
-  File an issue at https://github.com/gnubg/gnubg-nn-pypi/issues
+  File an issue at https://github.com/reayd-falmouth/gnubg-nn-pypi/issues
 
 - **Writing Code:**
     - Fork the repository and create a feature branch.
@@ -75,7 +75,7 @@ Need Help?
 ---------------------
 
 Please reach out via:
-- GitHub Issues: https://github.com/gnubg/gnubg-nn-pypi/issues
+- GitHub Issues: https://github.com/reayd-falmouth/gnubg-nn-pypi/issues
 - Mailing List: https://lists.gnu.org/mailman/listinfo/gnubg
 
 Thank you for contributing to the GNUBG community!
