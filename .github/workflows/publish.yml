@@ -187,7 +187,7 @@ jobs:
         shell: msys2 {0}
         run: |
           WINDOWS_PLAT=win_amd64  # Change this if targeting a different platform tag
-          for whl in dist/windows/*.whl; do
+          for whl in wheelhouse/windows/*.whl; do
             echo "Retagging $whl"
             python -m wheel tags --remove --platform-tag=$WINDOWS_PLAT "$whl"
           done
