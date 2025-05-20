@@ -1,9 +1,8 @@
 <h1 align="center">
 <img src="https://raw.githubusercontent.com/reayd-falmouth/gnubg-nn-pypi/refs/heads/main/img/gerwinski-gnu-head.png" width="200">
 
-gnubg-nn-pypi
+GNUBG
 </h1>
-<hr/>
 
 [![PyPI Downloads](https://img.shields.io/pypi/dm/gnubg-nn-pypi.svg?label=PyPI%20downloads)](https://pypi.org/project/gnubg-nn-pypi/)
 [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gnubg-nn-pypi.svg?label=Conda%20downloads)](https://anaconda.org/conda-forge/gnubg-nn-pypi/)
@@ -75,8 +74,10 @@ For more information, see our [Contributing Guide](https://github.com/reayd-falm
 
 ## Acknowledgments
 
-This project builds upon the extensive work of the GNU Backgammon (GNUBG) community.  
-We express our gratitude to all contributors who have dedicated their time and expertise to the development of GNUBG and its Python bindings.
+This project builds upon the extensive work of the GNU Backgammon (GNUBG) community. Specifically the 
+[pygnubg](https://git.savannah.gnu.org/cgit/gnubg/gnubg-nn.git/tree/py) program developed by Joseph Heled.
+
+We express our gratitude to all contributors who have dedicated their time and expertise to the development of GNUBG.
 
 - **AUTHORS.md**: A list of primary contributors to the `gnubg-nn-pypi` project can be found [here](https://github.com/reayd-falmouth/gnubg-nn-pypi/blob/main/AUTHORS.md).
 - **GNUBG credits.sh**: For a comprehensive list of contributors to the core GNUBG project, please refer to the [credits.sh](https://git.savannah.gnu.org/cgit/gnubg.git/tree/credits.sh) file.
