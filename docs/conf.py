@@ -7,6 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 import re
 from pathlib import Path
+import pypandoc
+
 
 DIR = Path(__file__).parent
 
@@ -40,11 +42,13 @@ breathe_default_project = "gnubg"
 
 
 def prepare(app):
-    readme_path = DIR.parent / "README.md"
-    target_path = DIR / "readme.rst"
+    readme_md = DIR.parent / "README.md"
+    readme_rst = DIR / "readme.rst"
 
-    with open(target_path, "w") as f:
-        f.write(f".. mdinclude:: {readme_path}\n")
+    if readme_md.exists():
+        contents = pypandoc.convert_file(str(readme_md), 'rst')
+        with open(readme_rst, "w") as f:
+            f.write(contents)
 
 
 def setup(app):
