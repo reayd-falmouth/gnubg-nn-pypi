@@ -10,13 +10,6 @@ from pathlib import Path
 
 DIR = Path(__file__).parent
 
-def prepare(app):
-    readme_path = DIR.parent / "README.md"
-    target_path = DIR / "readme.rst"
-
-    with open(target_path, "w") as f:
-        f.write(f".. mdinclude:: {readme_path}\n")
-
 project = 'gnubg'
 copyright = '2025, David Reay'
 author = 'David Reay'
@@ -44,3 +37,15 @@ breathe_projects = {
     "gnubg": "./doxygen/xml"
 }
 breathe_default_project = "gnubg"
+
+
+def prepare(app):
+    readme_path = DIR.parent / "README.md"
+    target_path = DIR / "readme.rst"
+
+    with open(target_path, "w") as f:
+        f.write(f".. mdinclude:: {readme_path}\n")
+
+
+def setup(app):
+    prepare(app)
