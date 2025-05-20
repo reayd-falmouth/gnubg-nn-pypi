@@ -41,16 +41,16 @@ breathe_projects = {
 breathe_default_project = "gnubg"
 
 
-def prepare(app):
-    readme_md = DIR.parent / "README.md"
-    readme_rst = DIR / "readme.rst"
-
-    if readme_md.exists():
-        contents = pypandoc.convert_file(str(readme_md), 'rst')
-        with open(readme_rst, "w") as f:
-            f.write(contents)
-
-
-def setup(app):
-    # Copy the readme in
-    app.connect("builder-inited", prepare)
+# def prepare(app):
+#     readme_md = DIR.parent / "README.md"
+#     readme_rst = DIR / "readme.rst"
+#
+#     if readme_md.exists():
+#         contents = pypandoc.convert_file(str(readme_md), 'rst')
+#         with open(readme_rst, "w") as f:
+#             f.write(contents)
+#
+#
+# def setup(app):
+#     # Copy the readme in
+#     app.connect("builder-inited", prepare)
