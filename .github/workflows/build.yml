@@ -193,11 +193,9 @@ jobs:
           path: wheelhouse/windows/*.whl
 
       - name: Run tests
-        shell: msys2 {0}
+        shell: cmd
         run: |
-          export PATH="/c/msys64/mingw64/bin:$PATH"
           python3 -m venv venv
-          source venv/bin/activate
-          pyver=$(python3 -c "import sys; print(f'cp{sys.version_info.major}{sys.version_info.minor}')")
-          python3 -m pip install --break-system-packages wheelhouse/windows/*$pyver*.whl
+          venv\Scripts\activate
+          python3 -m pip install wheelhouse/windows/*.whl
           python3 -m unittest discover -s gnubg.tests
