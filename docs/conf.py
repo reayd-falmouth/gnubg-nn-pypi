@@ -5,6 +5,17 @@
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+import re
+from pathlib import Path
+
+DIR = Path(__file__).parent
+
+def prepare(app):
+    readme_path = DIR.parent / "README.md"
+    target_path = DIR / "readme.rst"
+
+    with open(target_path, "w") as f:
+        f.write(f".. mdinclude:: {readme_path}\n")
 
 project = 'gnubg'
 copyright = '2025, David Reay'
@@ -14,8 +25,8 @@ release = '1.1.0'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["breathe"]
-
+extensions = ["myst_parser","breathe"]
+source_suffix = {".rst": "restructuredtext", ".md": "markdown"}
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
@@ -30,6 +41,6 @@ html_static_path = ['_static']
 
 # -- Options for breathe
 breathe_projects = {
-    "gnubg": "../doxygen/xml"
+    "gnubg": "./doxygen/xml"
 }
 breathe_default_project = "gnubg"

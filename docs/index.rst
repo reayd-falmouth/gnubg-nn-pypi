@@ -1,17 +1,35 @@
-.. gnubg documentation master file, created by
-   sphinx-quickstart on Tue May 20 04:28:58 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. only:: latex
 
-gnubg documentation
-===================
+   Intro
+   =====
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
+.. include:: readme.rst
 
+.. only:: not latex
+
+    Contents:
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 1
 
+   changelog
+
+.. toctree::
+   :caption: The Basics
+   :maxdepth: 2
+
+   installing
+   basics
+
+.. toctree::
+   :caption: Advanced Topics
+   :maxdepth: 2
+
+   advanced/functions
+.. toctree::
+   :caption: Extra Information
+   :maxdepth: 1
+
+   faq
+   reference
+   cmake/index
