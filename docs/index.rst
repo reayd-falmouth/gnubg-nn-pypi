@@ -3,4 +3,4 @@
    Intro
    =====
 
-.. include:: ../README.rst
+.. include:: readme.rst
