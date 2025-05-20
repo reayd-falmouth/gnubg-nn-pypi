@@ -184,7 +184,7 @@ jobs:
             --wheel-dir=./wheelhouse/windows
 
       - name: Retag Windows wheels
-        shell: bash
+        shell: msys2 {0}
         run: |
           WINDOWS_PLAT=win_amd64  # Change this if targeting a different platform tag
           for whl in dist/windows/*.whl; do
