@@ -48,4 +48,5 @@ def prepare(app):
 
 
 def setup(app):
-    prepare(app)
+    # Copy the readme in
+    app.connect("builder-inited", prepare)
