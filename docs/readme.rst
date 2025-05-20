@@ -101,7 +101,9 @@ If you’re unsure where to start, open an issue or join the discussion on our m
 Acknowledgments
 ---------------
 
-This project builds upon the extensive work of the GNU Backgammon (GNUBG) community.
+This project builds upon the extensive work of the GNU Backgammon (GNUBG) community. Specifically the
+`pygnubg <https://git.savannah.gnu.org/cgit/gnubg/gnubg-nn.git/tree/py>`_ program developed by Joseph Heled.
+
 We express our gratitude to all contributors who have dedicated their time and expertise to the development of GNUBG and its Python bindings.
 
 - **AUTHORS.md**: A list of primary contributors to the `gnubg-nn-pypi` project can be found `here <https://github.com/reayd-falmouth/gnubg-nn-pypi/blob/main/AUTHORS.md>`_.
