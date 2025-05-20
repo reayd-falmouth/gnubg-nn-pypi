@@ -23,7 +23,7 @@ twine_macos:
 twine_linux:
 	twine upload --verbose --repository $(PYPI_REPO) dist/linux/*.whl
 twine_windows:
-	mv dist/windows/gnubg-1.1-cp312-cp312-mingw_x86_64_msvcrt_gnu.whl dist/windows/gnubg-1.1-cp312-cp312-win_amd64.whl
+	#mv dist/windows/gnubg-1.1-cp312-cp312-mingw_x86_64_msvcrt_gnu.whl dist/windows/gnubg-1.1-cp312-cp312-win_amd64.whl
 	twine upload --verbose --repository $(PYPI_REPO) dist/windows/*.whl
 
 test:

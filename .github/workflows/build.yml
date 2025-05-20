@@ -171,10 +171,11 @@ jobs:
           make
           
           cd ..
-          python3 -m pip install --upgrade pip setuptools wheel
+          python3 -m pip install --upgrade pip setuptools wheel x
           python3 -m pip wheel . \
             --global-option build_ext \
             --global-option "--compiler=mingw32" \
+            --plat-name win_amd64 \
             --wheel-dir=./wheelhouse/windows
 
       - name: Upload Windows wheels
