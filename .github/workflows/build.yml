@@ -172,16 +172,10 @@ jobs:
           
           cd ..
           python3 -m pip install --upgrade pip setuptools wheel
-          python3 setup.py build_ext \
-            --compiler=mingw32 bdist_wheel \
-            --plat-name=win_amd64
-          ls -la *
-
-#          python3 -m pip wheel . \
-#            --global-option build_ext \
-#            --global-option "--compiler=mingw32" \
-#            --plat-name win_amd64 \
-#            --wheel-dir=./wheelhouse/windows
+          python3 -m pip wheel . \
+            --global-option build_ext \
+            --global-option "--compiler=mingw32" \
+            --wheel-dir=./wheelhouse/windows
 
       - name: Upload Windows wheels
         uses: actions/upload-artifact@v4
