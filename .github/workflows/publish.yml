@@ -236,14 +236,15 @@ jobs:
           path: dist/
 
       - name: Install Twine
-        run: pip install --upgrade pip twine
+        run: pip install --upgrade pip twine setuptools
 
       - name: Upload to TestPyPI
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
         run: |
-          ls -la 
+          ls -la
+          python -m pip show setuptools
           twine upload --verbose --repository testpypi dist/*.whl
 
       - name: Create GitHub release (if needed)
