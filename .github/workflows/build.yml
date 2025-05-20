@@ -177,6 +177,15 @@ jobs:
             --global-option "--compiler=mingw32" \
             --wheel-dir=./wheelhouse/windows
 
+      - name: Retag Windows wheels
+        shell: bash
+        run: |
+          WINDOWS_PLAT=win_amd64  # Change this if targeting a different platform tag
+          for whl in dist/windows/*.whl; do
+            echo "Retagging $whl"
+            wheel tags --remove --platform-tag=$WINDOWS_PLAT "$whl"
+          done
+
       - name: Upload Windows wheels
         uses: actions/upload-artifact@v4
         with:
