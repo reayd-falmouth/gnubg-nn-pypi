@@ -115,3 +115,19 @@ print("=== trainer and onecrace ===")
 print(" onecrace(10)        ->", gnubg.one_checker_race(10))
 # t = gnubg.trainer({"pos": board, "n": 0})  # a Trainer object
 # print(" trainer object      ->", t)
+
+print()
+print("=== evaluate_cube_decision ===")
+try:
+    # test with known position and default arguments
+    result = gnubg.evaluate_cube_decision(
+        pos="4HPwATDgc/ABMA",  # valid position ID
+        n=2,                  # 2-ply analysis
+        s=b'X',  # ✅ pass as byte string
+        i=1                   # verbose output
+    )
+    print(" evaluate_cube_decision verbose =", result)
+    assert isinstance(result, tuple) and len(result) == 6, "Expected a 6-tuple from verbose output"
+    print(" evaluate_cube_decision passed")
+except Exception as e:
+    print(" evaluate_cube_decision failed:", str(e))
