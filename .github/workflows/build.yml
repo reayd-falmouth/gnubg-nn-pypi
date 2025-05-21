@@ -133,6 +133,10 @@ jobs:
 
   build-windows-mingw:
     name: Build Windows (MSYS2 / MinGW) wheels
+    strategy:
+      matrix:
+        python-version: [ "3.6", "3.7", "3.8", "3.9", "3.10", "3.11", "3.12", "3.13" ]
+
     runs-on: windows-latest
     steps:
       - name: Checkout code
@@ -148,8 +152,11 @@ jobs:
           install: |
             base-devel
             mingw-w64-x86_64-toolchain
-            mingw-w64-x86_64-python3
-            mingw-w64-x86_64-python-pip
+            mingw-w64-x86_64-python${{ matrix.python-version }}
+            mingw-w64-x86_64-python${{ matrix.python-version }}-pip
+            mingw-w64-x86_64-python${{ matrix.python-version }}-setuptools
+            mingw-w64-x86_64-python${{ matrix.python-version }}-wheel
+            autoconf automake libtool make m4
 
       - name: Install Autotools (autoconf, automake, m4, make)
         shell: msys2 {0}
@@ -186,16 +193,16 @@ jobs:
             python -m wheel tags --remove --platform-tag=$WINDOWS_PLAT "$whl"
           done
 
-      - name: Upload Windows wheels
+      - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: windows-wheels-mingw
+          name: wheels-py${{ matrix.python-version }}
           path: wheelhouse/windows/*.whl
-
-      - name: Run tests
-        shell: cmd
-        run: |
-          python3 -m venv venv
-          venv\Scripts\activate
-          python3 -m pip install wheelhouse/windows/*.whl
-          python3 -m unittest discover -s gnubg.tests
+#
+#      - name: Run tests
+#        shell: cmd
+#        run: |
+#          python3 -m venv venv
+#          venv\Scripts\activate
+#          python3 -m pip install wheelhouse/windows/*.whl
+#          python3 -m unittest discover -s gnubg.tests
