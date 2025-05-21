@@ -136,7 +136,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.6", "3.7", "3.8", "3.9", "3.10", "3.11", "3.12", "3.13" ]
+        include:
+          - python-version: "3.6"
+            python-short: "36"
+          - python-version: "3.7"
+            python-short: "37"
+          - python-version: "3.8"
+            python-short: "38"
+          - python-version: "3.9"
+            python-short: "39"
+          - python-version: "3.10"
+            python-short: "310"
+          - python-version: "3.11"
+            python-short: "311"
+          - python-version: "3.12"
+            python-short: "312"
+          - python-version: "3.13"
+            python-short: "313"
 
     runs-on: windows-latest
     steps:
@@ -154,8 +170,8 @@ jobs:
             base-devel
             mingw-w64-x86_64-toolchain
             autoconf automake libtool m4 make
-            mingw-w64-x86_64-python${{ matrix.python-version }}
-            mingw-w64-x86_64-python${{ matrix.python-version//./}}-pip  # Remove dot for pip package
+            mingw-w64-x86_64-python${{ matrix.python-short }}
+            mingw-w64-x86_64-python${{ matrix.python-short }}-pip  # Remove dot for pip package
 
       - name: Apply Patch files
         run: make patch
