@@ -112,6 +112,11 @@ jobs:
         if: matrix.os == 'windows-latest'
         shell: msys2 {0}
         run: |
+          python --version
+          which python
+          python3 --version
+          which python3
+          exit 1
           export PATH="/c/msys64/mingw64/bin:$PATH"
           cd gnubg-nn
           
