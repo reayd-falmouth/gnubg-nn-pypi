@@ -34,7 +34,11 @@ defines = [
     ['HAVE_CONFIG_H',          '1'],
 ]
 # turn them into -D flags:
-c_defs = defines.map(d -> '-D' + d[0] + '=' + d[1])
+c_defs = []
+foreach d : defines
+    c_defs += ['-D' + d.get(0) + '=' + d.get(1)]
+endforeach
+
 
 # windows extra warnings-suppressors, else empty
 c_warnings = []
