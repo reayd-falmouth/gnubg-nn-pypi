@@ -25,7 +25,7 @@ jobs:
         python:
 #          - "3.8"
 #          - "3.9"
-          - "3.10"
+          - "cp310"
 #          - "3.11"
 #          - "3.12"
 #          - "3.13"
@@ -103,7 +103,7 @@ jobs:
         if: matrix.os != 'windows-latest'
         env:
           CIBW_SKIP: "pp*"
-          CIBW_BUILD: "cp${{ matrix.python[0], matrix.python[2]) }}-*"
+          CIBW_BUILD: "${{ matrix.python }}-*"
           CIBW_ARCHS_MACOS: "universal2"
           CIBW_PLATFORM: ${{ matrix.os == 'ubuntu-latest' && 'linux' || (matrix.os == 'macos-latest' && 'macos') }}
         run: cibuildwheel --output-dir wheelhouse
