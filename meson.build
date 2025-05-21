@@ -10,8 +10,8 @@ project(
 # -----------------------------------------------------------------------------
 # 1) Find Python
 # -----------------------------------------------------------------------------
-py3 = import('python').find_installation('python3')
-python_mod = import('python').extension_module
+py_mod = import('python')
+py3 = py_mod.find_installation('python3')
 
 # -----------------------------------------------------------------------------
 # 2) Common includes & compiler flags
@@ -79,13 +79,13 @@ all_srcs = c_srcs + cpp_srcs
 # -----------------------------------------------------------------------------
 # 4) Build the Python extension
 # -----------------------------------------------------------------------------
-py_ext = python_mod(
+py_ext = py_mod.extension_module(
     module_name:    'gnubg.gnubg',
     sources:        all_srcs,
     include_directories: common_inc,
     c_args:         c_defs + c_warnings,
     cpp_args:       ['-std=c++14'] + cpp_warnings,
-    dependencies:   py3.dependency(),   # link against Python
+    dependencies:   py3.dependency(),
     install:        true,
 )
 
