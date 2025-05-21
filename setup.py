@@ -29,20 +29,6 @@ here = os.path.abspath(os.path.dirname(__file__))
 with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
-# class build_ext(_build_ext):
-#     def build_extensions(self):
-#         for ext in self.extensions:
-#             args = []
-#             for src in ext.sources:
-#                 if src.endswith((".cc", ".cpp")):
-#                     args += extra_compile_args_cpp
-#                 elif src.endswith(".c"):
-#                     args += extra_compile_args_c
-#             if is_macos:
-#                 # Remove incompatible flags
-#                 args = [arg for arg in args if not arg.startswith("-std=")]
-#             ext.extra_compile_args = args
-#         super().build_extensions()
 class build_ext(_build_ext):
     def build_extensions(self):
         ctype = self.compiler.compiler_type
@@ -137,6 +123,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     author='David Reay',
+    install_requires=[],
     author_email='dr323090@falmouth.ac.uk',
     project_urls={
         'Homepage':       'https://www.gnu.org/software/gnubg/',
