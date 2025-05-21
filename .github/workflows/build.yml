@@ -103,7 +103,7 @@ jobs:
         if: matrix.os != 'windows-latest'
         env:
           CIBW_SKIP: "pp*"
-          CIBW_BUILD: "cp${{ matrix.python | replace('.', '') }}-*"
+          CIBW_BUILD: "cp${{ matrix.python[0], matrix.python[2]) }}-*"
           CIBW_ARCHS_MACOS: "universal2"
           CIBW_PLATFORM: ${{ matrix.os == 'ubuntu-latest' && 'linux' || (matrix.os == 'macos-latest' && 'macos') }}
         run: cibuildwheel --output-dir wheelhouse
