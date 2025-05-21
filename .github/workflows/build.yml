@@ -136,23 +136,10 @@ jobs:
             python -m wheel tags --remove --platform-tag=$WINDOWS_PLAT "$whl"
           done
 
-      - name: Install built wheel (Linux)
-        if: matrix.os == 'ubuntu-latest'
+      - name: Install built wheel (macOS, linux)
+        if: matrix.os != 'windows-latest'
         run: |
-          pyver=$(python -c "import sys; print(f'cp{sys.version_info.major}{sys.version_info.minor}')")
-          echo "Looking for: *${pyver}*x86_64*.whl in wheelhouse/linux"
-          whl=$(ls wheelhouse/*${pyver}*x86_64*.whl | head -n 1)
-          if [ -z "$whl" ]; then
-            echo "❌ No matching wheel found for Python version ${pyver} and arch x86_64"
-            exit 1
-          fi
-          pip install "$whl"
-
-      - name: Install built wheel (macOS)
-        if: matrix.os == 'macos-latest'
-        run: |
-          pyver=$(python -c "import sys; print(f'cp{sys.version_info.major}{sys.version_info.minor}')")
-          pip install wheelhouse/*$pyver*.whl
+          pip install wheelhouse/*.whl
 
       - name: Run tests
         if: matrix.os != 'windows-latest'
