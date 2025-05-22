@@ -83,17 +83,11 @@ jobs:
       - name: Apply Patch files (Linux, macOS, Windows)
         run: make patch
 
-      - name: Generate configure script & configure (linux, macOS)
-        if: matrix.os != 'windows-latest'
-        run: make configure
-
-      - name: Generate configure script & configure (Windows MSYS)
-        if: matrix.os == 'windows-latest'
-        shell: msys2 {0}
+      - name: Generate configure script & configure (linux, macOS, Windows)
         run: make configure
 
       - name: Set up Python & build tools
-#        if: matrix.os != 'windows-latest'
+        if: matrix.os != 'windows-latest'
         uses: actions/setup-python@v4
         with:
           python-version-file: .python-version
@@ -116,6 +110,7 @@ jobs:
         if: matrix.os == 'windows-latest'
         shell: msys2 {0}
         run: |
+          cibuildwheel --output-dir wheelhouse
           #          export PATH="/c/msys64/mingw64/bin:$PATH"
           #          cd gnubg-nn
           #
@@ -124,8 +119,8 @@ jobs:
           #          make
           #
           #          cd ..
-          python3 -m pip install --upgrade setuptools wheel cibuildwheel auditwheel
-          python3 -m cibuildwheel --output-dir wheelhouse
+          # python3 -m pip install --upgrade setuptools wheel cibuildwheel auditwheel
+          
 
 #          python3 -m pip wheel . \
 #            --global-option build_ext \
