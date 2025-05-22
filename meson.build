@@ -16,7 +16,7 @@ install_data(
     'src/gnubg/data/gnubg_os.db',
     install_dir: join_paths(pkgdir, 'gnubg', 'data')
 )
-install_subdir(
+install_data(
     'src/gnubg/tests/__init__.py',
     'src/gnubg/tests/test.py',
     'src/gnubg/tests/test_bindings.py',
