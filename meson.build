@@ -1,3 +1,4 @@
+# meson.build
 project(
     'gnubg',                      # Your project name
     ['cpp', 'c'],                 # Languages used
