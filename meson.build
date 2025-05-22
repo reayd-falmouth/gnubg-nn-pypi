@@ -10,9 +10,9 @@ python3 = import('python').find_installation('python3')
 python_dep = python3.dependency()
 pkgdir = python3.get_install_dir()
 
-# install the __init__.py so that gnubg/ becomes a real package
 python3.install_sources(
-    'src/gnubg/__init__.py'
+    'src/gnubg',
+    install_dir: join_paths(pkgdir, 'gnubg')
 )
 
 install_data(
