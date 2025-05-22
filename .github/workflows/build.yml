@@ -69,7 +69,7 @@ jobs:
           CIBW_ARCHS_MACOS: "native"
           CIBW_PLATFORM: ${{ matrix.os == 'ubuntu-latest' && 'linux' || (matrix.os == 'macos-13' && 'macos') || (matrix.os == 'macos-14' && 'macos') ||(matrix.os == 'windows-latest' && 'windows')}}
           CIBW_TEST_REQUIRES: "pytest"
-#          CIBW_TEST_COMMAND: "pytest {project}/src/tests"
+          CIBW_TEST_COMMAND: "pytest {project}/src/tests"
         run: cibuildwheel --output-dir wheelhouse
 
       - name: Upload wheel
