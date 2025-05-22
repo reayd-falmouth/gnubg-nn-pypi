@@ -4,6 +4,17 @@ project(
     version     : '1.1.0.dev4',    # Match your setup.py version
     meson_version : '>=1.7.0',     # Require a recent Meson
 )
+conf_data = configuration_data()
+conf_data.set('_CRT_SECURE_NO_WARNINGS', 1)  # or 0 to disable
+conf_data.set('NOMINMAX', 1)
+conf_data.set('LOADED_BO', 1)
+conf_data.set('OS_BEAROFF_DB', 1)
+conf_data.set('HAVE_CONFIG_H', 1)
+
+config_h = configure_file(
+    output: 'config.h',
+    configuration: conf_data
+)
 
 # Include directories
 gnubg_inc = include_directories(
