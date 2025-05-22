@@ -39,11 +39,17 @@ class build_ext(_build_ext):
             has_cpp = any(src.endswith(('.cpp', '.cc', '.cxx')) for src in ext.sources)
 
             # Use the predefined args
-            if ctype == "msvc":
-                args = (
-                        (["/std:c++14"] if has_cpp else []) +
-                        ["/wd4244", "/wd4305", "/wd4028", "/wd4090"]
-                )
+            if is_windows:
+                # always suppress those warnings on Windows
+                args.extend(extra_compile_args_c)
+                if has_cpp:
+                    # force C++14 mode and "treat as C++"
+                    args[:0] = ["/std:c++14", "/TP"]
+            # if ctype == "msvc":
+            #     args = (
+            #             (["/std:c++14"] if has_cpp else []) +
+            #             ["/wd4244", "/wd4305", "/wd4028", "/wd4090"]
+            #     )
             else:
                 args = (
                         (["-std=c++14"] if has_cpp else []) +

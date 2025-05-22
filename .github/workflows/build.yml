@@ -87,7 +87,7 @@ jobs:
         if: matrix.os != 'windows-latest'
         run: make configure
 
-      - name: Generate configure script & configure (Windows)
+      - name: Generate configure script & configure (Windows MSYS)
         if: matrix.os == 'windows-latest'
         shell: msys2 {0}
         run: make configure
