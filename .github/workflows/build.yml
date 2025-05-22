@@ -6,7 +6,7 @@ on:
   pull_request:
     branches:
       - main
-
+      -
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
@@ -50,14 +50,14 @@ jobs:
             libssl-dev \
             zlib1g-dev
 
-      - name: Set up Python & build tools (linux, macOS, Windows)
-        uses: actions/setup-python@v4
-        with:
-          python-version-file: .python-version
-          check-latest: true    # ← allow downloading if it's not in the cache
+#      - name: Set up Python & build tools (linux, macOS, Windows)
+#        uses: actions/setup-python@v4
+#        with:
+#          python-version-file: .python-version
+#          check-latest: true    # ← allow downloading if it's not in the cache
 
       - name: Install Meson
-        run: pip3 install meson ninja
+        run: pip install meson ninja
 
       - name: Build with meson
         run: |
