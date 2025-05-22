@@ -20,6 +20,11 @@ config_h = configure_file(
     configuration: conf_data
 )
 
+add_project_arguments(
+    '-include', 'config.h',
+    language: ['c', 'cpp']
+)
+
 # Include directories
 gnubg_inc = include_directories(
     'gnubg-nn',
