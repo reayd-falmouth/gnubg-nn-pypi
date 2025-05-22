@@ -10,15 +10,10 @@ python3 = import('python').find_installation('python3', pure: false)
 python_dep = python3.dependency()
 pkgdir = python3.get_install_dir()
 
-py_sources = files(
+install_data(
     'src/gnubg/__init__.py',
-    # add any other .py you have here
+    install_dir: join_paths(pkgdir, 'gnubg')
 )
-
-python3.install_sources(
-    py_sources,
-)
-
 install_data(
     'src/gnubg/data/gnubg.weights',
     'src/gnubg/data/gnubg_ts0.bd',
