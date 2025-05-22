@@ -104,6 +104,7 @@ jobs:
 
       - name: Build wheels
         env:
+          CL: "/std:c++14 /TP /wd4244 /wd4305 /wd4028 /wd4090"
           CIBW_SKIP: "pp*"
           CIBW_BUILD: "${{ matrix.python }}-*"
           CIBW_ARCHS_MACOS: "universal2"
