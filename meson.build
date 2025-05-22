@@ -10,9 +10,9 @@ python3 = import('python').find_installation('python3')
 python_dep = python3.dependency()
 pkgdir = python3.get_install_dir()
 
-python3.install_sources(
-    'src/gnubg',
-    install_dir: join_paths(pkgdir, 'gnubg')
+install_subdir(
+    'src/gnubg',             # the on‐disk folder
+    install_dir : pkgdir     # install into <venv>/.../site-packages
 )
 
 install_data(
