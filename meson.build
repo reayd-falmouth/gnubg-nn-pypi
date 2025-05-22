@@ -4,6 +4,10 @@ project(
     version     : '1.1.0.dev4',    # Match your setup.py version
     meson_version : '>=1.7.0',     # Require a recent Meson
 )
+
+python3 = import('python').find_installation('python3')
+python_dep = python3.dependency()
+
 conf_data = configuration_data()
 conf_data.set('_CRT_SECURE_NO_WARNINGS', 1)  # or 0 to disable
 conf_data.set('NOMINMAX', 1)
