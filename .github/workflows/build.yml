@@ -84,8 +84,13 @@ jobs:
       - name: Apply Patch files
         run: make patch
 
-      - name: Generate configure script & configure
-#        if: matrix.os != 'windows-latest'
+      - name: Generate configure script & configure (linux, macos)
+        if: matrix.os != 'windows-latest'
+        run: make configure
+
+      - name: Generate configure script & configure (windows MSYS)
+        if: matrix.os == 'windows-latest'
+        shell: msys2 {0}
         run: make configure
 
       - name: Set up Python & build tools
