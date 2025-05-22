@@ -1,10 +1,9 @@
 [build-system]
 requires = [
-    "meson>=1.0.0",
-    "ninja>=1.10.0",
-    "meson-python>=0.10.0"
+    "meson>=1.7.0",
+    "meson-python>=0.12.0"
 ]
-build-backend = "meson_python.build_backend"
+build-backend = "mesonpy"
 
 [project]
 name = "gnubg"
@@ -25,3 +24,7 @@ Source = "https://github.com/gnubg/gnubg-nn-pypi"
 GNUBG = "https://git.savannah.gnu.org/cgit/gnubg/gnubg-nn.git"
 MailingList = "https://lists.gnu.org/mailman/listinfo/gnubg"
 Credits = "https://git.savannah.gnu.org/cgit/gnubg.git/tree/credits.sh"
+
+[tool.meson-python.metadata]
+# Include any package_data files (bd, weights, db) under gnubg/data
+package_data = { "gnubg" = ["data/*.bd", "data/*.weights", "data/*.db"] }
