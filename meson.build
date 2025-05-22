@@ -9,6 +9,11 @@ python3 = import('python').find_installation('python3')
 python_dep = python3.dependency()
 pkgdir = python3.get_install_dir()
 
+# install the __init__.py so that gnubg/ becomes a real package
+python3.install_sources(
+    'src/gnubg/__init__.py'
+)
+
 install_data(
     'src/gnubg/data/gnubg.weights',
     'src/gnubg/data/gnubg_ts0.bd',
@@ -16,12 +21,7 @@ install_data(
     'src/gnubg/data/gnubg_os.db',
     install_dir: join_paths(pkgdir, 'gnubg', 'data')
 )
-#install_data(
-#    'src/gnubg/tests/__init__.py',
-#    'src/gnubg/tests/test_functional.py',
-#    'src/gnubg/tests/test_unit.py',
-#    install_dir: join_paths(pkgdir, 'gnubg', 'tests')
-#)
+
 conf_data = configuration_data()
 conf_data.set('_CRT_SECURE_NO_WARNINGS', 1)  # or 0 to disable
 conf_data.set('NOMINMAX', 1)
