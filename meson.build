@@ -18,8 +18,8 @@ install_data(
 )
 install_data(
     'src/gnubg/tests/__init__.py',
-    'src/gnubg/tests/test.py',
-    'src/gnubg/tests/test_bindings.py',
+    'src/gnubg/tests/test_functional.py',
+    'src/gnubg/tests/test_unit.py',
     install_dir: join_paths(pkgdir, 'gnubg', 'tests')
 )
 conf_data = configuration_data()
@@ -97,7 +97,7 @@ gnubg_dep = declare_dependency(
 # Build the Python extension
 python = import('python').find_installation()
 py_ext = python.extension_module(
-    'gnubg.gnubg',
+    'gnubg',
     [],                          # no extra sources; they live in the static lib
     dependencies : [gnubg_dep],
     install      : true,

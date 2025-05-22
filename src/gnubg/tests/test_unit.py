@@ -1,6 +1,7 @@
 import unittest
 import gnubg
 import faulthandler
+import pytest
 
 faulthandler.enable()
 
