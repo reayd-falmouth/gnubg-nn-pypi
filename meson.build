@@ -16,7 +16,10 @@ install_data(
     'src/gnubg/data/gnubg_os.db',
     install_dir: join_paths(pkgdir, 'gnubg', 'data')
 )
-
+install_subdir(
+    'src/gnubg/tests',
+    install_dir: join_paths(python.get_install_dir(), 'gnubg', 'tests')
+)
 conf_data = configuration_data()
 conf_data.set('_CRT_SECURE_NO_WARNINGS', 1)  # or 0 to disable
 conf_data.set('NOMINMAX', 1)
