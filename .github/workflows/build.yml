@@ -103,6 +103,7 @@ jobs:
         run: pip install --upgrade pip setuptools wheel cibuildwheel auditwheel
 
       - name: Build wheels
+        if: matrix.os != 'windows-latest'
         env:
           CL: "/std:c++14 /TP /wd4244 /wd4305 /wd4028 /wd4090"
           CIBW_SKIP: "pp*"
@@ -111,24 +112,26 @@ jobs:
           CIBW_PLATFORM: ${{ matrix.os == 'ubuntu-latest' && 'linux' || (matrix.os == 'macos-latest' && 'macos') || (matrix.os == 'windows-latest' && 'windows')}}
         run: cibuildwheel --output-dir wheelhouse
 
-#      - name: Build wheel under MSYS2
-#        if: matrix.os == 'windows-latest'
-#        shell: msys2 {0}
-#        run: |
-#          export PATH="/c/msys64/mingw64/bin:$PATH"
-#          cd gnubg-nn
-#
-#          autoreconf -vfi
-#          ./configure --host=x86_64-w64-mingw32
-#          make
-#
-#          cd ..
-#          python3 -m pip install --upgrade pip setuptools wheel
+      - name: Build wheel under MSYS2
+        if: matrix.os == 'windows-latest'
+        shell: msys2 {0}
+        run: |
+          export PATH="/c/msys64/mingw64/bin:$PATH"
+          cd gnubg-nn
+
+          autoreconf -vfi
+          ./configure --host=x86_64-w64-mingw32
+          make
+
+          cd ..
+          python3 -m pip setuptools wheel cibuildwheel auditwheel
+          python3 -m cibuildwheel --output-dir wheelhouse
+
 #          python3 -m pip wheel . \
 #            --global-option build_ext \
 #            --global-option "--compiler=mingw32" \
 #            --wheel-dir=./wheelhouse/
-#
+
 #      - name: Retag Windows wheels
 #        if: matrix.os == 'windows-latest'
 #        shell: bash
