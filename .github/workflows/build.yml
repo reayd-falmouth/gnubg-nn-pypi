@@ -84,6 +84,7 @@ jobs:
         run: make patch
 
       - name: Generate configure script & configure (Linux, macOS)
+        if: matrix.os != 'windows-latest'
         run: make configure
 
       - name: Generate configure script & configure (Windows MSYS)
