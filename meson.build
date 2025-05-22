@@ -73,13 +73,6 @@ cpp_sources = files(
     'gnubg-nn/gnubg/osr.cc',
 )
 
-install_data(
-    'gnubg/data/gnubg_ts0.bd',
-    'gnubg/data/gnubg_os0.bd',
-    'gnubg/data/gnubg.weights',
-    install_dir: join_paths(get_option('datadir'), 'gnubg')
-)
-
 # Build static library bundling all GNUBG engine code
 libgnubg_nn = static_library(
     'gnubg_nn',
