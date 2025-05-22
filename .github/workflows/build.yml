@@ -31,7 +31,9 @@ jobs:
           - "cp311"
           - "cp312"
           - "cp313"
-
+        exclude:
+          - os: "macos-14"
+            python: "cp37"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
