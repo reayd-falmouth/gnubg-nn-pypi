@@ -20,7 +20,7 @@ jobs:
       matrix:
         os:
 #          - "ubuntu-latest"
-          - "macos-latest"
+          - "macos-13"
 #          - "windows-latest"
         python:
 #          - "cp38"
