@@ -32,6 +32,8 @@ with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
 class build_ext(_build_ext):
     def build_extensions(self):
         ctype = self.compiler.compiler_type
+        is_win = sys.platform == "win32"
+        is_macos = sys.platform == "darwin"
 
         for ext in self.extensions:
             args = []
@@ -39,17 +41,12 @@ class build_ext(_build_ext):
             has_cpp = any(src.endswith(('.cpp', '.cc', '.cxx')) for src in ext.sources)
 
             # Use the predefined args
-            if is_windows:
+            if is_win:
                 # always suppress those warnings on Windows
                 args.extend(extra_compile_args_c)
                 if has_cpp:
                     # force C++14 mode and "treat as C++"
                     args[:0] = ["/std:c++14", "/TP"]
-            # if ctype == "msvc":
-            #     args = (
-            #             (["/std:c++14"] if has_cpp else []) +
-            #             ["/wd4244", "/wd4305", "/wd4028", "/wd4090"]
-            #     )
             else:
                 args = (
                         (["-std=c++14"] if has_cpp else []) +
