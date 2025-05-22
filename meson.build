@@ -71,6 +71,7 @@ libgnubg_nn = static_library(
     include_directories : gnubg_inc,
     cpp_args            : ['-std=c++14'],    # match your C++14 requirement
     install             : false,
+    dependencies:       [python_dep],  # ✅ use the Python headers!
 )
 
 # Force-link every object to avoid missing-symbol errors
