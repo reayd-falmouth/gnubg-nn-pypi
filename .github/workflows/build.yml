@@ -116,14 +116,14 @@ jobs:
         if: matrix.os == 'windows-latest'
         shell: msys2 {0}
         run: |
-#          export PATH="/c/msys64/mingw64/bin:$PATH"
-#          cd gnubg-nn
-#
-#          autoreconf -vfi
-#          ./configure --host=x86_64-w64-mingw32
-#          make
-#
-#          cd ..
+          #          export PATH="/c/msys64/mingw64/bin:$PATH"
+          #          cd gnubg-nn
+          #
+          #          autoreconf -vfi
+          #          ./configure --host=x86_64-w64-mingw32
+          #          make
+          #
+          #          cd ..
           python3 -m pip install --upgrade setuptools wheel cibuildwheel auditwheel
           python3 -m cibuildwheel --output-dir wheelhouse
 
