@@ -24,7 +24,6 @@ jobs:
           - "macos-14"
           - "windows-latest"
         python:
-          - "cp36"
           - "cp37"
           - "cp38"
           - "cp39"
