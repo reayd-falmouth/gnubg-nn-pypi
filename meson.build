@@ -10,9 +10,9 @@ python_dep = python3.dependency()
 pkgdir = python3.get_install_dir()
 
 install_data(
-    'gnubg/data/gnubg.weights',
-    'gnubg/data/gnubg_ts0.bd',
-    'gnubg/data/gnubg_os0.bd',
+    'src/gnubg/data/gnubg.weights',
+    'src/gnubg/data/gnubg_ts0.bd',
+    'src/gnubg/data/gnubg_os0.bd',
     install_dir: join_paths(pkgdir, 'gnubg', 'data')
 )
 
