@@ -1,0 +1,27 @@
+[build-system]
+requires = [
+    "meson>=1.0.0",
+    "ninja>=1.10.0",
+    "meson-python>=0.10.0"
+]
+build-backend = "meson_python.build_backend"
+
+[project]
+name = "gnubg"
+version = "1.1.0.dev4"
+description = "Python3 bindings for GNUBG neural evaluation"
+readme = "README.md"
+requires-python = ">=3.6"
+authors = [
+    { name = "David Reay", email = "dr323090@falmouth.ac.uk" }
+]
+license = { text = "GPL-2.0-or-later" }
+dependencies = []
+
+[project.urls]
+Homepage = "https://www.gnu.org/software/gnubg/"
+Documentation = "http://www.gnubg.org/documentation/doku.php?id=gnu_backgammon_faq"
+Source = "https://github.com/gnubg/gnubg-nn-pypi"
+GNUBG = "https://git.savannah.gnu.org/cgit/gnubg/gnubg-nn.git"
+MailingList = "https://lists.gnu.org/mailman/listinfo/gnubg"
+Credits = "https://git.savannah.gnu.org/cgit/gnubg.git/tree/credits.sh"
