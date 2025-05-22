@@ -18,7 +18,7 @@ install_data(
 )
 install_subdir(
     'src/gnubg/tests',
-    install_dir: join_paths(pkgdir, 'gnubg', 'tests')
+    install_dir: join_paths(pkgdir, 'gnubg')
 )
 conf_data = configuration_data()
 conf_data.set('_CRT_SECURE_NO_WARNINGS', 1)  # or 0 to disable
