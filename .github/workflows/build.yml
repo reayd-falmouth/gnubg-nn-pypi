@@ -113,20 +113,15 @@ jobs:
           CIBW_PLATFORM: ${{ matrix.os == 'ubuntu-latest' && 'linux' || (matrix.os == 'macos-latest' && 'macos') || (matrix.os == 'windows-latest' && 'windows')}}
         run: cibuildwheel --output-dir wheelhouse
 
-      - name: Build wheels (Windows MSYS)
+      - name: Build wheel under MSYS2
         if: matrix.os == 'windows-latest'
-        uses: pypa/cibuildwheel@v2
-        with:
-          platform: windows
-          output-dir: wheelhouse/
-
-#      - name: Build wheel under MSYS2
-#        if: matrix.os == 'windows-latest'
-#        shell: msys2 {0}
-#        run: |
-#          export PATH="/c/msys64/mingw64/bin:$PATH"
-#          python3 -m pip install --upgrade setuptools wheel cibuildwheel auditwheel
-#          python3 -m cibuildwheel --output-dir wheelhouse
+        shell: msys2 {0}
+        run: |
+          export PATH=$(printf "%s\n" $PATH | grep -vE '/msys64/usr/bin' | paste -sd: -)
+          echo "Cleaned PATH: $PATH"
+          export PATH="/c/msys64/mingw64/bin:$PATH"
+          python3 -m pip install --upgrade setuptools wheel cibuildwheel auditwheel
+          python3 -m cibuildwheel --output-dir wheelhouse
 
 #          cd gnubg-nn
 #
