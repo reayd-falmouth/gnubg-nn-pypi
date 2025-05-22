@@ -111,7 +111,6 @@ jobs:
         run: pip install --upgrade pip setuptools wheel cibuildwheel auditwheel
 
       - name: Build wheels (linux, macOS, Windows)
-        if: matrix.os != 'windows-latest'
         env:
           CL: "/std:c++14 /TP /wd4244 /wd4305 /wd4028 /wd4090"
           CIBW_SKIP: "pp*"
