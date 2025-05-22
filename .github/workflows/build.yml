@@ -83,24 +83,16 @@ jobs:
       - name: Apply Patch files (Linux, macOS, Windows)
         run: make patch
 
-      - name: Generate configure script & configure (linux, macOS)
-        if: matrix.os != 'windows-latest'
+      - name: Generate configure script & configure (linux, macOS, windows)
         run: make configure
 
-#      - name: Generate configure script & configure (Windows MSYS)
-#        if: matrix.os == 'windows-latest'
-#        shell: msys2 {0}
-#        run: make configure
-
       - name: Set up Python & build tools
-        if: matrix.os != 'windows-latest'
         uses: actions/setup-python@v4
         with:
           python-version-file: .python-version
           check-latest: true    # ← allow downloading if it's not in the cache
 
       - name: Install build tools
-        if: matrix.os != 'windows-latest'
         run: pip install --upgrade pip setuptools wheel cibuildwheel auditwheel
 
       - name: Build wheels
