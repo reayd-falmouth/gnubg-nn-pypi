@@ -13,6 +13,7 @@ install_data(
     'src/gnubg/data/gnubg.weights',
     'src/gnubg/data/gnubg_ts0.bd',
     'src/gnubg/data/gnubg_os0.bd',
+    'src/gnubg/data/gnubg_os.db',
     install_dir: join_paths(pkgdir, 'gnubg', 'data')
 )
 
