@@ -102,9 +102,8 @@ jobs:
           CIBW_SKIP: "pp*"
           CIBW_BUILD: "${{ matrix.python }}-*"
           CIBW_ARCHS_MACOS: "universal2"
-          CIBW_PLATFORM: ${{ matrix.os == 'ubuntu-latest' && 'linux' || (matrix.os == 'macos-latest' && 'macos') || (matrix.os == 'windows-latest' && 'windows')}}
+          CIBW_PLATFORM: ${{ matrix.os == 'ubuntu-latest' && 'linux' || (matrix.os == 'macos-latest' && 'macos') || (matrix.os == 'windows-latest' && 'windows') }}
         run: cibuildwheel --output-dir wheelhouse
-
       - name: Build wheel under MSYS2
         if: matrix.os == 'windows-latest'
         shell: msys2 {0}
