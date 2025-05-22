@@ -7,7 +7,7 @@ project(
 
 python3 = import('python').find_installation('python3')
 python_dep = python3.dependency()
-pkgdir = python.get_install_dir()
+pkgdir = python3.get_install_dir()
 
 install_data(
     'gnubg/data/gnubg.weights',
