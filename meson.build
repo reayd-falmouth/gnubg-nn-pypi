@@ -91,7 +91,7 @@ gnubg_dep = declare_dependency(
 ).as_link_whole()
 
 # Build the Python extension
-python = import('python').find_installation()
+python = import('python').find_installation(pure: false)
 py_ext = python.extension_module(
     'gnubg',
     [],                          # no extra sources; they live in the static lib
