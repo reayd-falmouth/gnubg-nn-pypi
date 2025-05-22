@@ -17,7 +17,6 @@ py_sources = files(
 
 python3.install_sources(
     py_sources,
-    install_dir: join_paths(pkgdir, 'gnubg')
 )
 
 install_data(
