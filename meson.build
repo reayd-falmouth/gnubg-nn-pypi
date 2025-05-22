@@ -1,33 +1,22 @@
+# Minimum required Meson version
+meson_version = '>=1.7.0'
+
 project(
     'gnubg',
-    ['cpp', 'python'],
+    ['cpp', 'c'],
     version : '1.1.0.dev4',
-    default_options : ['cpp_std=c++14']
 )
 
-# 1. Include dirs
+# -- 1) Include directories
 gnubg_inc = include_directories(
     'gnubg-nn',
     'gnubg-nn/gnubg',
     'gnubg-nn/gnubg/lib',
     'gnubg-nn/analyze',
-    'gnubg-nn/py'
+    'gnubg-nn/py',
 )
 
-# 2. Compiler definitions (macros)
-common_defines = [
-    '_CRT_SECURE_NO_WARNINGS=1',
-    'NOMINMAX=1',
-    'LOADED_BO=1',
-    'OS_BEAROFF_DB=1',
-    'HAVE_CONFIG_H=1',
-]
-# Apply to both C and C++ compilations
-foreach m : common_defines
-    add_project_arguments('-D' + m, language: ['c', 'cpp'])
-endforeach
-
-# 3. C sources (GNUBG core)
+# -- 2) Source files
 c_sources = files(
     'gnubg-nn/gnubg/bearoffdb.c',
     'gnubg-nn/gnubg/eggmoveg.c',
@@ -38,11 +27,11 @@ c_sources = files(
     'gnubg-nn/gnubg/pub_eval.c',
     'gnubg-nn/gnubg/lib/hash.c',
     'gnubg-nn/gnubg/lib/neuralnet.c',
-    'gnubg-nn/gnubg/lib/nsse.c'
+    'gnubg-nn/gnubg/lib/nsse.c',
 )
 
-# 4. C++ sources (GNUBG analysis) minus the Python binding entrypoint
-cpp_lib_sources = files(
+cpp_sources = files(
+    'src/gnubg/gnubgmodule.cpp',
     'gnubg-nn/analyze/analyze.cc',
     'gnubg-nn/analyze/bm.cc',
     'gnubg-nn/analyze/bms.cc',
@@ -53,38 +42,29 @@ cpp_lib_sources = files(
     'gnubg-nn/analyze/player.cc',
     'gnubg-nn/gnubg/bearoffgammon.cc',
     'gnubg-nn/gnubg/racebg.cc',
-    'gnubg-nn/gnubg/osr.cc'
+    'gnubg-nn/gnubg/osr.cc',
 )
 
-# 5. Static library combining C + C++ analysis code
-gnubg_lib = static_library(
+# -- 3) Build a static library for all GNUBG code
+libgnubg_nn = static_library(
     'gnubg_nn',
-    c_sources + cpp_lib_sources,
-    include_directories : gnubg_inc
+    c_sources + cpp_sources,
+    include_directories : gnubg_inc,
+    cpp_args : ['-std=c++14'],    # match your C++14 requirement
+    install : false,
 )
 
-# 6. Wrap as a dependency and link everything (“link_whole” avoids missing symbols)
+# -- 4) Declare a dependency that links the entire static library
 gnubg_dep = declare_dependency(
-    link_whole : gnubg_lib,
-    include_directories : gnubg_inc
-)
+    include_directories : gnubg_inc,
+    link_with : libgnubg_nn,
+).as_link_whole()  # pull in all objects to prevent unresolved externals :contentReference[oaicite:5]{index=5}
 
-# 7. Python extension module
-python = import('python')
-python.extension_module(
+# -- 5) Build the Python extension module
+python = import('python').find_installation()
+py_ext = python.extension_module(
     'gnubg.gnubg',
-    sources : ['src/gnubg/gnubgmodule.cpp'],
-    dependencies : [gnubg_dep],
-    include_directories : gnubg_inc
-)
-
-# 8. Install Python package data
-python.install_sources('src/gnubg')
-install_data(
-    files : [
-        'src/gnubg/data/bearoffdb.bd',
-        'src/gnubg/data/*.weights',
-        'src/gnubg/data/*.db'
-    ],
-    install_dir : join_paths(get_option('prefix'), get_option('libdir'), 'python' + python.get_major_version(), 'site-packages', 'gnubg', 'data')
+    [],                          # sources are in the static lib
+    dependencies : [gnubg_dep],  # link GNUBG engine into the .pyd/.so
+    install : true,
 )
