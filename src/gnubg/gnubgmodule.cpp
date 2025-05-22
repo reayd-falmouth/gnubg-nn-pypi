@@ -1814,7 +1814,7 @@ PyInit_gnubg(void)
         }
 
     // Debug: Print the base path and data directory
-    std::cout << "Base path: " << base << std::endl;
+//    std::cout << "Base path: " << base << std::endl;
     std::cout << "Data directory: " << datadir << std::endl;
 
     // Define paths to required data files
