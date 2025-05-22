@@ -1762,7 +1762,7 @@ static std::string find_data_dir(PyObject* module) {
 //---------------------------------------------------------------------------
 // Module initialization
 PyMODINIT_FUNC
-PyInit__gnubg(void)
+PyInit_gnubg(void)
 {
     // Initialize the module
     PyObject* m = PyModule_Create(&gnubgmodule);
