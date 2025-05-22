@@ -15,7 +15,7 @@ authors = [
     { name = "David Reay", email = "dr323090@falmouth.ac.uk" }
 ]
 license = { text = "GPL-2.0-or-later" }
-license-files = "LICENSE"
+license-files = ["LICENSE"]
 dependencies = []
 
 [project.urls]
