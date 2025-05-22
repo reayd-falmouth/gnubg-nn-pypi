@@ -57,13 +57,21 @@ jobs:
 #          check-latest: true    # ← allow downloading if it's not in the cache
 
       - name: Install Meson
-        run: pip install meson ninja
+        run: pip install meson ninja cibuildwheel
 
       - name: Build with meson
         run: |
           meson setup builddir
           meson compile -C builddir
-          pip wheel builddir
+
+      - name: Build wheels (linux, macOS, Windows)
+        env:
+#          CL: "/std:c++14 /TP /wd4244 /wd4305 /wd4028 /wd4090"
+          CIBW_SKIP: "pp*"
+          CIBW_BUILD: "${{ matrix.python }}-*"
+          CIBW_ARCHS_MACOS: "universal2"
+          CIBW_PLATFORM: ${{ matrix.os == 'ubuntu-latest' && 'linux' || (matrix.os == 'macos-latest' && 'macos') || (matrix.os == 'windows-latest' && 'windows')}}
+        run: cibuildwheel --output-dir wheelhouse
 
 #
 #      - name: Install system dependencies (macOS)
