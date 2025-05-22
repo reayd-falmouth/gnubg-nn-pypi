@@ -59,8 +59,8 @@ jobs:
 
       - name: Build with meson
         run: |
-          meson setup builddir
-          meson compile -C builddir
+          meson setup build
+          meson compile -C build
 
       - name: Build wheels (linux, macOS, Windows)
         env:
