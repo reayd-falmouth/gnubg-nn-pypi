@@ -23,12 +23,12 @@ jobs:
 #          - "macos-latest"
 #          - "windows-latest"
         python:
-#          - "cp38"
-#          - "cp39"
-#          - "cp310"
+          - "cp38"
+          - "cp39"
+          - "cp310"
           - "cp311"
-#          - "cp312"
-#          - "cp313"
+          - "cp312"
+          - "cp313"
 
     steps:
       - name: Checkout code
