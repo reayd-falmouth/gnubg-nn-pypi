@@ -1,13 +1,11 @@
-# Minimum required Meson version
-meson_version = '>=1.7.0'
-
 project(
-    'gnubg',
-    ['cpp', 'c'],
-    version : '1.1.0.dev4',
+    'gnubg',                      # Your project name
+    ['cpp', 'c'],                 # Languages used
+    version     : '1.1.0.dev4',    # Match your setup.py version
+    meson_version : '>=1.7.0',     # Require a recent Meson
 )
 
-# -- 1) Include directories
+# Include directories
 gnubg_inc = include_directories(
     'gnubg-nn',
     'gnubg-nn/gnubg',
@@ -16,7 +14,7 @@ gnubg_inc = include_directories(
     'gnubg-nn/py',
 )
 
-# -- 2) Source files
+# C sources
 c_sources = files(
     'gnubg-nn/gnubg/bearoffdb.c',
     'gnubg-nn/gnubg/eggmoveg.c',
@@ -30,6 +28,7 @@ c_sources = files(
     'gnubg-nn/gnubg/lib/nsse.c',
 )
 
+# C++ sources
 cpp_sources = files(
     'src/gnubg/gnubgmodule.cpp',
     'gnubg-nn/analyze/analyze.cc',
@@ -45,26 +44,26 @@ cpp_sources = files(
     'gnubg-nn/gnubg/osr.cc',
 )
 
-# -- 3) Build a static library for all GNUBG code
+# Build static library bundling all GNUBG engine code
 libgnubg_nn = static_library(
     'gnubg_nn',
     c_sources + cpp_sources,
     include_directories : gnubg_inc,
-    cpp_args : ['-std=c++14'],    # match your C++14 requirement
-    install : false,
+    cpp_args            : ['-std=c++14'],    # match your C++14 requirement
+    install             : false,
 )
 
-# -- 4) Declare a dependency that links the entire static library
+# Force-link every object to avoid missing-symbol errors
 gnubg_dep = declare_dependency(
     include_directories : gnubg_inc,
-    link_with : libgnubg_nn,
-).as_link_whole()  # pull in all objects to prevent unresolved externals :contentReference[oaicite:5]{index=5}
+    link_with           : libgnubg_nn,
+).as_link_whole()
 
-# -- 5) Build the Python extension module
+# Build the Python extension
 python = import('python').find_installation()
 py_ext = python.extension_module(
     'gnubg.gnubg',
-    [],                          # sources are in the static lib
-    dependencies : [gnubg_dep],  # link GNUBG engine into the .pyd/.so
-    install : true,
+    [],                          # no extra sources; they live in the static lib
+    dependencies : [gnubg_dep],
+    install      : true,
 )
