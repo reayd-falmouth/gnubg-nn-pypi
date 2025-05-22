@@ -62,48 +62,55 @@ jobs:
           aclocal
           autoheader
 
-      - name: Install system dependencies (Windows MSYS)
-        if: matrix.os == 'windows-latest'
-        uses: msys2/setup-msys2@v2
-        with:
-          update: true
-          install: |
-            base-devel
-            mingw-w64-x86_64-toolchain
-            mingw-w64-x86_64-python3
-            mingw-w64-x86_64-python-pip
-            autoconf 
-            automake 
-            libtool 
-            m4 
-            make 
-            mingw-w64-x86_64-gcc
-            mingw-w64-x86_64-autotools
+#      - name: Install system dependencies (Windows MSYS)
+#        if: matrix.os == 'windows-latest'
+#        uses: msys2/setup-msys2@v2
+#        with:
+#          update: true
+#          install: |
+#            base-devel
+#            mingw-w64-x86_64-toolchain
+#            mingw-w64-x86_64-python3
+#            mingw-w64-x86_64-python-pip
+#            autoconf
+#            automake
+#            libtool
+#            m4
+#            make
+#            mingw-w64-x86_64-gcc
+#            mingw-w64-x86_64-autotools
 
-      - name: Apply Patch files (Linux, macOS, Windows)
+      - name: Apply Patch files (Linux, macOS)
+        if: matrix.os != 'windows-latest'
         run: make patch
+
+      - name: Apply Patch files (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          Copy-Item `
+          -Path .\patches\gnubg-nn\* `
+          -Destination .\gnubg-nn `
+          -Recurse -Force
 
       - name: Generate configure script & configure (linux, macOS)
         if: matrix.os != 'windows-latest'
         run: make configure
 
-      - name: Generate configure script & configure (Windows MSYS)
-        if: matrix.os == 'windows-latest'
-        shell: msys2 {0}
-        run: make configure
+#      - name: Generate configure script & configure (Windows MSYS)
+#        if: matrix.os == 'windows-latest'
+#        shell: msys2 {0}
+#        run: make configure
 
-      - name: Set up Python & build tools  (linux, macOS)
-        if: matrix.os != 'windows-latest'
+      - name: Set up Python & build tools (linux, macOS, Windows)
         uses: actions/setup-python@v4
         with:
           python-version-file: .python-version
           check-latest: true    # ← allow downloading if it's not in the cache
 
-      - name: Install build tools  (linux, macOS)
-        if: matrix.os != 'windows-latest'
+      - name: Install build tools (linux, macOS, Windows)
         run: pip install --upgrade pip setuptools wheel cibuildwheel auditwheel
 
-      - name: Build wheels (linux, macOS)
+      - name: Build wheels (linux, macOS, Windows)
         if: matrix.os != 'windows-latest'
         env:
           CL: "/std:c++14 /TP /wd4244 /wd4305 /wd4028 /wd4090"
@@ -113,15 +120,15 @@ jobs:
           CIBW_PLATFORM: ${{ matrix.os == 'ubuntu-latest' && 'linux' || (matrix.os == 'macos-latest' && 'macos') || (matrix.os == 'windows-latest' && 'windows')}}
         run: cibuildwheel --output-dir wheelhouse
 
-      - name: Build wheel under MSYS2
-        if: matrix.os == 'windows-latest'
-        shell: msys2 {0}
-        run: |
-          export PATH=$(printf "%s\n" $PATH | grep -vE '/msys64/usr/bin' | paste -sd: -)
-          echo "Cleaned PATH: $PATH"
-          export PATH="/c/msys64/mingw64/bin:$PATH"
-          python3 -m pip install --upgrade setuptools wheel cibuildwheel auditwheel
-          python3 -m cibuildwheel --output-dir wheelhouse
+#      - name: Build wheel under MSYS2
+#        if: matrix.os == 'windows-latest'
+#        shell: msys2 {0}
+#        run: |
+#          export PATH=$(printf "%s\n" $PATH | grep -vE '/msys64/usr/bin' | paste -sd: -)
+#          echo "Cleaned PATH: $PATH"
+#          export PATH="/c/msys64/mingw64/bin:$PATH"
+#          python3 -m pip install --upgrade setuptools wheel cibuildwheel auditwheel
+#          python3 -m cibuildwheel --output-dir wheelhouse
 
 #          cd gnubg-nn
 #
