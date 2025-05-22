@@ -44,7 +44,7 @@
 #include "equities.h"
 #include "dice_gen.h"
 
-#if !HAVE_STRCASECMP
+#if !HAVE_STRCASECMP || defined(_WIN32)
 #include <cstring>
 #include <cctype>
 
