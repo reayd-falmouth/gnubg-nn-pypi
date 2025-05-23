@@ -14,7 +14,7 @@ python_dep = python3.dependency()
 pkgdir = python3.get_install_dir()
 
 # Custom target to generate __version__.py at build time
-generate_version = custom_target(
+custom_target(
     'generate_version',
     output: '__version__.py',
     command: [
@@ -28,7 +28,7 @@ generate_version = custom_target(
 # Install __init__.py and generated __version__.py
 install_data(
     'src/gnubg/__init__.py',
-    generate_version,  # installs generated __version__.py
+    'src/gnubg/__version__.py',
     install_dir: join_paths(pkgdir, 'gnubg')
 )
 
