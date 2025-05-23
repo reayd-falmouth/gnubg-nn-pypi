@@ -3,7 +3,7 @@ project(
     'gnubg',                      # Your project name
     ['cpp', 'c'],                 # Languages used
     version: run_command(
-        ['src/_build_utils/git_version.py'],
+        ['src/_build_utils/_version.py'],
         check: true
     ).stdout().strip(),
     meson_version : '>=1.7.0',     # Require a recent Meson
@@ -13,10 +13,25 @@ python3 = import('python').find_installation('python3', pure: false)
 python_dep = python3.dependency()
 pkgdir = python3.get_install_dir()
 
+# Custom target to generate __version__.py at build time
+generate_version = custom_target(
+    'generate_version',
+    output: '__version__.py',
+    command: [
+        python3,
+        files('src/_build_utils/_version.py'),
+        '--write', '@OUTPUT@'
+    ],
+    build_by_default: true
+)
+
+# Install __init__.py and generated __version__.py
 install_data(
     'src/gnubg/__init__.py',
+    generate_version,  # installs generated __version__.py
     install_dir: join_paths(pkgdir, 'gnubg')
 )
+
 install_data(
     'src/gnubg/data/gnubg.weights',
     'src/gnubg/data/gnubg_ts0.bd',
