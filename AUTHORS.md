@@ -5,8 +5,11 @@ PyPi Authors and Maintainers
 ----------------------------
 
 David Reay <dr323090@falmouth.ac.uk>
-- Python bindings (gnubg-nn-pypi)
+- Python3 module (gnubg-nn-pypi)
 - Package maintenance and PyPI integration
+
+Joseph Heled
+- Original C/C++ python2.7 interpreter
 
 Upstream GNUBG Core Developers
 ------------------------------
