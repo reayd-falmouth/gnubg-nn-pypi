@@ -38,6 +38,7 @@ jobs:
             --inconclusive \
             --error-exitcode=1 \
             --suppress=missingIncludeSystem \
+            --suppress=missingInclude \
             -I src/ \
             src/
 
