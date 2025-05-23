@@ -2,7 +2,10 @@
 project(
     'gnubg',                      # Your project name
     ['cpp', 'c'],                 # Languages used
-    version     : '1.1.0.dev4',    # Match your setup.py version
+    version: run_command(
+        ['src/gnubg/_build_utils/git_version.py'],
+        check: true
+    ).stdout().strip(),
     meson_version : '>=1.7.0',     # Require a recent Meson
 )
 
