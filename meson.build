@@ -13,7 +13,7 @@ python3 = import('python').find_installation('python3', pure: false)
 python_dep = python3.dependency()
 pkgdir = python3.get_install_dir()
 
-# Custom target to generate __version__.py at build time
+# Custom target to generate __version__.py at build time and install it
 generate_version = custom_target(
     'generate_version',
     output: '__version__.py',
@@ -22,13 +22,14 @@ generate_version = custom_target(
         files('src/_build_utils/_version.py'),
         '--write', '@OUTPUT@'
     ],
-    build_by_default: true
+    build_by_default: true,
+    install: true,
+    install_dir: join_paths(pkgdir, 'gnubg')
 )
 
-# Install __init__.py and generated __version__.py
+# Install __init__.py
 install_data(
     'src/gnubg/__init__.py',
-    generate_version[0],  # installs generated __version__.py
     install_dir: join_paths(pkgdir, 'gnubg')
 )
 
