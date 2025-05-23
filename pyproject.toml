@@ -25,9 +25,6 @@ GNUBG = "https://git.savannah.gnu.org/cgit/gnubg/gnubg-nn.git"
 MailingList = "https://lists.gnu.org/mailman/listinfo/gnubg"
 Credits = "https://git.savannah.gnu.org/cgit/gnubg.git/tree/credits.sh"
 
-[tool.meson-python]
-allow-windows-internal-shared-libs = true
-
 [tool.cibuildwheel.windows]
 # Ensure delvewheel is installed before repair
 before-build = "pip install delvewheel"
