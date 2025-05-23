@@ -27,3 +27,9 @@ Credits = "https://git.savannah.gnu.org/cgit/gnubg.git/tree/credits.sh"
 
 [tool.meson-python]
 allow-windows-internal-shared-libs = true
+
+[tool.cibuildwheel.windows]
+# Ensure delvewheel is installed before repair
+before-build = "pip install delvewheel"
+# Run delvewheel directly after building each wheel
+repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel}"
