@@ -32,6 +32,25 @@ It provides:
 * **Equity lookup** (`equities.value(xAway, oAway)`)
 * **Runtime engine tuning** via the `set` submodule
 
+## 🧪 Platform Compatibility
+
+| Python Version | Linux x86\_64<br>(glibc ≥ 2.17) | Linux i686<br>(glibc ≥ 2.12) | macOS universal2  | Windows x86\_64 |
+| -------------- | ------------------------------- | ---------------------------- | ----------------- |-----------------|
+| **3.13**       | ✅                               | ✅                            | ✅ (macOS ≥ 10.13) | ✅               |
+| **3.12**       | ✅                               | ✅                            | ✅ (macOS ≥ 10.13) | ✅               |
+| **3.11**       | ✅                               | ✅                            | ✅ (macOS ≥ 10.9)  | ✅               |
+| **3.10**       | ✅                               | ✅                            | ✅ (macOS ≥ 10.9)  | ✅               |
+| **3.9**        | ✅                               | ✅                            | ✅ (macOS ≥ 10.9)  | ✅               |
+| **3.8**        | ✅                               | ✅                            | ✅ (macOS ≥ 10.9)  | ✅               |
+| **3.7**        | ✅                               | ✅                            | ❌                 | ✅               |
+| **3.6**        | ❌                               | ❌                            | ❌                 | ❌               |
+
+### Notes:
+
+* ✅ = Built and available
+* ❌ = Not built
+* macOS universal2 = Supports both ARM64 and x86-64 architectures
+
 ## Testing
 
 gnubg-nn-pypi has some basic unit testing. After installation, run:
