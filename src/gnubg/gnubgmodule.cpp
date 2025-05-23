@@ -1601,6 +1601,107 @@ py_onecrace(PyObject*, PyObject* const args)
     return Py_BuildValue("dd", v, stdv);
 }
 
+extern float centeredLDweight, ownedLDweight;
+extern bool useRaceMagic;
+
+static PyObject*
+py_evaluate_cube_decision(PyObject* self, PyObject* args, PyObject* kwargs)
+{
+    if( Equities::match.xAway == 0 && Equities::match.oAway == 0 ) {
+        PyErr_SetString(PyExc_RuntimeError, "Not implemented for money") ;
+        return 0;
+    }
+
+    int nPlies = 0;
+    int nPliesVerify = -1;
+    double ad = 0.5;
+
+    char side = 0;
+    int verboseInfo = 0;
+    PyObject* p  = 0;
+
+    float const s_centeredLDweight = centeredLDweight;
+    float const s_ownedLDweight = ownedLDweight;
+    float probs[5];
+    probs[0] = -1;
+
+    bool APopt = true;
+    bool APshortcuts = false;
+
+    AnalyzeBoard board;
+
+    static const char* kwlist[] = {"pos", "n", "v", "s", "i", "p", 0};
+
+    if( !PyArg_ParseTupleAndKeywords(args, kwargs, "O&|iiciO", (char**)kwlist,
+                                     &anyAnalyzeBoard, &board,
+                                     &nPlies, &nPliesVerify, &side,
+                                     &verboseInfo, &p)) {
+        return 0;
+    }
+
+    bool xOnPlay = false;
+
+    switch( side ) {
+        case 'X': case 'x': xOnPlay = true; break;
+        case 'O': case 'o': xOnPlay = false; break;
+        case 0: break;
+        default:
+        {
+            PyErr_SetString(PyExc_ValueError, "invalid side");
+            return 0;
+        }
+    }
+
+    if( Equities::match.cube > 1 && Equities::match.xOwns != xOnPlay ) {
+        PyErr_Format(PyExc_RuntimeError, "side (%c) does not own cube",
+                     side) ;
+        return 0;
+    }
+
+    if( p ) {
+        if( ! (PySequence_Check(p) && PySequence_Size(p) == 5) ) {
+            PyErr_SetString(PyExc_ValueError, "invalid probablities") ;
+            return 0;
+        }
+
+        for(uint k = 0; k < 5; ++k) {
+            PyObject* const pk = PySequence_Fast_GET_ITEM(p, k);
+            probs[k] = PyFloat_AsDouble(pk);
+            if( ! (0 <= probs[k] && probs[k] <= 1) ) {
+                PyErr_SetString(PyExc_ValueError, "invalid probablities") ;
+                return 0;
+            }
+        }
+    }
+
+    Analyze::nPliesToDouble = nPlies;
+
+    if( nPliesVerify < 0 ) {
+        nPliesVerify = (nPlies == 0 ? 0 : 2);
+    }
+
+    Analyze::nPliesToDoubleVerify = nPliesVerify;
+
+    Player::R1 const& info =
+            analyzer.rollOrDouble(board, xOnPlay, ad, APopt, APshortcuts,
+                                  probs[0] >= 0 ? probs : 0);
+
+    centeredLDweight = s_centeredLDweight;
+    ownedLDweight = s_ownedLDweight;
+
+    if( verboseInfo ) {
+        PyObject* const v =
+                Py_BuildValue("iiiddd",
+                              info.actionDouble, info.actionTake, info.tooGood,
+                              info.matchProbNoDouble,
+                              info.matchProbDoubleTake,
+                              info.matchProbDoubleDrop);
+        return v;
+    }
+
+    return PyLong_FromLong(info.actionDouble);
+}
+
 
 static PyMethodDef GnubgMethods[] = {
         {"classify", py_classify, METH_VARARGS, "Classify a board position."},
@@ -1662,8 +1763,12 @@ static PyMethodDef GnubgMethods[] = {
                 METH_VARARGS | METH_KEYWORDS,
                 "cubefullRollout(pos, ngames=576, side='X', ply=0) -> 13-element tuple\n"
                 "Simulate a set of cube rolls and return the results as 13 floats." },
-//        {"equities", (PyCFunction)py_set_equities, METH_VARARGS, "Set the equities table or set custom weight and growth rate."},
         {"one_checker_race", py_onecrace, METH_VARARGS, "OCR function to compute value and standard deviation for a given number."},
+        { "evaluate_cube_decision",
+                (PyCFunction)py_evaluate_cube_decision,
+                METH_VARARGS | METH_KEYWORDS,
+                "evaluate_cube_decision(pos, n=0, v=-1, s='X', i=0, p=None)\n"
+                "Evaluate whether to double, take/pass, or play on. Returns integer or verbose stats." },
         {NULL, NULL, 0, NULL}
 };
 
@@ -1807,27 +1912,13 @@ PyInit_gnubg(void)
         #else
                 setenv("GNUBGHOME", datadir.c_str(), 1);
         #endif
-//                std::cout << "Defaulting GNUBGHOME to: " << datadir << std::endl;
     }
-//        else {
-//            std::cout << "GNUBGHOME set to: " << std::getenv("GNUBGHOME") << std::endl;
-//        }
-
-    // Debug: Print the base path and data directory
-//    std::cout << "Base path: " << base << std::endl;
-//    std::cout << "Data directory: " << datadir << std::endl;
 
     // Define paths to required data files
     std::string weights = datadir + "/gnubg.weights";
     std::string os_bd   = datadir + "/gnubg_os.db";
     std::string ts0_bd  = datadir + "/gnubg_ts0.bd";
     std::string os0_bd  = datadir + "/gnubg_os0.bd";
-
-    // Debug: Print the paths to the data files
-//    std::cout << "Looking for weights at: " << weights << std::endl;
-//    std::cout << "Looking for os_bd at: " << os_bd << std::endl;
-//    std::cout << "Looking for ts0_bd at: " << ts0_bd << std::endl;
-//    std::cout << "Looking for os0_bd at: " << os0_bd << std::endl;
 
     // Initialize GNUBG (loads all six nets into the global `nets[]`)
     if (!Analyze::init(weights.c_str())) {
