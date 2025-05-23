@@ -34,6 +34,7 @@ jobs:
       - name: Run cppcheck static analysis
         run: |
           cppcheck \
+<<<<<<< Updated upstream
           --enable=all \
           --inconclusive \
           --error-exitcode=1 \
@@ -44,6 +45,14 @@ jobs:
           -I gnubg-nn/analyze \
           -I gnubg-nn/py \
           src/
+=======
+            --enable=all \
+            --inconclusive \
+            --error-exitcode=1 \
+            --suppress=missingIncludeSystem \
+            -I src/ \
+            src/
+>>>>>>> Stashed changes
 
       - name: Verify formatting with clang-format
         run: |
