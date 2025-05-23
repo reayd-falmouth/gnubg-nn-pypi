@@ -1,52 +1,55 @@
+# meson.build
 project(
-    'gnubg',                      # project name
-    ['c', 'cpp'],                 # languages
-    version: '1.1',
-    default_options: [
-        'cpp_std=c++14',            # C++ standard
-    ],
+    'gnubg',                      # Your project name
+    ['cpp', 'c'],                 # Languages used
+    version     : '1.1.0.dev4',    # Match your setup.py version
+    meson_version : '>=1.7.0',     # Require a recent Meson
 )
 
-# -----------------------------------------------------------------------------
-# 1) Find Python
-# -----------------------------------------------------------------------------
-py3 = import('python').find_installation('python3')
-python_mod = import('python').extension_module
+python3 = import('python').find_installation('python3', pure: false)
+python_dep = python3.dependency()
+pkgdir = python3.get_install_dir()
 
-# -----------------------------------------------------------------------------
-# 2) Common includes & compiler flags
-# -----------------------------------------------------------------------------
-common_inc = include_directories(
+install_data(
+    'src/gnubg/__init__.py',
+    install_dir: join_paths(pkgdir, 'gnubg')
+)
+install_data(
+    'src/gnubg/data/gnubg.weights',
+    'src/gnubg/data/gnubg_ts0.bd',
+    'src/gnubg/data/gnubg_os0.bd',
+    'src/gnubg/data/gnubg_os.db',
+    install_dir: join_paths(pkgdir, 'gnubg', 'data')
+)
+
+conf_data = configuration_data()
+conf_data.set('_CRT_SECURE_NO_WARNINGS', 1)  # or 0 to disable
+conf_data.set('NOMINMAX', 1)
+conf_data.set('LOADED_BO', 1)
+conf_data.set('OS_BEAROFF_DB', 1)
+conf_data.set('HAVE_CONFIG_H', 1)
+
+config_h = configure_file(
+    output: 'config.h',
+    configuration: conf_data
+)
+
+add_project_arguments(
+    '-include', 'config.h',
+    language: ['c', 'cpp']
+)
+
+# Include directories
+gnubg_inc = include_directories(
     'gnubg-nn',
     'gnubg-nn/gnubg',
     'gnubg-nn/gnubg/lib',
     'gnubg-nn/analyze',
     'gnubg-nn/py',
-    'src'                         # for src/gnubg/**
 )
 
-# platform-specific defines
-defines = [
-    ['_CRT_SECURE_NO_WARNINGS', '1'],
-    ['NOMINMAX',               '1'],
-    ['LOADED_BO',              '1'],
-    ['OS_BEAROFF_DB',          '1'],
-    ['HAVE_CONFIG_H',          '1'],
-]
-# turn them into -D flags:
-c_defs = defines.map(d -> '-D' + d[0] + '=' + d[1])
-
-# windows extra warnings-suppressors, else empty
-c_warnings = []
-cpp_warnings = []
-if host_machine.system() == 'windows'
-    c_warnings = ['/wd4244','/wd4305','/wd4028','/wd4090']
-endif
-
-# -----------------------------------------------------------------------------
-# 3) Gather sources
-# -----------------------------------------------------------------------------
-c_srcs = files(
+# C sources
+c_sources = files(
     'gnubg-nn/gnubg/bearoffdb.c',
     'gnubg-nn/gnubg/eggmoveg.c',
     'gnubg-nn/gnubg/eval.c',
@@ -56,10 +59,11 @@ c_srcs = files(
     'gnubg-nn/gnubg/pub_eval.c',
     'gnubg-nn/gnubg/lib/hash.c',
     'gnubg-nn/gnubg/lib/neuralnet.c',
-    'gnubg-nn/gnubg/lib/nsse.c'
+    'gnubg-nn/gnubg/lib/nsse.c',
 )
 
-cpp_srcs = files(
+# C++ sources
+cpp_sources = files(
     'src/gnubg/gnubgmodule.cpp',
     'gnubg-nn/analyze/analyze.cc',
     'gnubg-nn/analyze/bm.cc',
@@ -71,34 +75,30 @@ cpp_srcs = files(
     'gnubg-nn/analyze/player.cc',
     'gnubg-nn/gnubg/bearoffgammon.cc',
     'gnubg-nn/gnubg/racebg.cc',
-    'gnubg-nn/gnubg/osr.cc'
+    'gnubg-nn/gnubg/osr.cc',
 )
 
-all_srcs = c_srcs + cpp_srcs
-
-# -----------------------------------------------------------------------------
-# 4) Build the Python extension
-# -----------------------------------------------------------------------------
-py_ext = python_mod(
-    module_name:    'gnubg.gnubg',
-    sources:        all_srcs,
-    include_directories: common_inc,
-    c_args:         c_defs + c_warnings,
-    cpp_args:       ['-std=c++14'] + cpp_warnings,
-    dependencies:   py3.dependency(),   # link against Python
-    install:        true,
+# Build static library bundling all GNUBG engine code
+libgnubg_nn = static_library(
+    'gnubg_nn',
+    c_sources + cpp_sources,
+    include_directories : gnubg_inc,
+    cpp_args            : ['-std=c++14'],    # match your C++14 requirement
+    install             : false,
+    dependencies:       [python_dep],  # ✅ use the Python headers!
 )
 
-# -----------------------------------------------------------------------------
-# 5) Install package data (the .bd/.weights/.db files)
-# -----------------------------------------------------------------------------
-data_files = files(
-    meson.glob('src/gnubg/data/*.bd')     +
-    meson.glob('src/gnubg/data/*.weights')+
-    meson.glob('src/gnubg/data/*.db')
-)
+# Force-link every object to avoid missing-symbol errors
+gnubg_dep = declare_dependency(
+    include_directories : gnubg_inc,
+    link_with           : libgnubg_nn,
+).as_link_whole()
 
-install_data(
-    data_files,
-    install_dir: py3.get_install_dir() + '/gnubg/data'
+# Build the Python extension
+py_ext = python3.extension_module(
+    'gnubg',
+    [],                          # no extra sources; they live in the static lib
+    dependencies : [gnubg_dep],
+    install      : true,
+    subdir       : 'gnubg',
 )
