@@ -3,7 +3,7 @@ project(
     'gnubg',                      # Your project name
     ['cpp', 'c'],                 # Languages used
     version: run_command(
-        ['src/gnubg/_build_utils/git_version.py'],
+        ['src/_build_utils/git_version.py'],
         check: true
     ).stdout().strip(),
     meson_version : '>=1.7.0',     # Require a recent Meson
