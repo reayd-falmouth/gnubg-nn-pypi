@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
 
       - name: Install linting tools
         run: |
@@ -23,12 +26,23 @@ jobs:
           sudo apt-get install -y \
             clang-format \
             cppcheck \
-            python3-pip
+            python3-pip \
+            python3-dev \
           pip3 install cpplint
 
       - name: Run cppcheck static analysis
         run: |
-          cppcheck --enable=all --inconclusive --error-exitcode=1 src/
+          cppcheck \
+          --enable=all \
+          --inconclusive \
+          --error-exitcode=1 \
+          --suppress=missingIncludeSystem \
+          -I gnubg-nn/ \
+          -I gnubg-nn/gnubg \
+          -I gnubg-nn/gnubg/lib \
+          -I gnubg-nn/analyze \
+          -I gnubg-nn/py \
+          src/
 
       - name: Verify formatting with clang-format
         run: |
