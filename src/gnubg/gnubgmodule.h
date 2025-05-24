@@ -2,7 +2,8 @@
  * gnubgmodule.h
  *
  * Originally by Joseph Heled <joseph@gnubg.org>, 2000
- * Adapted for Python 3 and Meson build system by David Reay <dr323090@falmouth.ac.uk>
+ * Adapted for Python 3 and Meson build system by David Reay
+ * <dr323090@falmouth.ac.uk>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of version 2 of the GNU General Public License as
@@ -33,4 +34,4 @@ extern "C" {
 }
 #endif
 
-#endif  // SRC_GNUBG_GNUBGMODULE_H_
+#endif // SRC_GNUBG_GNUBGMODULE_H_
