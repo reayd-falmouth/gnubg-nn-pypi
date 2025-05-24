@@ -588,17 +588,18 @@ stringToBoard(const char* key, int board[2][25])
 static int
 readPly(PyObject* obj, void* out_p)
 {
-    int& nPlies = *static_cast<int*>(out_p);
     if (!PyLong_Check(obj)) {
         PyErr_SetString(PyExc_TypeError, "ply must be an integer");
         return 0;
     }
+
     long v = PyLong_AsLong(obj);
     // valid if non-negative or one of our special negative codes
     if (v >= 0 || (v <= PLY_OSR && v >= PLY_1ANDHALF)) {
-        nPlies = (int)v;
+        *static_cast<int*>(out_p) = static_cast<int>(v);
         return 1;
     }
+
     PyErr_SetString(PyExc_ValueError, "invalid ply");
     return 0;
 }
