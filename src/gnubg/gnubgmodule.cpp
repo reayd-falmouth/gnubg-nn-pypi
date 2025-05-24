@@ -311,7 +311,6 @@ static const char *posString(const unsigned char *auch) {
   return buf;
 }
 
-//-----------------------------------------------------------------------------
 // Convert a 20‐char A–Z key into the 10‐byte “auch” array:
 static unsigned char *auchFromString(const char *str) {
   // str must be length 20
@@ -324,8 +323,7 @@ static unsigned char *auchFromString(const char *str) {
   return auch;
 }
 
-//─── setBoard for resign logic
-//─────────────────────────────────────────────────
+// setBoard for resign logic
 static void setBoard(AnalyzeBoard out, const int board[2][25]) {
   // bar of + on [0]
   out[0] = board[1][24];
@@ -343,8 +341,7 @@ static void setBoard(AnalyzeBoard out, const int board[2][25]) {
   out[25] = -board[0][24];
 }
 
-//─── boardString: turn a C board into the “PositionKey” string
-//─────────────────
+// boardString: turn a C board into the “PositionKey” string
 static const char *boardString(const int board[2][25]) {
   unsigned char auch[10];
   // PositionKey comes from <eval.h>; it wants Board = int[2][25]
@@ -477,8 +474,7 @@ static PyObject *pack_board(const int board[2][25]) {
   return outer;
 }
 
-//─── anyBoard converter
-//─────────────────────────────────────────────────────────
+// anyBoard converter
 static int anyBoard(PyObject *obj, void *out_board) {
   // reinterpret the void* as int[2][25]
   int(*board)[25] = reinterpret_cast<int(*)[25]>(out_board);
