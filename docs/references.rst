@@ -10,7 +10,7 @@ Official Documentation
   https://www.gnu.org/software/gnubg/
 
 - **GNU Backgammon Manual (HTML)**
-  Provided in this documentation under :doc:`gnubg_manual_cleaned`.
+  https://www.gnu.org/software/gnubg/manual/gnubg.html
 
 - **All About GNU Backgammon**
   Albert Silver and Christian Anthon
