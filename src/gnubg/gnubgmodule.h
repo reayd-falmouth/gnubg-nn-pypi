@@ -1,5 +1,5 @@
 /*
- * gnubgmodule.cpp / gnubgmodule.h
+ * gnubgmodule.h
  *
  * Originally by Joseph Heled <joseph@gnubg.org>, 2000
  * Adapted for Python 3 and Meson build system by David Reay <dr323090@falmouth.ac.uk>
@@ -18,18 +18,19 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef GNUBGMODULE_H
-#define GNUBGMODULE_H
+#ifndef SRC_GNUBG_GNUBGMODULE_H_
+#define SRC_GNUBG_GNUBGMODULE_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-// Expose any C-style function declarations here (if needed)
-// But usually this is empty unless used from other files.
+// Add any function declarations here that need to be accessible from C/C++
+// For example, if you wrap any C functions for the Python interface:
+// int some_exported_function(int x);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // GNUBGMODULE_H
+#endif  // SRC_GNUBG_GNUBGMODULE_H_
