@@ -1353,7 +1353,7 @@ py_cubefullRollout(PyObject* /*self*/, PyObject* args, PyObject* kwargs)
     static const char* kwlist[] = {"pos", "ngames", "side", "ply", NULL};
 
     // Parse the input arguments
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O&|ci", (char**)kwlist,
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O&|ci", const_cast<char**>(kwlist),
                                      anyAnalyzeBoard, board,
                                      &nGames, &side, &nPlies)) {
         return NULL;
@@ -1632,7 +1632,7 @@ py_evaluate_cube_decision(PyObject* self, PyObject* args, PyObject* kwargs)
 
     static const char* kwlist[] = {"pos", "n", "v", "s", "i", "p", 0};
 
-    if( !PyArg_ParseTupleAndKeywords(args, kwargs, "O&|iiciO", (char**)kwlist,
+    if( !PyArg_ParseTupleAndKeywords(args, kwargs, "O&|iiciO", const_cast<char**>(kwlist),
                                      &anyAnalyzeBoard, &board,
                                      &nPlies, &nPliesVerify, &side,
                                      &verboseInfo, &p)) {
@@ -1899,7 +1899,7 @@ PyInit_gnubg(void)
         // on Unix we used forward‐slash
     #else
         // on Win32 convert to forward‐slash for Analyze::init()
-        for (auto &c : datadir) if (c == '\\') c = '/';
+        std::replace(datadir.begin(), datadir.end(), '\\', '/');
     #endif
 
     // If the user hasn't already pointed GNUBGHOME somewhere, default it
@@ -1916,9 +1916,9 @@ PyInit_gnubg(void)
 
     // Define paths to required data files
     std::string weights = datadir + "/gnubg.weights";
-    std::string os_bd   = datadir + "/gnubg_os.db";
-    std::string ts0_bd  = datadir + "/gnubg_ts0.bd";
-    std::string os0_bd  = datadir + "/gnubg_os0.bd";
+    // std::string os_bd   = datadir + "/gnubg_os.db";
+    // std::string ts0_bd  = datadir + "/gnubg_ts0.bd";
+    // std::string os0_bd  = datadir + "/gnubg_os0.bd";
 
     // Initialize GNUBG (loads all six nets into the global `nets[]`)
     if (!Analyze::init(weights.c_str())) {
