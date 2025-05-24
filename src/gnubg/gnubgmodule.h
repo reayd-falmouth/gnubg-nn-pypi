@@ -5,6 +5,9 @@
  * Adapted for Python 3 and Meson build system by David Reay
  * <dr323090@falmouth.ac.uk>
  *
+ * Copyright 2000 Joseph Heled
+ * Copyright 2025 David Reay
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
