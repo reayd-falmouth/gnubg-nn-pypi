@@ -38,6 +38,7 @@ jobs:
             --inconclusive \
             --error-exitcode=1 \
             --suppress=missingInclude \
+            --suppress=missingIncludeSystem \
             -I src/ src/
 
       - name: Verify formatting with clang-format (matches pre-commit)
