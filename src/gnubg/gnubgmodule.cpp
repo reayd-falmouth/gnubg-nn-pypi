@@ -1839,7 +1839,8 @@ static std::string find_data_dir(PyObject* module) {
 
 #elif defined(__unix__) || defined(__APPLE__)
     Dl_info dl;
-    if (dladdr((void*)&find_data_dir, &dl) && dl.dli_fname) {
+    // if (dladdr((void*)&find_data_dir, &dl) && dl.dli_fname) {
+    if (dladdr(reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(&find_data_dir)), &dl) && dl.dli_fname) {
         char* dup = strdup(dl.dli_fname);
         std::string base = dirname(dup);
         free(dup);
