@@ -42,3 +42,10 @@ checkin: ## Perform a check-in after formatting the code
 	@git add --all; \
 	  git commit -m "$(COMMIT_MESSAGE)"; \
 	  git push
+
+install_docs:
+	pip install -r requirements.txt ;\
+
+.PHONY: docs
+docs:
+	$(MAKE) -C docs
