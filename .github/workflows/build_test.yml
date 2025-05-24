@@ -1,5 +1,5 @@
 # .github/workflows/build-wheels.yml
-name: Build wheels
+name: Build & test wheels
 
 on:
   workflow_dispatch:

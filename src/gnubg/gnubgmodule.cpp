@@ -24,6 +24,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 #include "analyze.h"
 #include "bm.h"
@@ -31,7 +32,7 @@
 #include "misc.h"
 #include "player.h"
 #include "stdutil.h"
-#include <algorithm>  // for std::replace
+
 
 extern "C" {
 #include "eval.h"
