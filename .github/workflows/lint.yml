@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: read    # for checkout
+  contents: read
 
 jobs:
   lint-cpp:
@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
 
       - name: Install linting tools
         run: |
@@ -23,19 +26,29 @@ jobs:
           sudo apt-get install -y \
             clang-format \
             cppcheck \
-            python3-pip
+            python3-pip \
+            python3-dev
+          
           pip3 install cpplint
 
-      - name: Run cppcheck static analysis
+      - name: Run cppcheck static analysis (matches pre-commit)
         run: |
-          cppcheck --enable=all --inconclusive --error-exitcode=1 src/
+          cppcheck \
+            --enable=all \
+            --inconclusive \
+            --error-exitcode=1 \
+            --suppress=missingInclude \
+            --suppress=missingIncludeSystem \
+            -I src/ src/
 
-      - name: Verify formatting with clang-format
+      - name: Verify formatting with clang-format (matches pre-commit)
         run: |
           find src/ -regex '.*\.\(c\|cpp\|h\|hpp\)' -print0 \
-            | xargs -0 clang-format --dry-run --Werror
+            | xargs -0 clang-format --dry-run --Werror --style=file
 
-      - name: Run cpplint style checks
+      - name: Run cpplint style checks (matches pre-commit)
         run: |
           find src/ -regex '.*\.\(c\|cpp\|h\|hpp\)' -print0 \
-            | xargs -0 cpplint --quiet
+            | xargs -0 python3 -m cpplint \
+              --quiet \
+              --filter=-build/include_subdir

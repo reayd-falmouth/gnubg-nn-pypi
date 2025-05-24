@@ -1,6 +1,6 @@
 PYPI_REPO := testpypi
 
-all: clean install patch configure build test
+all: clean install build wheel test
 
 configure:
 	cd gnubg-nn && autoreconf -i &&	./configure
@@ -13,7 +13,8 @@ install:
 	pip install --upgrade pip setuptools wheel cibuildwheel twine meson ninja
 
 build:
-	python3 setup.py sdist bdist_wheel
+	meson setup build
+	meson compile -C build
 
 wheel:
 	cibuildwheel --platform linux --output-dir dist

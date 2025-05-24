@@ -1,12 +1,12 @@
 # .github/workflows/build-wheels.yml
-name: Build wheels
+name: Build & test wheels
 
 on:
   workflow_dispatch:
   pull_request:
     branches:
       - main
-      -
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
