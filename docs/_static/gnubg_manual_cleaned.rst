@@ -1,53 +1,37 @@
 GNUBG Manual
 ============
-.. container:: article
 
-   .. container:: titlepage
 
-      .. container::
 
-         .. container::
 
-            .. rubric:: GNU Backgammon Manual V1.00.0
-               :name: gnu-backgammon-manual-v1.00.0
-               :class: title
+GNU Backgammon Manual V1.00.0
+-----------------------------
 
-         .. container::
 
-            .. container:: authorgroup
 
-               .. container:: author
 
-                  .. rubric:: Christian Anthon
-                     :name: christian-anthon
-                     :class: author
+Christian Anthon
+----------------
 
-                  .. container:: affiliation
 
                      GNU Backgammon Project
 
-                     .. container:: address
 
                         |
                         | ``<christian.anthon@gmail.com>``
                         |
 
-         .. container::
 
             This manual describes version 1.00.0 of GNU Backgammon.
 
-         .. container::
 
             Copyright © 1999, 2000, 2001, 2002, 2003 Achim Mueller, Gary
             Wong
 
-         .. container::
 
             Copyright © 2007 Christian Anthon
 
-         .. container::
 
-            .. container:: legalnotice
 
                Permission is granted to copy, distribute and/or modify
                this document under the terms of the GNU Free
@@ -66,9 +50,7 @@ GNUBG Manual
                suggestions to ``<bug-gnubg@gnu.org>`` or make a `bug
                report <https://savannah.gnu.org/bugs/?group=gnubg>`__.
 
-         .. container::
 
-            .. container:: revhistory
 
                **Revision History**
 
@@ -90,9 +72,7 @@ November 2003
 
 GNU Backgammon Project
 
-.. container::
 
-   .. container:: abstract
 
       **Abstract**
 
@@ -100,7 +80,6 @@ GNU Backgammon Project
 
 --------------
 
-.. container:: toc
 
    **Table of Contents**
 
@@ -172,21 +151,14 @@ GNU Backgammon Project
    `Abbreviations <#gnubg-faq_abbr>`__
    `A. GNU Free Documentation License <#fdl>`__
 
-.. container:: sect1
 
-   .. container:: titlepage
 
-      .. container::
 
-         .. container::
 
-            .. rubric:: Introduction
-               :name: introduction
-               :class: title
+Introduction
+------------
 
-         .. container::
 
-            .. container:: abstract
 
                **Abstract**
 
@@ -204,9 +176,7 @@ GNU Backgammon Project
    GTK+interface. GNU Backgammon is extensible on platforms which
    support Python.
 
-   .. container:: screenshot
 
-      .. container:: mediaobject
 
          +----------+
          | |image0| |
@@ -220,7 +190,6 @@ GNU Backgammon Project
    The following features can be found in the current release of GNU
    Backgammon.
 
-   .. container:: itemizedlist
 
       -  A command-line interface (with full command editing features if
          GNU readline is available) that lets you play matches and
@@ -273,17 +242,12 @@ GNU Backgammon Project
          progress: (cs_CZ, da_DK, en_GB, en_US, es_ES, fi_FI, fr_FR,
          de_DE, el_GR, is_IS, it_IT, ja_JP, ro_RO, ru_RU and tr_TR)
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: GPL copying/warranty info
-                  :name: gpl-copyingwarranty-info
-                  :class: title
+GPL copying/warranty info
+-------------------------
 
       GNU Backgammon is developed under the GNU General Public License
       (GPL) and it is part of the GNU project. For more information
@@ -292,34 +256,24 @@ GNU Backgammon Project
       general please visit The Free Software Foundation at:
       https://www.fsf.org/.
 
-.. container:: sect1
 
-   .. container:: titlepage
 
-      .. container::
 
-         .. container::
 
-            .. rubric:: Rules of the game
-               :name: rules-of-the-game
-               :class: title
+Rules of the game
+-----------------
 
    This section describes how to play a game, a match, or a session of
    money games against GNU Backgammon or a human opponent. It is taken
    directly from the rules section of `Backgammon
    Galore <https://www.bkgm.com/>`__ , courtesy of Tom Keith.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Setup
-                  :name: setup
-                  :class: title
+Setup
+-----
 
       Backgammon is a game for two players, played on a board consisting
       of twenty-four narrow triangles called points. The triangles
@@ -329,14 +283,11 @@ GNU Backgammon Project
       board. The home and the outer boards are separated from each other
       by a ridge down the center of the board called the bar.
 
-      .. container:: figure
 
          **Figure 1. A board with the checkers in their initial
          position.**
 
-         .. container:: figure-contents
 
-            .. container:: mediaobject
 
                |A board with the checkers in their initial position.|
 
@@ -356,45 +307,32 @@ GNU Backgammon Project
       64 on its faces, is used to keep track of the current stake of the
       game.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Object of the Game
-                  :name: object-of-the-game
-                  :class: title
+Object of the Game
+------------------
 
       The object of the game is for a player to move all of his checkers
       into his own home board and then bear them off. The first player
       to bear off all of his checkers wins the game.
 
-      .. container:: figure
 
          **Figure 2. Direction of movement of White's checkers. Red's
          checkers move in the opposite direction.**
 
-         .. container:: figure-contents
 
-            .. container:: mediaobject
 
                |Direction of movement of White's checkers. Red's
                checkers move in the opposite direction.|
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Movement of the Checkers
-                  :name: movement-of-the-checkers
-                  :class: title
+Movement of the Checkers
+------------------------
 
       To start the game, each player throws a single die. This
       determines both the player to go first and the numbers to be
@@ -408,7 +346,6 @@ GNU Backgammon Project
       player is to move his checkers. The checkers are always moved
       forward, to a lower-numbered point. The following rules apply:
 
-      .. container:: orderedlist
 
          1. A checker may be moved only to an open point, one that is
             not occupied by two or more opposing checkers.
@@ -421,13 +358,10 @@ GNU Backgammon Project
             intermediate point (either three or five spaces from the
             starting point) is also open.
 
-            .. container:: figure
 
                **Figure 3. White opens the game with 53.**
 
-               .. container:: figure-contents
 
-                  .. container:: mediaobject
 
                      |White opens the game with 53.|
 
@@ -447,17 +381,12 @@ GNU Backgammon Project
             numbers cannot be played, the player must play as many
             numbers as he can.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Hitting and Entering
-                  :name: hitting-and-entering
-                  :class: title
+Hitting and Entering
+--------------------
 
       A point occupied by a single checker of either color is called a
       blot. If an opposing checker lands on a blot, the blot is hit and
@@ -473,13 +402,10 @@ GNU Backgammon Project
       prospective point is not occupied by two or more of the opponent's
       checkers.
 
-      .. container:: figure
 
          **Figure 4. White rolls 64 with a checker on the bar.**
 
-         .. container:: figure-contents
 
-            .. container:: mediaobject
 
                |White rolls 64 with a checker on the bar.|
 
@@ -494,17 +420,12 @@ GNU Backgammon Project
       numbers on the dice must be played, by moving either the checker
       that was entered or a different checker.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Bearing Off
-                  :name: bearing-off
-                  :class: title
+Bearing Off
+-----------
 
       Once a player has moved all of his fifteen checkers into his home
       board, he may commence bearing off. A player bears off a checker
@@ -521,13 +442,10 @@ GNU Backgammon Project
       under no obligation to bear off if he can make an otherwise legal
       move.
 
-      .. container:: figure
 
          **Figure 5. White rolls 64 and bears off two checkers.**
 
-         .. container:: figure-contents
 
-            .. container:: mediaobject
 
                |White rolls 64 and bears off two checkers.|
 
@@ -537,17 +455,12 @@ GNU Backgammon Project
       before continuing to bear off. The first player to bear off all
       fifteen checkers wins the game.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Doubling
-                  :name: doubling
-                  :class: title
+Doubling
+--------
 
       Backgammon is played for an agreed stake per point. Each game
       starts at one point. During the course of the game, a player who
@@ -567,17 +480,12 @@ GNU Backgammon Project
       owner of the cube and the game continues at twice the previous
       stakes. There is no limit to the number of redoubles in a game.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Gammons and Backgammons
-                  :name: gammons-and-backgammons
-                  :class: title
+Gammons and Backgammons
+-----------------------
 
       At the end of the game, if the losing player has borne off at
       least one checker, he loses only the value showing on the doubling
@@ -588,21 +496,15 @@ GNU Backgammon Project
       checker on the bar or in the winner's home board, he is
       backgammoned and loses three times the value of the double cube.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Optional Rules
-                  :name: optional-rules
-                  :class: title
+Optional Rules
+--------------
 
       The following optional rules are in widespread use.
 
-      .. container:: orderedlist
 
          1. Automatic doubles. If identical numbers are thrown on the
             first roll, the stakes are doubled. The doubling cube is
@@ -620,17 +522,12 @@ GNU Backgammon Project
             eliminating situations where a player avoids doubling so he
             can play on for a gammon.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Rules for Match Play
-                  :name: rules-for-match-play
-                  :class: title
+Rules for Match Play
+--------------------
 
       When backgammon tournaments are held to determine an overall
       winner, the usual style of competition is match play. Competitors
@@ -654,7 +551,6 @@ GNU Backgammon Project
       (and it's most often in the best interests of the trailing player
       to double immediately in these games).
 
-      .. container:: informaltable
 
          ============ ===== ===== =============
          Match to 5   White Black Doubling
@@ -678,37 +574,25 @@ GNU Backgammon Project
       Automatic doubles, beavers, and the Jacoby rule are not used in
       match play.
 
-.. container:: sect1
 
-   .. container:: titlepage
 
-      .. container::
 
-         .. container::
 
-            .. rubric:: Starting GNU Backgammon
-               :name: starting-gnu-backgammon
-               :class: title
+Starting GNU Backgammon
+-----------------------
 
-         .. container::
 
-            .. container:: abstract
 
                **Abstract**
 
                Starting GNU Backgammon. Command line options.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: GNU/Linux and Unix
-                  :name: gnulinux-and-unix
-                  :class: title
+GNU/Linux and Unix
+------------------
 
       If GNU Backgammon is properly installed on your system, you can
       start it by simply typing gnubg at the command prompt. If you want
@@ -717,17 +601,12 @@ GNU Backgammon Project
       without the graphical user interface. There is also other options
       which can be added at the start-up.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Microsoft Windows
-                  :name: microsoft-windows
-                  :class: title
+Microsoft Windows
+-----------------
 
       The builds of GNU Backgammon which may be downloaded from the
       `main GNU Backgammon
@@ -742,22 +621,16 @@ GNU Backgammon Project
       this version of GNU Backgammon by choosing Start → Programs → GNU
       Backgammon → GNU Backgammon CLI.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Mac OS X
-                  :name: mac-os-x
-                  :class: title
+Mac OS X
+--------
 
       Once you have installed both an X11R6 server and GNU Backgammon
       for Mac OS X, you can run GNU Backgammon for Mac OS X by:
 
-      .. container:: orderedlist
 
          1. Start your X11R6 server;
 
@@ -765,7 +638,6 @@ GNU Backgammon Project
             windows (by default, Apple's X11 opens one such window at
             start-up, and XDarwin opens three), do the following:
 
-            .. container:: orderedlist
 
                a. If you have installed GNU Backgammon in your private
                   Applications folder, type cd Applications/gnubg to get
@@ -777,28 +649,21 @@ GNU Backgammon Project
                   /Applications/gnubg to get into GNU Backgammon for Mac
                   OS X's folder, and type ./gnubg to run it;
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Command line options
-                  :name: command-line-options
-                  :class: title
+Command line options
+--------------------
 
       The following options control the startup of GNU Backgammon. Most
       options are available in all versions of GNU Backgammon, but
       notably, the -w and -t options do not work under Microsoft Windows
       where separate command-line and GUI applications exist instead.
 
-      .. container:: example
 
          **Example 1. GNU Backgammon startup options**
 
-         .. container:: example-contents
 
             .. code:: programlisting
 
@@ -829,42 +694,29 @@ GNU Backgammon Project
                  --display=DISPLAY            X display to use
                          
 
-.. container:: sect1
 
-   .. container:: titlepage
 
-      .. container::
 
-         .. container::
 
-            .. rubric:: Playing a game
-               :name: playing-a-game
-               :class: title
+Playing a game
+--------------
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Starting a new match or session
-                  :name: starting-a-new-match-or-session
-                  :class: title
+Starting a new match or session
+-------------------------------
 
       To start a new game, match or session choose File → New, or use
       the New button in the toolbar. This will open a dialog box, where
       you can select the main options for the new backgammon game you
       are about to begin.
 
-      .. container:: figure
 
          **Figure 6. The dialog for starting a new match.**
 
-         .. container:: figure-contents
 
-            .. container:: mediaobject
 
                |The dialog for starting a new match.|
 
@@ -877,7 +729,6 @@ GNU Backgammon Project
 
       The dialog allows a fine tuning of the startup options:
 
-      .. container:: orderedlist
 
          1. In none of the above shortcuts is suitable, clicking OK will
             start a new match of the length set in the Match length
@@ -902,58 +753,40 @@ GNU Backgammon Project
             the playing strength of GNU Backgammon. This dialog will be
             explained later.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Rolling the dice
-                  :name: rolling-the-dice
-                  :class: title
+Rolling the dice
+----------------
 
       The simplest way to roll the dice is to click in the right board
       area between the board points. You can also roll the dice from the
       menu Game → Roll or with the keyboard shortcut Ctrl+R.
 
-      .. container:: figure
 
          **Figure 7. Click in the red rectangle to roll the dice.**
 
-         .. container:: figure-contents
 
-            .. container:: mediaobject
 
                |Click in the red rectangle to roll the dice.|
 
       When you have moved your checkers to make the desired move, you
       complete your turn by clicking on the dice.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Moving the checkers
-                  :name: moving-the-checkers
-                  :class: title
+Moving the checkers
+-------------------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Moving by drag and drop
-                     :name: moving-by-drag-and-drop
-                     :class: title
+Moving by drag and drop
+-----------------------
 
          One way to move the checkers is to click on a checker you want
          to move and then drag it, while holding the mouse button down,
@@ -963,17 +796,12 @@ GNU Backgammon Project
          dragging. You can find this option by choosing Settings →
          Options... → Display
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Moving checkers by clicking
-                     :name: moving-checkers-by-clicking
-                     :class: title
+Moving checkers by clicking
+---------------------------
 
          Move the mouse cursor over the checker you want to move. If you
          now click the left mouse button, the checker will move the pips
@@ -988,17 +816,12 @@ GNU Backgammon Project
          left if you choose Settings → Options... → Dice and check the
          check box labeled Show higher die on left.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Undo a move
-                     :name: undo-a-move
-                     :class: title
+Undo a move
+-----------
 
          Before you complete your move by clicking the dice, it's
          possible to undo your moves and return to the position before
@@ -1006,17 +829,12 @@ GNU Backgammon Project
          button in the toolbar, or you can choose Edit → Undo from the
          menu or the keyboard shortcut Ctrl+Z.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Some shortcuts
-                     :name: some-shortcuts
-                     :class: title
+Some shortcuts
+--------------
 
          There are some shortcuts for moving the checkers. You can make
          a new point by right clicking on the empty point that you want
@@ -1033,45 +851,30 @@ GNU Backgammon Project
          can be enabled by choosing Settings → Options... → Game, and
          then check the box Play forced moves automatically.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Using the doubling cube
-                  :name: using-the-doubling-cube
-                  :class: title
+Using the doubling cube
+-----------------------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Offering a double
-                     :name: offering-a-double
-                     :class: title
+Offering a double
+-----------------
 
          You offer a double to your opponent by clicking on the cube.
          This will offer the cube immediately. You can also click Game →
          Double from the menu or the keyboard shortcut Ctrl+D.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Accepting or declining a cube
-                     :name: accepting-or-declining-a-cube
-                     :class: title
+Accepting or declining a cube
+-----------------------------
 
          You accept a double made by your opponent by clicking on the
          offered doubling cube at the board. If you want to decline the
@@ -1082,13 +885,10 @@ GNU Backgammon Project
          The beaver button is only activated in money game sessions
          where beavers are allowed.
 
-         .. container:: figure
 
             **Figure 8. The toolbar double buttons.**
 
-            .. container:: figure-contents
 
-               .. container:: mediaobject
 
                   |[[cubebuttons.png]]|
 
@@ -1098,29 +898,19 @@ GNU Backgammon Project
          decline an offered double(Ctrl+P). Click Game → Beaver, from
          the menu, to beaver an offered double.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Resigning
-                  :name: resigning
-                  :class: title
+Resigning
+---------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Offering a resignation
-                     :name: offering-a-resignation
-                     :class: title
+Offering a resignation
+----------------------
 
          It's also possible to resign during a game. To resign during
          play press the Resign button in the toolbar. This is the button
@@ -1130,17 +920,12 @@ GNU Backgammon Project
          dialog may also be reached from the menu system. Click Game →
          Resign to offer your resignation.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Accepting or declining a resignation
-                     :name: accepting-or-declining-a-resignation
-                     :class: title
+Accepting or declining a resignation
+------------------------------------
 
          When a resignation is offered a white square will appear on the
          board area. The square has a number 1, 2 or 3. A square with a
@@ -1158,53 +943,35 @@ GNU Backgammon Project
          Decline resignation from the menu, to decline an offered
          resignation.
 
-.. container:: sect1
 
-   .. container:: titlepage
 
-      .. container::
 
-         .. container::
 
-            .. rubric:: Getting hints and Tutor Mode
-               :name: getting-hints-and-tutor-mode
-               :class: title
+Getting hints and Tutor Mode
+----------------------------
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Getting hints manually
-                  :name: getting-hints-manually
-                  :class: title
+Getting hints manually
+----------------------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Getting checker play hints while playing
-                     :name: getting-checker-play-hints-while-playing
-                     :class: title
+Getting checker play hints while playing
+----------------------------------------
 
          If you want to get a hint of the best move or the best cube
          action press the Hint button in the tool bar or the menu option
          Analyse → Hint. This will open a hint window.
 
-         .. container:: figure
 
             **Figure 9. The hint window**
 
-            .. container:: figure-contents
 
-               .. container:: mediaobject
 
                   |[[hintwindow.png]]|
 
@@ -1215,7 +982,6 @@ GNU Backgammon Project
          and cryptic but, once you learn what each number means, it
          isn't really that bad.
 
-         .. container:: orderedlist
 
             1.  Rank is the number that shows GNU Backgammon's rank of
                 the move. All moves evaluated at a given ply are ranked
@@ -1274,17 +1040,12 @@ GNU Backgammon Project
             11. Move is the move being evaluated. In the case of a red
                 line, it is the move that was played.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Getting cube decision hints while playing
-                     :name: getting-cube-decision-hints-while-playing
-                     :class: title
+Getting cube decision hints while playing
+-----------------------------------------
 
          If you're thinking about a cube decision before rolling you can
          press the same Hint button in the toolbar, as you pressed when
@@ -1292,13 +1053,10 @@ GNU Backgammon Project
          appear, but this time it will look a bit different and it will
          show a hint of the correct cube decision.
 
-         .. container:: figure
 
             **Figure 10. The cube hint window**
 
-            .. container:: figure-contents
 
-               .. container:: mediaobject
 
                   |[[hintcubewindow.png]]|
 
@@ -1330,23 +1088,17 @@ GNU Backgammon Project
          available when the position is considered No double, take or
          Too good to double, pass.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: The hint tool buttons
-                     :name: the-hint-tool-buttons
-                     :class: title
+The hint tool buttons
+---------------------
 
          As you may see in both figures above, there is a set of buttons
          below the move list or cube analysis. Here follows a short
          description of what each of the buttons does:
 
-         .. container:: orderedlist
 
             1.  Eval will evaluate the selected moves, or the cube
                 decision with the current evaluation setting.
@@ -1395,30 +1147,22 @@ GNU Backgammon Project
                 this window remembers its size and position it will
                 really become useful.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Tutor mode
-                  :name: tutor-mode
-                  :class: title
+Tutor mode
+----------
 
       One of the greatest tools for learning, is Tutor Mode. Tutor mode
       can be activated by clicking Settings → Options... and then click
       on the Tutor flag. Activate Tutor Mode by checking the Tutor mode
       check box.
 
-      .. container:: figure
 
          **Figure 11. The tutor window**
 
-         .. container:: figure-contents
 
-            .. container:: mediaobject
 
                |[[tutor.png]]|
 
@@ -1435,13 +1179,10 @@ GNU Backgammon Project
       to only warn on checker play decisions, you can uncheck the box
       for the Cube decisions.
 
-      .. container:: figure
 
          **Figure 12. The tutor warning window**
 
-         .. container:: figure-contents
 
-            .. container:: mediaobject
 
                |[[tutorwarning.png]]|
 
@@ -1459,17 +1200,12 @@ GNU Backgammon Project
 
       A similar warning window will also appear for poor cube handling.
 
-.. container:: sect1
 
-   .. container:: titlepage
 
-      .. container::
 
-         .. container::
 
-            .. rubric:: Setting up a position
-               :name: setting-up-a-position
-               :class: title
+Setting up a position
+---------------------
 
    Think about the Friday night chouette where there was this tough
    choice between two move candidates. Which move was the best? Or what
@@ -1480,17 +1216,12 @@ GNU Backgammon Project
    answer to a lot of questions, and in that way give you a better
    understanding of the game.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Entering Edit mode
-                  :name: entering-edit-mode
-                  :class: title
+Entering Edit mode
+------------------
 
       To set up a position, you have to be in Edit mode. To enter Edit
       mode you simply click the Edit button in the tool bar and can
@@ -1513,33 +1244,23 @@ GNU Backgammon Project
       When you are in edit mode you will see the the text (Editing) in
       the match information box below the board.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Editing
-                  :name: editing
-                  :class: title
+Editing
+-------
 
       Setting up a position is basically done by editing the current
       position. The editing it self is controlled by clicking different
       areas of the board and may not be obvious at first hand.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Clearing the board
-                  :name: clearing-the-board
-                  :class: title
+Clearing the board
+------------------
 
       In edit mode you can easily clear the board by clicking in one of
       the bearoff trays. It's often easier to start setting up a
@@ -1547,14 +1268,11 @@ GNU Backgammon Project
       you click on one of the bearoff tray, all checkers will be moved
       to the bearoff.
 
-      .. container:: figure
 
          **Figure 13. Click in the one of the areas marked with a red
          ellipse to clear the board.**
 
-         .. container:: figure-contents
 
-            .. container:: mediaobject
 
                |[[clearboard.png]]|
 
@@ -1562,14 +1280,11 @@ GNU Backgammon Project
       clicking the opposite trays when in edit mode. Clicking in one of
       these trays puts all checkers back to the initial position.
 
-      .. container:: figure
 
          **Figure 14. Click in the one of the areas marked with a red
          ellipse to get to the initial position.**
 
-         .. container:: figure-contents
 
-            .. container:: mediaobject
 
                |[[initialboard.png]]|
 
@@ -1579,17 +1294,12 @@ GNU Backgammon Project
       In addition, both click-on-tray actions above reset the cube to
       centered with a value of 1 and clear the dice.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Quick edit
-                  :name: quick-edit
-                  :class: title
+Quick edit
+----------
 
       The default method of editing a position is called Quick edit.
       It's based on clicking on the point where you want to place
@@ -1607,17 +1317,12 @@ GNU Backgammon Project
       points - the more you click to the middle of the bar, the more
       checkers will be placed there.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Editing by drag and drop
-                  :name: editing-by-drag-and-drop
-                  :class: title
+Editing by drag and drop
+------------------------
 
       There is also a different way of editing the checker positions.
       You can drag and drop checkers around the board while you're
@@ -1632,29 +1337,21 @@ GNU Backgammon Project
       This method of editing comes handy when there is just a small
       adjustment to be done in the position.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Setting the player on turn
-                  :name: setting-the-player-on-turn
-                  :class: title
+Setting the player on turn
+--------------------------
 
       The player on turn can be set by clicking the small checker icons
       below the board. See figure below.
 
-      .. container:: figure
 
          **Figure 15. Clicking the White checker image will set White on
          turn, clicking the Black image will set Black in turn.**
 
-         .. container:: figure-contents
 
-            .. container:: mediaobject
 
                |[[initialboard.png]]|
 
@@ -1668,17 +1365,12 @@ GNU Backgammon Project
       methods for setting the player on turn can also be used without
       being in edit mode.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Setting the dice
-                  :name: setting-the-dice
-                  :class: title
+Setting the dice
+----------------
 
       You can set the dice for a player by clicking in the middle part
       of the board where you usually click when you roll the dice while
@@ -1688,15 +1380,12 @@ GNU Backgammon Project
       one of these areas the dice selection widget will appear and you
       can select a dice roll by clicking on a dice pair.
 
-      .. container:: figure
 
          **Figure 16. Click inside the red rectangle to set the dice for
          Black. Click inside the green rectangle to set the dice for
          White.**
 
-         .. container:: figure-contents
 
-            .. container:: mediaobject
 
                |[[setdice.png]]|
 
@@ -1709,17 +1398,12 @@ GNU Backgammon Project
       Set dice... from the menu, however this will set the dice for the
       player on turn.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Setting the cube
-                  :name: setting-the-cube
-                  :class: title
+Setting the cube
+----------------
 
       Setting the cube is quite simple while you're in edit mode. Simply
       click the cube in the board and the cube selection widget appears.
@@ -1730,17 +1414,12 @@ GNU Backgammon Project
       Note that the unturned cube is the leftmost cube labeled 64, just
       as it usually is on real doubling cube.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Setting the score
-                  :name: setting-the-score
-                  :class: title
+Setting the score
+-----------------
 
       Very often i backgammon the match score does matter on how the
       position is evaluated. GNU Backgammon's evaluation algorithms does
@@ -1759,17 +1438,12 @@ GNU Backgammon Project
       If you want the computer to do a money game evaluation of the
       position, you should set the match score to 0 (zero).
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Exiting Edit mode
-                  :name: exiting-edit-mode
-                  :class: title
+Exiting Edit mode
+-----------------
 
       Before you can start analysing the position you have to exit edit
       mode. This is done by releasing the Edit button in the toolbar by
@@ -1777,17 +1451,12 @@ GNU Backgammon Project
       record with no warning, so it might be an idea to save your match
       if you want to keep it.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Analysing the position
-                  :name: analysing-the-position
-                  :class: title
+Analysing the position
+----------------------
 
       After you have successfully set up the position you desire, you
       can now analyse the position. You can click Hint in the toolbar to
@@ -1811,41 +1480,26 @@ GNU Backgammon Project
       See also `Albert Silver's post on
       GammOnLine <https://www.bkgm.com/rgb/rgb.cgi?view+1098>`__
 
-.. container:: sect1
 
-   .. container:: titlepage
 
-      .. container::
 
-         .. container::
 
-            .. rubric:: Working with matches
-               :name: working-with-matches
-               :class: title
+Working with matches
+--------------------
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Retrieving and storing backgammon files
-                  :name: retrieving-and-storing-backgammon-files
-                  :class: title
+Retrieving and storing backgammon files
+---------------------------------------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: The Smart Game Format
-                     :name: the-smart-game-format
-                     :class: title
+The Smart Game Format
+---------------------
 
          GNU Backgammon uses the Smart Game Format (SGF) to store games,
          matches, sessions and positions. SGF is used in as a standard
@@ -1856,17 +1510,12 @@ GNU Backgammon Project
          A game that uses SGF extensively is Go. The format is described
          at `this site <http://www.red-bean.com/sgf/>`__.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Opening and importing matches
-                     :name: opening-and-importing-matches
-                     :class: title
+Opening and importing matches
+-----------------------------
 
          Since version 0.16 the GUI recognizes all importable files
          automatically (with the exception of the FIBS format). To open
@@ -1885,7 +1534,6 @@ GNU Backgammon Project
          The following table contains the supported formats and the
          corresponding commands for manual import of a file.
 
-         .. container:: informaltable
 
             ==================== ===========================
             FIBS oldmoves format import oldmoves <filepath>
@@ -1903,18 +1551,13 @@ GNU Backgammon Project
          matches to this format often produce minor discrepancies. GNU
          Backgammon tries to cater to most of them automatically.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Saving and exporting positions, games or
+Saving and exporting positions, games or
+----------------------------------------
                      matches
-                     :name: saving-and-exporting-positions-games-or-matches
-                     :class: title
 
          If you have played or imported a match into GNU Backgammon, and
          wish to save your efforts, you can choose File → Save. A file
@@ -1941,7 +1584,6 @@ GNU Backgammon Project
          export a Jellyfish position you would issue the command export
          position pos <filepath>
 
-         .. container:: informaltable
 
             ========================= =================================
             HTML                      export <MGP> html <filepath>
@@ -1957,17 +1599,12 @@ GNU Backgammon Project
             Snowie Text               export <MGP> snowietxt <filepath>
             ========================= =================================
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: HTML export
-                        :name: html-export
-                        :class: title
+HTML export
+-----------
 
             GNU Backgammon can export the current position, game, match
             or session in HTML if you wish to publish it on the web.
@@ -1980,7 +1617,6 @@ GNU Backgammon Project
             The board is made up from hundreds of pictures. Currently,
             you can choose between three different sets of pictures:
 
-            .. container:: orderedlist
 
                1. the BBS images used by Kit Woolsey's GammOnLine
                   e-magazine, Stick's BGonline or the Danish Backgammon
@@ -2031,17 +1667,12 @@ GNU Backgammon Project
             where directory is the directory where you want your images
             to be created.
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: LaTeX export
-                        :name: latex-export
-                        :class: title
+LaTeX export
+------------
 
             GNU Backgammon can export games, match and positions to the
             document typesetting system LaTeX. For exporting a match or
@@ -2058,22 +1689,16 @@ GNU Backgammon Project
             Note that these prerequiste packages are only compatible
             with the original LaTeX, not PDFLaTeX.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Entering live tournament matches
-                  :name: entering-live-tournament-matches
-                  :class: title
+Entering live tournament matches
+--------------------------------
 
       It's possible to enter match transcriptions into GNU Backgammon.
       It's not very difficult. Presuming you're using the GUI, do this:
 
-      .. container:: orderedlist
 
          1. Start a match of any length, pressing the New button, and
             select Human-Human and manual dice.
@@ -2118,23 +1743,17 @@ GNU Backgammon Project
       the move list and click on the move, and you'll see the analysis
       appear in the Analysis pane as it should.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Entering illegal moves
-                     :name: entering-illegal-moves
-                     :class: title
+Entering illegal moves
+----------------------
 
          It's possible to enter illegal moves with a little trick. This
          is a step by step guide for the example: If a player rolls 41
          and the player makes an illegal move as the dice showed 31.
 
-         .. container:: orderedlist
 
             1. Manually enter the roll which was rolled. 41.
 
@@ -2158,17 +1777,12 @@ GNU Backgammon Project
 
             8. Continue to enter the rest of the game.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Analysing matches
-                  :name: analysing-matches
-                  :class: title
+Analysing matches
+-----------------
 
       GNU Backgammon can analyse your matches for skill and luck. If you
       have an open match (as a result of playing, loading or importing),
@@ -2187,29 +1801,21 @@ GNU Backgammon Project
       Analyse game. If you're only interested in the analysis of the
       current move, you can select Analyse → Analyse move.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Analysis settings
-                     :name: analysis-settings
-                     :class: title
+Analysis settings
+-----------------
 
          You can configure how GNU Backgammon analysis the match or game
          for you. This can be configured in the dialog box that appears
          when choose Settings → Analysis.
 
-         .. container:: figure
 
             **Figure 17. Analyse settings dialog**
 
-            .. container:: figure-contents
 
-               .. container:: mediaobject
 
                   |[[analysesettings.png]]|
 
@@ -2217,7 +1823,6 @@ GNU Backgammon Project
          to analyse. GNU Backgammon is able to analyse three different
          properties in a match.
 
-         .. container:: orderedlist
 
             1. Checker play
 
@@ -2252,29 +1857,19 @@ GNU Backgammon Project
          analysis. For an explanation of this settings, see the chapter
          called "[[Evaluation settings]]".
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Reviewing matches
-                  :name: reviewing-matches
-                  :class: title
+Reviewing matches
+-----------------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Game record
-                     :name: game-record
-                     :class: title
+Game record
+-----------
 
          When a match is analysed in GNU Backgammon you should open the
          game record window. Open this by checking Window → Game record
@@ -2284,13 +1879,10 @@ GNU Backgammon Project
          The game record window shows a list of all the moves in the
          game. You can also navigate between the games and moves.
 
-         .. container:: figure
 
             **Figure 18. The Game record pane**
 
-            .. container:: figure-contents
 
-               .. container:: mediaobject
 
                   |[[gamerecord.png]]|
 
@@ -2327,7 +1919,6 @@ GNU Backgammon Project
          and some with ??. These marks means the same as the marks in
          normal chess notation.
 
-         .. container:: informaltable
 
             == ===============
             ?? a very bad move
@@ -2344,7 +1935,6 @@ GNU Backgammon Project
          color code. The cube decisions are shown by the background
          color. The checkers move decisions are shown by the font color.
 
-         .. container:: informaltable
 
             ======== ================ ==========
                      Cube(background) Move(font)
@@ -2355,7 +1945,6 @@ GNU Backgammon Project
 
          The luck is also marked in the font
 
-         .. container:: informaltable
 
             ============ =======
             Luck         Font
@@ -2363,17 +1952,12 @@ GNU Backgammon Project
             Very Unlucky Italics
             ============ =======
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Analysis panel
-                     :name: analysis-panel
-                     :class: title
+Analysis panel
+--------------
 
          You can also study your moves and cube decisions in more detail
          in the analysis window, or analysis panel if you have checked
@@ -2383,13 +1967,10 @@ GNU Backgammon Project
          window is basically the same as the Hint window described in
          the "[[Playing a game or match]]" chapter.
 
-         .. container:: figure
 
             **Figure 19. The Analyse pane**
 
-            .. container:: figure-contents
 
-               .. container:: mediaobject
 
                   |[[analasyepane.png]]|
 
@@ -2445,17 +2026,12 @@ GNU Backgammon Project
          Hint window, which is described in the the chapter called
          "[[Playing a game or match]]".
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Statistics
-                     :name: statistics
-                     :class: title
+Statistics
+----------
 
          You can get a summary of the analysis from the game, match, or
          session analysis. The game analysis is a summary for the
@@ -2464,22 +2040,16 @@ GNU Backgammon Project
          analysis is available in the GUI from Analyse → Match
          Statistics or at the bottom of exported files.
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: Checker play statistics
-                        :name: checker-play-statistics
-                        :class: title
+Checker play statistics
+-----------------------
 
             This section provides a summary of the checker play
             statistics. The following information is available
 
-            .. container:: orderedlist
 
                1. Total moves: The total number of moves in the match.
 
@@ -2516,23 +2086,17 @@ GNU Backgammon Project
                   Supernatural. See the description for the overall
                   rating below.
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: Luck analysis
-                        :name: luck-analysis
-                        :class: title
+Luck analysis
+-------------
 
             This section provides information about how Ms. Fortuna
             distributed her luck. The following information is
             available:
 
-            .. container:: orderedlist
 
                1. Rolls marked xxx: The number of moves marked very
                   lucky, lucky etc. Moves marked very lucky are huge
@@ -2555,7 +2119,6 @@ GNU Backgammon Project
 
             Thresholds for marking of rolls:
 
-            .. container:: informaltable
 
                ================================ ==============
                Deviation of equity from average Roll is marked
@@ -2568,7 +2131,6 @@ GNU Backgammon Project
 
             Luck ratings:
 
-            .. container:: informaltable
 
                ============================= ===============
                Normalized luck rate per move Luck rating
@@ -2579,23 +2141,17 @@ GNU Backgammon Project
                < -0.06                       Go to bed
                ============================= ===============
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: Cube statistics
-                        :name: cube-statistics
-                        :class: title
+Cube statistics
+---------------
 
             This section provides a summary of the cube decision
             statistics: the number of cube decisions, missed doubles,
             etc.
 
-            .. container:: orderedlist
 
                1. Total cube decisions: The total number of cube
                   decisions, i.e., the sum of no-doubles, doubles,
@@ -2654,21 +2210,15 @@ GNU Backgammon Project
                   Supernatural. See the description for the overall
                   rating below.
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: Overall rating
-                        :name: overall-rating
-                        :class: title
+Overall rating
+--------------
 
             The last section is the overall summary.
 
-            .. container:: orderedlist
 
                1. Error rate (total): The accumulated checker play and
                   cube decision errors reported by normalized and
@@ -2733,7 +2283,6 @@ GNU Backgammon Project
 
             Threshold for ratings:
 
-            .. container:: informaltable
 
                ==================================== =============
                Normalized total error rate per move Rating
@@ -2750,29 +2299,19 @@ GNU Backgammon Project
             Please note: The Normalized total error rate per move is
             multiplied by 1000 in the default settings.
 
-.. container:: sect1
 
-   .. container:: titlepage
 
-      .. container::
 
-         .. container::
 
-            .. rubric:: Rollouts
-               :name: rollouts
-               :class: title
+Rollouts
+--------
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Introduction to rollouts
-                  :name: introduction-to-rollouts
-                  :class: title
+Introduction to rollouts
+------------------------
 
       The million dollar question is simple enough: out of all the games
       that could result from playing this position, how many do we win
@@ -2809,22 +2348,16 @@ GNU Backgammon Project
       vs. a perfect player, or of you vs. Joe Average, but that's
       another story.)
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Rollouts in GNU Backgammon
-                  :name: rollouts-in-gnu-backgammon
-                  :class: title
+Rollouts in GNU Backgammon
+--------------------------
 
       In GNU Backgammon the Rollout function implements the procedure
       described above, with the following improvements:
 
-      .. container:: orderedlist
 
          1. Truncation: instead of rolling out all the way to the end of
             the game, it can stop and pretend its evaluation after a few
@@ -2875,17 +2408,12 @@ GNU Backgammon Project
             stratifies the first 2 plies of a rollout, though it would
             be easy enough to extend it to the remainder.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Quasi-Random Dice
-                     :name: quasi-random-dice
-                     :class: title
+Quasi-Random Dice
+-----------------
 
          Quasi-Random Dice are used to reduce the element of luck in
          rollouts. Instead of selecting purely random dice, GNU
@@ -2945,41 +2473,26 @@ GNU Backgammon Project
          possible first 2 rolls, every 46656 (38880) games you get full
          sets of 3 rolls, etc.
 
-.. container:: sect1
 
-   .. container:: titlepage
 
-      .. container::
 
-         .. container::
 
-            .. rubric:: Customizing GNU Backgammon
-               :name: customizing-gnu-backgammon
-               :class: title
+Customizing GNU Backgammon
+--------------------------
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Evaluation settings
-                  :name: evaluation-settings
-                  :class: title
+Evaluation settings
+-------------------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Introduction to evaluation settings
-                     :name: introduction-to-evaluation-settings
-                     :class: title
+Introduction to evaluation settings
+-----------------------------------
 
          GNU Backgammon evaluation functionality is driven by 3 separate
          neural networks. The neural nets evaluates each position
@@ -2993,7 +2506,6 @@ GNU Backgammon Project
          Backgammon there are several of these evaluations setting for
          each operation GNU Backgammon does.
 
-         .. container:: orderedlist
 
             1. Evaluation setting for Hints and Evaluations
 
@@ -3004,17 +2516,12 @@ GNU Backgammon Project
             4. Several evaluation settings for each move performed in a
                rollout.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: The depth to search and plies
-                     :name: the-depth-to-search-and-plies
-                     :class: title
+The depth to search and plies
+-----------------------------
 
          A ply is simply considered to be one turn by a player. Any
          position can be evaluated at 0-ply. That means that GNU
@@ -3075,33 +2582,23 @@ GNU Backgammon Project
          quite fast on current computers). On the other hand, 4 ply
          analysis is reasonably fast on modern multi-cores machines.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Defining evaluation settings
-                     :name: defining-evaluation-settings
-                     :class: title
+Defining evaluation settings
+----------------------------
 
          First of all: There are several places in GNU Backgammon where
          you can adjust either it's skill at playing or the quality of
          it's hints and analysis:
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Playing skill:
-                     :name: playing-skill
-                     :class: title
+Playing skill:
+--------------
 
          Settings → Players → Player 0 - choose Supremo or World Class.
          GNU Backgammon will take at most a few seconds choosing its
@@ -3109,33 +2606,23 @@ GNU Backgammon Project
          significantly stronger than any human player (on average, some
          classes of positions are evaluated less accurately).
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Hints:
-                     :name: hints
-                     :class: title
+Hints:
+------
 
          Settings → Evaluation - choose Supremo or World Class if you
          want hints to be accurate and fast. Anything lower doesn't
          really makes sense on current PCs.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Analysis:
-                     :name: analysis
-                     :class: title
+Analysis:
+---------
 
          Settings → Analysis - these settings are used by the Analyse
          Move/Game/Match or Session command. Note that this is totally
@@ -3149,17 +2636,12 @@ GNU Backgammon Project
          hardware. This would be more suitable to delayed, overnight for
          instance, processing of a batch of matches.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Rollouts:
-                     :name: rollouts-1
-                     :class: title
+Rollouts:
+---------
 
          Settings → Rollouts → General Settings tick the boxes for 'Cube
          decisions use same settings same as checker play' and 'Use same
@@ -3178,27 +2660,19 @@ GNU Backgammon Project
          Expert level to hours at World Class or Supremo rollout
          settings.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Changing evaluation settings
-                     :name: changing-evaluation-settings
-                     :class: title
+Changing evaluation settings
+----------------------------
 
          A typical evaluation settings dialog is shown in this figure.
 
-         .. container:: figure
 
             **Figure 20. The evaluation settings dialog**
 
-            .. container:: figure-contents
 
-               .. container:: mediaobject
 
                   |[[evalsettings.png]]|
 
@@ -3230,22 +2704,16 @@ GNU Backgammon Project
          always the same noise for the same position, or it can be
          random.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Predefined settings
-                     :name: predefined-settings
-                     :class: title
+Predefined settings
+-------------------
 
          At the top of each evaluation settings column, it's possible to
          set a predefined setting.
 
-         .. container:: orderedlist
 
             1. Beginner This setting uses no lookahead and add up to
                0.060 noise to the evaluation. With this setting GNU
@@ -3285,29 +2753,19 @@ GNU Backgammon Project
                it's also quite slow. It is more suitable to analysis
                than to actual play.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Move filters
-                     :name: move-filters
-                     :class: title
+Move filters
+------------
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: Introduction to move filters
-                        :name: introduction-to-move-filters
-                        :class: title
+Introduction to move filters
+----------------------------
 
             GNU Backgammon uses a technique called move filters in order
             to prune the complete list of legal moves when analysing
@@ -3316,7 +2774,6 @@ GNU Backgammon Project
             A move filter for a given ply, say, 2-ply, consists of four
             parameters for each sub ply:
 
-            .. container:: orderedlist
 
                1. whether to analyse at all at this sub ply,
 
@@ -3341,20 +2798,16 @@ GNU Backgammon Project
 
             Consider the opening position where 4-2 has been rolled:
 
-            .. container:: figure
 
                **Figure 21. Example of move filter settings**
 
-               .. container:: figure-contents
 
-                  .. container:: mediaobject
 
                      |[[movefilterex.png]]|
 
             GNU Backgammon starts by finding all possible moves and
             evaluate those at 0-ply:
 
-            .. container:: informaltable
 
                === ======= ===== =========== ========== ========
                1.  Cubeful 0-ply 8/4 6/4     Eq.:+0.189  
@@ -3379,7 +2832,6 @@ GNU Backgammon Project
             at 1-ply, so moves 1 through 4 are submitted for evaluation
             at 2-ply;
 
-            .. container:: informaltable
 
                === ======= ===== =========== ========== ========
                1.  Cubeful 2-ply 8/4 6/4     Eq.:+0.180  
@@ -3397,7 +2849,6 @@ GNU Backgammon Project
             If we instead request a 4-ply checker play decision, GNU
             Backgammon will use the move filters defined for 4-ply:
 
-            .. container:: informaltable
 
                === ============ =========== =========================
                Ply Accept moves Extra moves Threshold for extra moves
@@ -3431,17 +2882,12 @@ GNU Backgammon Project
             move made is doubtful. This ensures that all errors and
             blunders are evaluated at the same level.
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: Defining move filters
-                        :name: defining-move-filters
-                        :class: title
+Defining move filters
+---------------------
 
             The move filter allows you to control exactly how many moves
             GNU is examining at each ply. A ply is basically one move
@@ -3453,13 +2899,10 @@ GNU Backgammon Project
             Supremo, etc. are tested and good, you may want to know or
             control how GNU filters its moves to analyse and how many.
 
-            .. container:: figure
 
                **Figure 22. Move filter 1**
 
-               .. container:: figure-contents
 
-                  .. container:: mediaobject
 
                      |[[movefilter1.png]]|
 
@@ -3492,25 +2935,19 @@ GNU Backgammon Project
             2-ply as it is unlikely to change its mind on what the best
             move is.
 
-            .. container:: figure
 
                **Figure 23. Move filter 2**
 
-               .. container:: figure-contents
 
-                  .. container:: mediaobject
 
                      |[[movefilter2.png]]|
 
             Take a look at next figure.
 
-            .. container:: figure
 
                **Figure 24. Move filter 3**
 
-               .. container:: figure-contents
 
-                  .. container:: mediaobject
 
                      |[[movefilter3.png]]|
 
@@ -3532,17 +2969,12 @@ GNU Backgammon Project
             and I haven't seen more than one case in over 10,000 moves
             where it missed the best move.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Cubeful vs Cubeless
-                     :name: cubeful-vs-cubeless
-                     :class: title
+Cubeful vs Cubeless
+-------------------
 
          In the evaluation settings dialog box you can specify whether
          or not checker play should be evaluated cubeful. It's
@@ -3550,13 +2982,10 @@ GNU Backgammon Project
          understanding of what cubeful checker play evaluations are, you
          can take a look at this position:
 
-         .. container:: figure
 
             **Figure 25. Cubeful example**
 
-            .. container:: figure-contents
 
-               .. container:: mediaobject
 
                   |[[cubeful-ex1.png]]|
 
@@ -3574,13 +3003,10 @@ GNU Backgammon Project
 
          Here's another example:
 
-         .. container:: figure
 
             **Figure 26. Cubeful example 2**
 
-            .. container:: figure-contents
 
-               .. container:: mediaobject
 
                   |[[cubeful-ex2.png]]|
 
@@ -3602,17 +3028,12 @@ GNU Backgammon Project
 
          It's recommended that you use cubeful checker evaluations.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Pruning neural networks
-                     :name: pruning-neural-networks
-                     :class: title
+Pruning neural networks
+-----------------------
 
          A feature in the evaluation is the use of a set of neural
          networks just to prune away move candidates within a deeper ply
@@ -3623,17 +3044,12 @@ GNU Backgammon Project
          the pruning nets activated. In most of these positions the move
          would not have made any difference to the game at all.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Noise
-                     :name: noise
-                     :class: title
+Noise
+-----
 
          If you think GNU Backgammon plays too strong for you, you can
          add some noise to its evaluation. The number you add into the
@@ -3659,17 +3075,12 @@ GNU Backgammon Project
          If you want GNU Backgammon to evaluate and play as strong as
          possible, you should not add any noise.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Appearance
-                  :name: appearance
-                  :class: title
+Appearance
+----------
 
       You can change the appearance of GNU Backgammon. There is a lot of
       options to choose among and you can have the board look like
@@ -3679,13 +3090,10 @@ GNU Backgammon Project
       To change the look of the board, you should click Settings →
       Appearance. This will open a dialog box like this:
 
-      .. container:: figure
 
          **Figure 27. The appearance dialog**
 
-         .. container:: figure-contents
 
-            .. container:: mediaobject
 
                |[[appearance.png]]|
 
@@ -3709,41 +3117,26 @@ GNU Backgammon Project
       board. You can also choose between different other settings. Most
       of the settings here are self explanatory.
 
-.. container:: sect1
 
-   .. container:: titlepage
 
-      .. container::
 
-         .. container::
 
-            .. rubric:: Technical Notes
-               :name: technical-notes
-               :class: title
+Technical Notes
+---------------
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Obtaining bearoff databases
-                  :name: obtaining-bearoff-databases
-                  :class: title
+Obtaining bearoff databases
+---------------------------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Generate your own
-                     :name: generate-your-own
-                     :class: title
+Generate your own
+-----------------
 
          GNU Backgammon is supplied with a program makebearoff that is
          used to generate bearoff databases. Due to various limitations
@@ -3817,17 +3210,12 @@ GNU Backgammon Project
 
          See makehyper --help for the complete set of available options.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Download
-                     :name: download
-                     :class: title
+Download
+--------
 
          You may download the two sided database with 6 checkers on 6
          points from https://alpha.gnu.org/gnu/gnubg/gnubg_ts0.bd.gz and
@@ -3837,55 +3225,39 @@ GNU Backgammon Project
          Larger databases are available for download from
          https://dl.xs4all.nl/Museum/Demon/games/gnubg/databases/.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Installation of the databases
-                     :name: installation-of-the-databases
-                     :class: title
+Installation of the databases
+-----------------------------
 
          The databases's installation directory depends on where GNU
          Backgammon is installed on your system. It is displayed by Help
          → About GNU Backgammon → Evaluation Engine.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Verification of the databases
-                     :name: verification-of-the-databases
-                     :class: title
+Verification of the databases
+-----------------------------
 
          To verify that your generated or downloaded bearoff database is
          correct, the table below lists the MD5 checksums for a number
          of possible databases.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: One-sided bearoff databases (compressed)
-                     :name: one-sided-bearoff-databases-compressed
-                     :class: title
+One-sided bearoff databases (compressed)
+----------------------------------------
 
          The table below contains the MD5 checksums for the compressed
          one sided bearoff databases, i.e., databases generated with
          default options.
 
-         .. container:: informaltable
 
             ======== ====== ================================
             Checkers Points MD5 checksum
@@ -3909,23 +3281,17 @@ GNU Backgammon Project
             15       18     not available
             ======== ====== ================================
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Two-sided bearoff databases (with cubeless
+Two-sided bearoff databases (with cubeless
+------------------------------------------
                      and cubeful equities)
-                     :name: two-sided-bearoff-databases-with-cubeless-and-cubeful-equities
-                     :class: title
 
          The table below contains the MD5 checksums for the default two
          sided bearoff databases.
 
-         .. container:: informaltable
 
             ======== ====== ================================
             Checkers Points MD5 checksum
@@ -3946,17 +3312,12 @@ GNU Backgammon Project
             15       6      not available
             ======== ====== ================================
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Two-sided databases for Hypergammon
-                     :name: two-sided-databases-for-hypergammon
-                     :class: title
+Two-sided databases for Hypergammon
+-----------------------------------
 
          As the generation of the Hypergammon databases are an iterative
          process it's not possible to give MD5 checksum for these, as it
@@ -3970,11 +3331,9 @@ GNU Backgammon Project
 
          GNU Backgammon Position ID: ADAAAQAkIAAAAA
 
-         .. container:: example
 
             **Example 2. Random position from hypergammon database**
 
-            .. container:: example-contents
 
                .. code:: programlisting
 
@@ -4012,22 +3371,16 @@ GNU Backgammon Project
 
                   Correct cube action: No double, beaver
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Match Equity Tables
-                  :name: match-equity-tables
-                  :class: title
+Match Equity Tables
+-------------------
 
       Multiple match equity tables are bundled with GNU Backgammon,
       although most of them are only of marginal or historical interest.
 
-      .. container:: itemizedlist
 
          -  Rockwell-Kazaross or Kazaross-XG2 are the recommended
             choice. They were created by rolling out the initial
@@ -4050,34 +3403,24 @@ GNU Backgammon Project
             unequal opponents situations.
          -  The other tables are obsolete and of no practical use.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Python scripting
-                  :name: python-scripting
-                  :class: title
+Python scripting
+----------------
 
       Accessing the GNU Backgammon Python shell
 
       To access the Python shell, either type \`>' from the command line
       or select Window → Python Shell(IDLE...) from the GUI.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: gnubg module functions
-                     :name: gnubg-module-functions
-                     :class: title
+gnubg module functions
+----------------------
 
          board()
 
@@ -4147,17 +3490,12 @@ GNU Backgammon Project
 
          When 1, include derived analysis values. Default is 0.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Match description
-                     :name: match-description
-                     :class: title
+Match description
+-----------------
 
          gnubg.match() returns a dictionary containing the following
          items:
@@ -4174,17 +3512,12 @@ GNU Backgammon Project
 
          Match statistics.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Match info
-                     :name: match-info
-                     :class: title
+Match info
+----------
 
          A dictionary containing the following items:
 
@@ -4244,17 +3577,12 @@ GNU Backgammon Project
          144}, 'date': (13, 7, 2003), 'X': {'rating': '0 (Exp 0)',
          'name': 'Jon Royset'}, 'event': 'World Championship 2003'}
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Python game
-                     :name: python-game
-                     :class: title
+Python game
+-----------
 
          A dictionary containing the following items:
 
@@ -4282,43 +3610,28 @@ GNU Backgammon Project
          Game statistics. Similar entries to Analyse → Game statistics
          from the GUI.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Game actions
-                     :name: game-actions
-                     :class: title
+Game actions
+------------
 
          Each action is a dictionary
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Equities explained
-                  :name: equities-explained
-                  :class: title
+Equities explained
+------------------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Introduction to equities
-                     :name: introduction-to-equities
-                     :class: title
+Introduction to equities
+------------------------
 
          GNU Backgammon works with many different kinds of equities. The
          equity is defined as the expected value of the position.
@@ -4328,17 +3641,12 @@ GNU Backgammon Project
          will describe the equities used and calculated by GNU
          Backgammon.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Money equity
-                     :name: money-equity
-                     :class: title
+Money equity
+------------
 
          This is the value of the position in money game, e.g., if your
          equity is +0.4 an you are playing money game with a $1 stake,
@@ -4354,17 +3662,12 @@ GNU Backgammon Project
          former approach (`the section called “Cubeful
          equities” <#gnubg-tech_equities_cubeful>`__).
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Match Winning Chance
-                     :name: match-winning-chance
-                     :class: title
+Match Winning Chance
+--------------------
 
          In match play we're generally not particular interested in the
          outcome of the individual games as much as the outcome of the
@@ -4396,17 +3699,12 @@ GNU Backgammon Project
          calculate it from neural nets. GNU Backgammon uses the former
          approach, but the formula are currently not published.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Normalized equity
-                     :name: normalized-equity
-                     :class: title
+Normalized equity
+-----------------
 
          It's generally very difficult to compare MWCs. For example,
          it's hardly worth mentioning a 0.5% MWC error at DMP where as
@@ -4426,7 +3724,6 @@ GNU Backgammon Project
          For example, suppose the score is 3-1 to 5 with the cube on 2:
          MWC(l)=0% and MWC(w)=50%:
 
-         .. container:: informaltable
 
             ==== ====
             MWC  NEMG
@@ -4451,17 +3748,12 @@ GNU Backgammon Project
          literature this term seems to be reserved for the cubeless
          money equity.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Cubeful equities
-                     :name: cubeful-equities
-                     :class: title
+Cubeful equities
+----------------
 
          This chapter is a brief description of how GNU Backgammon
          calculates cubeful equities. The formula build directly on the
@@ -4469,17 +3761,12 @@ GNU Backgammon Project
          Games <http://www.bkgm.com/articles/Janowski/cubeformulae.pdf>`__
          from 1993.
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: Basic formula for cubeful equities
-                        :name: basic-formula-for-cubeful-equities
-                        :class: title
+Basic formula for cubeful equities
+----------------------------------
 
             The basic formula for cubeful equities as derived by
             Janowski is
@@ -4502,17 +3789,12 @@ GNU Backgammon Project
             as MWC is the entity that is used for match play
             evaluations.
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: Live cube equities
-                        :name: live-cube-equities
-                        :class: title
+Live cube equities
+------------------
 
             The live cube equity is the equity assuming that the equity
             changes continuously, so that doubles and takes occurs
@@ -4526,19 +3808,15 @@ GNU Backgammon Project
             won, and L is the average cubeless value of games ultimately
             lost. For example, for the following position
 
-            .. container:: figure
 
                **Figure 28. Cubeful example 1**
 
-               .. container:: figure-contents
 
-                  .. container:: mediaobject
 
                      |[[cubefuleq-ex1.png]]|
 
             GNU Backgammon evaluates
 
-            .. container:: informaltable
 
                ======= ===== ===== ===== ===== =====
                \       Win   W(g)  W(bg) L(g)  L(bg)
@@ -4555,13 +3833,10 @@ GNU Backgammon Project
             my take point I lose 1 point, at my cash point I cash 1
             point, and when I have a certain win I win W points:
 
-            .. container:: figure
 
                **Figure 29. mgtp**
 
-               .. container:: figure-contents
 
-                  .. container:: mediaobject
 
                      |mgtp|
 
@@ -4578,7 +3853,6 @@ GNU Backgammon Project
             and the 2-cube. For the position above and using Woolsey's
             match equity table the live cube take point are:
 
-            .. container:: informaltable
 
                ========== ============ ============
                Cube value TP for Black TP for White
@@ -4606,27 +3880,19 @@ GNU Backgammon Project
             interpolation between (0%,22%), (24.5%,24%), (72.7%,36%),
             and (100%,41%) (from black's point of view):
 
-            .. container:: figure
 
                **Figure 30. mptp**
 
-               .. container:: figure-contents
 
-                  .. container:: mediaobject
 
                      |mptp|
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: 0-ply Cubeful equities
-                        :name: ply-cubeful-equities
-                        :class: title
+0-ply Cubeful equities
+----------------------
 
             Having established the live cube equities and MWCs we're now
             in position to calculate the 0-ply cubeful equities.
@@ -4640,17 +3906,12 @@ GNU Backgammon Project
             determine the live cube MWC to be 29.2%. Using a value of
             x=0.68 we arrive at a cubeful MWC of 29.17%.
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: n-ply Cubeful equities
-                        :name: n-ply-cubeful-equities
-                        :class: title
+n-ply Cubeful equities
+----------------------
 
             The previous section concerned the calculation of 0-ply
             cubeful equities, so how so GNU Backgammon calculate cubeful
@@ -4688,24 +3949,18 @@ GNU Backgammon Project
             x(eff) = (E(2-ply cubeful) - E(2-ply dead))/(E(2-ply
             live)-E(2-ply dead)).
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: The cube efficiency
-                        :name: the-cube-efficiency
-                        :class: title
+The cube efficiency
+-------------------
 
             The cube efficiency is obviously an important parameter,
             unfortunately there haven't been much investigation carried
             out, so GNU Backgammon basically uses the values 0.6-0.7
             originally suggested by Rick Janowski:
 
-            .. container:: informaltable
 
                ========================= ========================================
                Position Class            x (Cube efficiency)
@@ -4739,17 +3994,12 @@ GNU Backgammon Project
             Similarly, backgames will often have a low cube efficiency,
             whereas blitzes have may have a higher cube efficiency.
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: Cube decisions
-                        :name: cube-decisions
-                        :class: title
+Cube decisions
+--------------
 
             GNU Backgammon's cube decisions are simple based on
             calculations of cubeful equities. For a double decision GNU
@@ -4762,13 +4012,10 @@ GNU Backgammon Project
             White and black's cube decisions in sample position from
             earlier.
 
-            .. container:: figure
 
                **Figure 31. mgcd**
 
-               .. container:: figure-contents
 
-                  .. container:: mediaobject
 
                      |mgcd|
 
@@ -4783,17 +4030,12 @@ GNU Backgammon Project
             double point explicitly. The cube decision is simply made by
             comparing equities from the figure.
 
-         .. container:: sect4
 
-            .. container:: titlepage
 
-               .. container::
 
-                  .. container::
 
-                     .. rubric:: Beyond the simple model
-                        :name: beyond-the-simple-model
-                        :class: title
+Beyond the simple model
+-----------------------
 
             Janowski has developed two other models for cubeful
             equities. The first is a generalization of the one used by
@@ -4809,17 +4051,12 @@ GNU Backgammon Project
             efficiency into a value that can be understood more
             intuitively and calculate easily from rollouts.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: A technical description of the Position ID
-                  :name: a-technical-description-of-the-position-id
-                  :class: title
+A technical description of the Position ID
+------------------------------------------
 
       This section describes a method for compactly recording a
       backgammon position. It demonstrates how to encode a position into
@@ -4837,7 +4074,6 @@ GNU Backgammon Project
       end). The way to build up a sequence that corresponds to a given
       position is:
 
-      .. container:: orderedlist
 
          1. For every point around the board (starting at the ace point
             of the player not on roll, continuing around to the 24 point
@@ -4873,7 +4109,6 @@ GNU Backgammon Project
       As an example, here's what the starting position looks like in the
       key format:
 
-      .. container:: informaltable
 
          ========= =====================================================
          0 0 0 0 0 opponent has no checkers on his ace to 5 points
@@ -4904,7 +4139,6 @@ GNU Backgammon Project
 
       In little endian bytes it looks like:
 
-      .. container:: informaltable
 
          ======== ======== ======== ======== ======== ========
          11100000 01110011 11110000 00000001 00110000 11100000
@@ -4942,7 +4176,6 @@ GNU Backgammon Project
 
       Notes
 
-      .. container:: orderedlist
 
          1. This encoding is obviously not as compact as it could be: in
             particular, there are lots of redundant representations of
@@ -4958,17 +4191,12 @@ GNU Backgammon Project
             suggestions on simplifying the encoding without increasing
             the worst case length.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: A technical description of the Match ID
-                  :name: a-technical-description-of-the-match-id
-                  :class: title
+A technical description of the Match ID
+---------------------------------------
 
       This section describes how the match ID is calculated. The match
       ID can be used for easy exchange of positions for GNUbg users in
@@ -4981,14 +4209,12 @@ GNU Backgammon Project
 
       The match key is a bit string of length 66:
 
-      .. container:: informaltable
 
          ==== ========= ========= ======== ========= ========= ====== ======
          1-4  5-6       7         8        9-11      12        13     14-15
          Cube CubeOwner DiceOwner Crawford GameState TurnOwner Double Resign
          ==== ========= ========= ======== ========= ========= ====== ======
 
-      .. container:: orderedlist
 
          1.  Bit 1-4 contains the 2-logarithm of the cube value. For
              example, a 8-cube is encoded as 0011 binary (or 3), since 2
@@ -5081,17 +4307,12 @@ GNU Backgammon Project
 
       set matchid QYkqASAAIAAA.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Description of the CSS style sheet
-                  :name: description-of-the-css-style-sheet
-                  :class: title
+Description of the CSS style sheet
+----------------------------------
 
       As mentioned above GNU Backgammon writes a CSS style sheet along
       with the generated XHTML file. The CSS style sheet may be written
@@ -5110,7 +4331,6 @@ GNU Backgammon Project
       Below follows a description of the CSS classes used in the XHTML
       export:
 
-      .. container:: informaltable
 
          +---------------------+-----------------------------------------------+
          | Class               | Description                                   |
@@ -5193,58 +4413,38 @@ GNU Backgammon Project
          | .positionid         | Style for the Position ID and match ID.       |
          +---------------------+-----------------------------------------------+
 
-.. container:: sect1
 
-   .. container:: titlepage
 
-      .. container::
 
-         .. container::
 
-            .. rubric:: Frequently Asked Questions
-               :name: frequently-asked-questions
-               :class: title
+Frequently Asked Questions
+--------------------------
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: General questions
-                  :name: general-questions
-                  :class: title
+General questions
+-----------------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: What is GNU Backgammon?
-                     :name: what-is-gnu-backgammon
-                     :class: title
+What is GNU Backgammon?
+-----------------------
 
          GNU Backgammon (gnubg) is a program for playing and analysing
          backgammon positions, games and matches. It's based on a neural
          network. You may play GNU Backgammon using the command line or
          a graphical interface based on GTK+.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: What operating systems are supported?
-                     :name: what-operating-systems-are-supported
-                     :class: title
+What operating systems are supported?
+-------------------------------------
 
          GNU Backgammon is mostly developed on GNU/Linux. It also builds
          and runs under other Unix operating systems like those derived
@@ -5260,34 +4460,24 @@ GNU Backgammon Project
          systems, you are welcome to give us a note at `the GNU
          Backgammon mailing list <mailto:bug-gnubg@gnu.org>`__.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Where do I get it?
-                     :name: where-do-i-get-it
-                     :class: title
+Where do I get it?
+------------------
 
          The official website is https://www.gnu.org/software/gnubg/.
          Binaries and source code for GNU Backgammon can be downloaded
          from this site. Up to date source code can be accessed through
          `CVS <https://savannah.gnu.org/cvs/?group=gnubg>`__.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: What do I have to pay for GNU Backgammon?
-                     :name: what-do-i-have-to-pay-for-gnu-backgammon
-                     :class: title
+What do I have to pay for GNU Backgammon?
+-----------------------------------------
 
          GNU Backgammon is Free Software and is a part of the GNU
          Project. You may download it for free. For more information see
@@ -5299,50 +4489,35 @@ GNU Backgammon Project
          to inspect, change or distribute as long as you keep said
          license.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: This GNU stuff sounds interesting
-                     :name: this-gnu-stuff-sounds-interesting
-                     :class: title
+This GNU stuff sounds interesting
+---------------------------------
 
          Take a look at the `GNU home page <https://www.gnu.org/>`__.
          It's also the page for Free Software Foundation.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: I want to learn more about backgammon
-                     :name: i-want-to-learn-more-about-backgammon
-                     :class: title
+I want to learn more about backgammon
+-------------------------------------
 
          A good place to start is `Backgammon
          Galore <http://www.bkgm.com/>`__. For an extensive link
          collection, go to `Gammon
          Links. <http://www.chicagopoint.com/links.html>`__
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Though I really read all the documentation
+Though I really read all the documentation
+------------------------------------------
                      I still have questions
-                     :name: though-i-really-read-all-the-documentation-i-still-have-questions
-                     :class: title
 
          Send an email to `the GNU backgammon mailing
          list <mailto:bug-gnubg@gnu.org>`__. If it is a bug, be sure to
@@ -5350,46 +4525,31 @@ GNU Backgammon Project
          you use, and any error messages you receive. Try to describe
          exactly what happens before the error occurs.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: I want to make a few proposals, I have new
+I want to make a few proposals, I have new
+------------------------------------------
                      ideas
-                     :name: i-want-to-make-a-few-proposals-i-have-new-ideas
-                     :class: title
 
          You're welcome! Send an email with your suggestions to `the GNU
          backgammon mailing list <mailto:bug-gnubg@gnu.org>`__.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: How to install
-                  :name: how-to-install
-                  :class: title
+How to install
+--------------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Do I need some other software to run GNU
+Do I need some other software to run GNU
+----------------------------------------
                      Backgammon?
-                     :name: do-i-need-some-other-software-to-run-gnu-backgammon
-                     :class: title
 
          On Microsoft Windows everything you need is included in the
          installer.
@@ -5399,48 +4559,33 @@ GNU Backgammon Project
          On GNU/Linux there are prerequisites as well but your package
          manager (apt, yum, etc...) will take care of them.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: I want to install a newer version
-                     :name: i-want-to-install-a-newer-version
-                     :class: title
+I want to install a newer version
+---------------------------------
 
          Go ahead, your settings should be saved.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: I would like to compile it from the source
+I would like to compile it from the source
+------------------------------------------
                      code
-                     :name: i-would-like-to-compile-it-from-the-source-code
-                     :class: title
 
          Good luck to you! Download the source code and make sure to
          read one of the two following two items.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: What software do I need for compiling
+What software do I need for compiling
+-------------------------------------
                      under GNU/Linux?
-                     :name: what-software-do-i-need-for-compiling-under-gnulinux
-                     :class: title
 
          Download GNU Backgammon sources as described
          `here <https://www.gnu.org/software/gnubg/#downloading>`__ and
@@ -5453,17 +4598,12 @@ GNU Backgammon Project
          software set up with autoconf, you will see that GNU Backgammon
          is straightforward to build.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: It does not compile
-                     :name: it-does-not-compile
-                     :class: title
+It does not compile
+-------------------
 
          Check that you have installed all necessary development
          packages.
@@ -5471,18 +4611,13 @@ GNU Backgammon Project
          Look for warnings or errors during compiling. If you still
          don't have a clue, send a message to ``<bug-gnubg@gnu.org>``.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: On what CPU will GNU Backgammon run
+On what CPU will GNU Backgammon run
+-----------------------------------
                      fastest?
-                     :name: on-what-cpu-will-gnu-backgammon-run-fastest
-                     :class: title
 
          GNU Backgammon's speed depends on the CPU only. It doesn't need
          much memory (any machine not totally obsolete will have enough)
@@ -5495,7 +4630,6 @@ GNU Backgammon Project
          comparable with those given by the similar command from eXtreme
          Gammon.
 
-         .. container:: informaltable
 
             +---------+---------+---------+---------+---------+---------+---------+
             | Ev      | CPU     | Syst    | RAM     | OS      | GNUBG-  |         |
@@ -5725,46 +4859,31 @@ GNU Backgammon Project
             |         |         | 4310    |         |         |         |         |
             +---------+---------+---------+---------+---------+---------+---------+
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Running GNU Backgammon
-                  :name: running-gnu-backgammon
-                  :class: title
+Running GNU Backgammon
+----------------------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: I get an error message when starting
-                     :name: i-get-an-error-message-when-starting
-                     :class: title
+I get an error message when starting
+------------------------------------
 
          Well, your computer wants to communicate with you. Give it a
          chance and read (and try to understand) what it is telling you.
          Then read the next items carefully:
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: GNU Backgammon complains about missing
+GNU Backgammon complains about missing
+--------------------------------------
                      files
-                     :name: gnu-backgammon-complains-about-missing-files
-                     :class: title
 
          GNU Backgammon reads several different files at start-up. It
          will first try to read a file called gnubg.wd. This is a file
@@ -5791,36 +4910,26 @@ GNU Backgammon Project
          file is not found at start-up, GNU Backgammon will evaluate
          late bearoff positions with the one sided bearoff database.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Starting from the Windows menu it plays
+Starting from the Windows menu it plays
+---------------------------------------
                      like a beginner
-                     :name: starting-from-the-windows-menu-it-plays-like-a-beginner
-                     :class: title
 
          Open the Windows menu and go to the entry for GNU Backgammon.
          Right-click with the mouse and choose \`properties'. Check, if
          the \`working path' is the same directory as the \`*.exe'-file
          one line above. If not, adjust the working path.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: My screen mixes up while starting GNU
+My screen mixes up while starting GNU
+-------------------------------------
                      Backgammon
-                     :name: my-screen-mixes-up-while-starting-gnu-backgammon
-                     :class: title
 
          Install the newest driver for your graphic card. Be sure that
          you have chosen at least a desktop resolution of 65535 (16 bit
@@ -5828,17 +4937,12 @@ GNU Backgammon Project
          might be some problems with the graphical interface (GTK+) and
          Microsoft Windows.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: I only get a command-line interface
-                     :name: i-only-get-a-command-line-interface
-                     :class: title
+I only get a command-line interface
+-----------------------------------
 
          Using Microsoft Windows, just click on the correct menu entry
          (\`GNU Backgammon'). If it still doesn't work, check whether
@@ -5847,17 +4951,12 @@ GNU Backgammon Project
          GNU/Linux users should check if `GTK+ <https://www.gtk.org/>`__
          is installed.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: I do not need this graphical stuff
-                     :name: i-do-not-need-this-graphical-stuff
-                     :class: title
+I do not need this graphical stuff
+----------------------------------
 
          For GNU/Linux users: open a terminal and run gnubg -t.
 
@@ -5867,30 +4966,20 @@ GNU Backgammon Project
          C:\[path-to-your-gnubg]\gnubg-cli.exe. There is also a menu
          entry GNU Backgammon CLI.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Playing backgammon
-                  :name: playing-backgammon
-                  :class: title
+Playing backgammon
+------------------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: What is the difference of a new game or
+What is the difference of a new game or
+---------------------------------------
                      match or session?
-                     :name: what-is-the-difference-of-a-new-game-or-match-or-session
-                     :class: title
 
          When you start a new match, you will be asked to play to a
          certain amount of points (for example, 7 points). The player
@@ -5899,17 +4988,12 @@ GNU Backgammon Project
          rules do slightly differ, mainly the Jacoby rule is applies to
          sessions and the Crawford to match play.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: What is a beaver in Backgammon?
-                     :name: what-is-a-beaver-in-backgammon
-                     :class: title
+What is a beaver in Backgammon?
+-------------------------------
 
          A beaver is only allowed in a money game session. To beaver
          means to redouble, retaining control of the cube, immediately
@@ -5917,17 +5001,12 @@ GNU Backgammon Project
          `glossary at Backgammon
          Galore <http://www.bkgm.com/glossary.html#B>`__.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: How do I move the checkers?
-                     :name: how-do-i-move-the-checkers
-                     :class: title
+How do I move the checkers?
+---------------------------
 
          The easiest way to move checkers is to "drag and drop." Put
          your mouse pointer over a checker you want to move, press the
@@ -5942,51 +5021,36 @@ GNU Backgammon Project
          to the menu Settings → Options, click on the \`Dice' tab and
          select Show higher die on left.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Why am I allowed to place more than 5
+Why am I allowed to place more than 5
+-------------------------------------
                      checkers on a point?
-                     :name: why-am-i-allowed-to-place-more-than-5-checkers-on-a-point
-                     :class: title
 
          The official backgammon tournament rules allow to put up to all
          15 checkers on a point. Playing with a maximum of 5 checkers,
          sometimes known as the Egyptian Rule, is no longer supported by
          GNU Backgammon.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: GNU Backgammon is too strong for me
-                     :name: gnu-backgammon-is-too-strong-for-me
-                     :class: title
+GNU Backgammon is too strong for me
+-----------------------------------
 
          Go to the menu Settings → Players and change the values for
          Player 0. There is also a set of predefined settings you may
          choose from.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: I think the bot is cheating
-                     :name: i-think-the-bot-is-cheating
-                     :class: title
+I think the bot is cheating
+---------------------------
 
          In its default configuration, the dice generator does not
          cheat. In the menu Settings you may choose between different
@@ -5994,75 +5058,50 @@ GNU Backgammon Project
          cheating, program your own dice generator or roll manually. It
          doesn't cheat!
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Settings
-                  :name: settings
-                  :class: title
+Settings
+--------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Where can I change the name of the human
+Where can I change the name of the human
+----------------------------------------
                      player?
-                     :name: where-can-i-change-the-name-of-the-human-player
-                     :class: title
 
          Go to the menu Settings → Players and click on Player 1. At the
          top there is a field to change the human player's name.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: How do I change the colors?
-                     :name: how-do-i-change-the-colors
-                     :class: title
+How do I change the colors?
+---------------------------
 
          Go to the menu Settings → Board Appearance. Here you may change
          the color of checkers, the points and the board itself.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: How do I stop the annoying beeps?
-                     :name: how-do-i-stop-the-annoying-beeps
-                     :class: title
+How do I stop the annoying beeps?
+---------------------------------
 
          Go to the menu Settings → Options and click on the \`Sound'
          tab. Disable the option \`Beep on illegal input'.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: What are Plies?
-                     :name: what-are-plies
-                     :class: title
+What are Plies?
+---------------
 
          A ply describes how far GNU Backgammon evaluates the position.
          0-ply means that GNU Backgammon estimates the worth of the
@@ -6100,46 +5139,31 @@ GNU Backgammon Project
          them. This time it's Snowie that seems to be counting
          strangely.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: What is noise?
-                     :name: what-is-noise
-                     :class: title
+What is noise?
+--------------
 
          Noise is a facility for disturbing GNU Backgammon's 0-ply
          evaluation. Raising the noise level decreases its playing
          strength.
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Analysing
-                  :name: analysing
-                  :class: title
+Analysing
+---------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: What are these funny letters at the right
+What are these funny letters at the right
+-----------------------------------------
                      bottom?
-                     :name: what-are-these-funny-letters-at-the-right-bottom
-                     :class: title
 
          You will find a small window titled \`GNUbg ID' at the bottom
          of the GNU Backgammon window. It contains an short, textual,
@@ -6156,17 +5180,12 @@ GNU Backgammon Project
          Pasting a \`XGID' (a similar shortcut used by eXtreme Gammon)
          there is recognized as well.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: How do I set up a position manually?
-                     :name: how-do-i-set-up-a-position-manually
-                     :class: title
+How do I set up a position manually?
+------------------------------------
 
          Open a new game, match or session. If GNUbg already rolls the
          dice, don't bother. Press \`edit', and either type the
@@ -6184,18 +5203,13 @@ GNU Backgammon Project
          Finally, go to the menu and select \`Game, Set turn' to choose
          the player on roll. The dice will then disappear.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: Which formats can I use to import matches
+Which formats can I use to import matches
+-----------------------------------------
                      and positions?
-                     :name: which-formats-can-i-use-to-import-matches-and-positions
-                     :class: title
 
          Import of matches and positions from a number of file formats
          is possible: (.gam) GammonEmpire Game, (.gam) PartyGammon Game,
@@ -6203,31 +5217,21 @@ GNU Backgammon Project
          Backgammon File, (.sgg) GridGammon Save Game, (.tmg)
          TrueMoneyGames, (.txt) Snowie Text
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: How can I switch the players sides?
-                     :name: how-can-i-switch-the-players-sides
-                     :class: title
+How can I switch the players sides?
+-----------------------------------
 
          Go to the menu \`Game' and click on \`Swap players'.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: What do ! and ? mean?
-                     :name: what-do-and-mean
-                     :class: title
+What do ! and ? mean?
+---------------------
 
          After analysing a game or a match GNU Backgammon is able to do
          some comments on checker play or cube decisions. Open the menu
@@ -6237,7 +5241,6 @@ GNU Backgammon Project
 
          The default settings are:
 
-         .. container:: informaltable
 
             ====== =========== ==
             -0.040 (doubtful): ?!
@@ -6248,22 +5251,16 @@ GNU Backgammon Project
          You may change these comment in the menu \`Window, Annotation'
          choosing another comment for moves and/or double
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: How is the error rate determined?
-                     :name: how-is-the-error-rate-determined
-                     :class: title
+How is the error rate determined?
+---------------------------------
 
          GNU Backgammon determines a player's strength according to its
          average error (per move):
 
-         .. container:: informaltable
 
             ============== =================
             Average Error  Skill Level
@@ -6280,17 +5277,12 @@ GNU Backgammon Project
          summary in the menu \`Analyse, ... statistics'. Note that you
          can't change the ranges of these values.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: What does Pips mean?
-                     :name: what-does-pips-mean
-                     :class: title
+What does Pips mean?
+--------------------
 
          The pip count is a measurement showing the total number of pips
          required for a player to bear off all checkers from the current
@@ -6305,17 +5297,12 @@ GNU Backgammon Project
          know that when you roll a six and a five, the total pips of
          that roll is eleven.)
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: What does EPC mean?
-                     :name: what-does-epc-mean
-                     :class: title
+What does EPC mean?
+-------------------
 
          When bearing off checkers, you may notice a display showing the
          current EPC value (next to the display of Pips). The EPC
@@ -6338,14 +5325,12 @@ GNU Backgammon Project
          Thus, EPC takes into account not only the current pip count,
          but also the expected pip wastage:
 
-         .. container:: orderedlist
 
             1. Effective Pip Count (EPC) = pip count + expected pip
                wastage
 
          An example:
 
-         .. container:: orderedlist
 
             1. Position: 5 checkers on the 1-point, 4 checkers on the
                2-point.
@@ -6374,57 +5359,37 @@ GNU Backgammon Project
          quite complicated heuristics (please see the aforementioned
          post by Douglas Zare, and do get back here and explain it!)
 
-   .. container:: sect2
 
-      .. container:: titlepage
 
-         .. container::
 
-            .. container::
 
-               .. rubric:: Abbreviations
-                  :name: abbreviations
-                  :class: title
+Abbreviations
+-------------
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: GWC?
-                     :name: gwc
-                     :class: title
+GWC?
+----
 
          GWC is an abbreviation for game winning chances.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: MWC?
-                     :name: mwc
-                     :class: title
+MWC?
+----
 
          MWC is an abbreviation for match winning chances.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: DP?
-                     :name: dp
-                     :class: title
+DP?
+---
 
          In the menu \`Analyse, Game/Match/Session statistics' you will
          see a window with some statistics. Near the bottom, you'll see
@@ -6432,17 +5397,12 @@ GNU Backgammon Project
          doubling point and describes a situation in the game, where you
          probably should have doubled your opponent.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: CP?
-                     :name: cp
-                     :class: title
+CP?
+---
 
          Cash-point(CP) is your opponent's take-point now seen from your
          side of the board (your cash-point which equals 100% minus your
@@ -6456,13 +5416,10 @@ GNU Backgammon Project
          double-points will often look something like this (where
          TP*=CP):
 
-         .. container:: figure
 
             **Figure 32. The double line**
 
-            .. container:: figure-contents
 
-               .. container:: mediaobject
 
                   |[[doubleline.png]]|
 
@@ -6478,49 +5435,34 @@ GNU Backgammon Project
          [reTP;reDP] = 100% minus your opponent's doubling window after
          he has taken.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: TG?
-                     :name: tg
-                     :class: title
+TG?
+---
 
          TG is an abbreviation for too good (to double). It points to a
          situation in the game, where you probably should have kept the
          cube (mostly because of decent, sometimes very good, gammon
          chances) rather than double out your opponent.
 
-      .. container:: sect3
 
-         .. container:: titlepage
 
-            .. container::
 
-               .. container::
 
-                  .. rubric:: EPC?
-                     :name: epc
-                     :class: title
+EPC?
+----
 
          See `the section called “What does EPC
          mean?” <#gnubg-faq_analysing_epc>`__
 
-.. container:: appendix
 
-   .. container:: titlepage
 
-      .. container::
 
-         .. container::
 
-            .. rubric:: A. GNU Free Documentation License
-               :name: a.-gnu-free-documentation-license
-               :class: title
+A. GNU Free Documentation License
+---------------------------------
 
    Version 1.3, 3 November 2008
 
@@ -6530,8 +5472,8 @@ GNU Backgammon Project
    Everyone is permitted to copy and distribute verbatim copies of this
    license document, but changing it is not allowed.
 
-   .. rubric::  0. PREAMBLE
-      :name: preamble
+0. PREAMBLE
+-----------
 
    The purpose of this License is to make a manual, textbook, or other
    functional and useful document “free” in the sense of freedom: to
@@ -6554,8 +5496,8 @@ GNU Backgammon Project
    whether it is published as a printed book. We recommend this License
    principally for works whose purpose is instruction or reference.
 
-   .. rubric::  1. APPLICABILITY AND DEFINITIONS
-      :name: applicability-and-definitions
+1. APPLICABILITY AND DEFINITIONS
+--------------------------------
 
    This License applies to any manual or other work, in any medium, that
    contains a notice placed by the copyright holder saying it can be
@@ -6647,8 +5589,8 @@ GNU Backgammon Project
    implication that these Warranty Disclaimers may have is void and has
    no effect on the meaning of this License.
 
-   .. rubric::  2. VERBATIM COPYING
-      :name: verbatim-copying
+2. VERBATIM COPYING
+-------------------
 
    You may copy and distribute the Document in any medium, either
    commercially or noncommercially, provided that this License, the
@@ -6663,8 +5605,8 @@ GNU Backgammon Project
    You may also lend copies, under the same conditions stated above, and
    you may publicly display copies.
 
-   .. rubric::  3. COPYING IN QUANTITY
-      :name: copying-in-quantity
+3. COPYING IN QUANTITY
+----------------------
 
    If you publish printed copies (or copies in media that commonly have
    printed covers) of the Document, numbering more than 100, and the
@@ -6702,8 +5644,8 @@ GNU Backgammon Project
    to give them a chance to provide you with an updated version of the
    Document.
 
-   .. rubric::  4. MODIFICATIONS
-      :name: modifications
+4. MODIFICATIONS
+----------------
 
    You may copy and distribute a Modified Version of the Document under
    the conditions of sections 2 and 3 above, provided that you release
@@ -6712,7 +5654,6 @@ GNU Backgammon Project
    and modification of the Modified Version to whoever possesses a copy
    of it. In addition, you must do these things in the Modified Version:
 
-   .. container:: orderedlist
 
       A. Use in the Title Page (and on the covers, if any) a title
          distinct from that of the Document, and from those of previous
@@ -6796,8 +5737,8 @@ GNU Backgammon Project
    give permission to use their names for publicity for or to assert or
    imply endorsement of any Modified Version.
 
-   .. rubric::  5. COMBINING DOCUMENTS
-      :name: combining-documents
+5. COMBINING DOCUMENTS
+----------------------
 
    You may combine the Document with other documents released under this
    License, under the terms defined in section 4 above for modified
@@ -6821,8 +5762,8 @@ GNU Backgammon Project
    and any sections Entitled “Dedications”. You must delete all sections
    Entitled “Endorsements”.
 
-   .. rubric::  6. COLLECTIONS OF DOCUMENTS
-      :name: collections-of-documents
+6. COLLECTIONS OF DOCUMENTS
+---------------------------
 
    You may make a collection consisting of the Document and other
    documents released under this License, and replace the individual
@@ -6837,8 +5778,8 @@ GNU Backgammon Project
    License in all other respects regarding verbatim copying of that
    document.
 
-   .. rubric::  7. AGGREGATION WITH INDEPENDENT WORKS
-      :name: aggregation-with-independent-works
+7. AGGREGATION WITH INDEPENDENT WORKS
+-------------------------------------
 
    A compilation of the Document or its derivatives with other separate
    and independent documents or works, in or on a volume of a storage or
@@ -6857,8 +5798,8 @@ GNU Backgammon Project
    form. Otherwise they must appear on printed covers that bracket the
    whole aggregate.
 
-   .. rubric::  8. TRANSLATION
-      :name: translation
+8. TRANSLATION
+--------------
 
    Translation is considered a kind of modification, so you may
    distribute translations of the Document under the terms of section 4.
@@ -6878,8 +5819,8 @@ GNU Backgammon Project
    its Title (section 1) will typically require changing the actual
    title.
 
-   .. rubric::  9. TERMINATION
-      :name: termination
+9. TERMINATION
+--------------
 
    You may not copy, modify, sublicense, or distribute the Document
    except as expressly provided under this License. Any attempt
@@ -6906,8 +5847,8 @@ GNU Backgammon Project
    reinstated, receipt of a copy of some or all of the same material
    does not give you any rights to use it.
 
-   .. rubric::  10. FUTURE REVISIONS OF THIS LICENSE
-      :name: future-revisions-of-this-license
+10. FUTURE REVISIONS OF THIS LICENSE
+------------------------------------
 
    The Free Software Foundation may publish new, revised versions of the
    GNU Free Documentation License from time to time. Such new versions
@@ -6928,8 +5869,8 @@ GNU Backgammon Project
    of a version permanently authorizes you to choose that version for
    the Document.
 
-   .. rubric::  11. RELICENSING
-      :name: relicensing
+11. RELICENSING
+---------------
 
    “Massive Multiauthor Collaboration Site” (or “MMC Site”) means any
    World Wide Web server that publishes copyrightable works and also
@@ -6957,8 +5898,8 @@ GNU Backgammon Project
    site under CC-BY-SA on the same site at any time before August 1,
    2009, provided the MMC is eligible for relicensing.
 
-   .. rubric::  ADDENDUM: How to use this License for your documents
-      :name: addendum-how-to-use-this-license-for-your-documents
+ADDENDUM: How to use this License for your documents
+----------------------------------------------------
 
    To use this License in a document you have written, include a copy of
    the License in the document and put the following copyright and

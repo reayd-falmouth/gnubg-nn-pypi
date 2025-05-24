@@ -13,8 +13,5 @@
    overview
    rules
    concepts
-   usage
    api
    references
-
-   gnubg_manual
