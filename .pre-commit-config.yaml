@@ -4,4 +4,22 @@ repos:
     hooks:
       - id: clang-format
         args: [--style=file]
-        files: ^src/.*\.(cpp|h|c|cc|cxx)$
+        files: ^src/.*\.(cpp|c|h|hpp)$
+
+  - repo: local
+    hooks:
+    - id: cpplint
+      name: cpplint
+      entry: python3 -m cpplint
+      language: system
+      args: [--quiet, --filter=-build/include_subdir]
+      files: ^src/.*\.(cpp|c|h|hpp)$
+
+    - id: cppcheck
+      name: cppcheck
+      entry: bash -c 'cppcheck --enable=all --inconclusive --error-exitcode=1 --suppress=missingInclude -I src/ src/'
+      language: system
+      files: ^src/.*\.(cpp|c|h|hpp)$
+
+
+

@@ -22,12 +22,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "gnubgmodule.h"
 #include <Python.h>
 
 // Windows doesn’t have strcasecmp or strdup or setenv:
 #if defined(_WIN32)
-#include <stdlib.h> // for _putenv_s
+#include <stdlib.h>  // for _putenv_s
 #define strcasecmp _stricmp
 #define strdup _strdup
 #endif
@@ -45,13 +44,16 @@
 
 #include <algorithm>
 #include <cstdarg>
+#include <cstdint>
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "analyze.h"
 #include "bm.h"
 #include "equities.h"
+#include "gnubgmodule.h"
 #include "misc.h"
 #include "player.h"
 #include "stdutil.h"
@@ -63,31 +65,20 @@ extern "C" {
 
 typedef struct NetDef NetDef;
 extern NetDef *nets
-    []; // pulls in the real definition from eval.c
-        // :contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
+    [];  // pulls in the real definition from eval.c
+         // :contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
 void initnet(
-    void); // this will populate nets[]
-           // :contentReference[oaicite:2]{index=2}:contentReference[oaicite:3]{index=3}
-}
-
-// Hook GNUBG's internal logging function
-extern "C" void outputf(const char *fmt, ...) {
-  va_list args;
-  va_start(args, fmt);
-  vfprintf(stderr, fmt, args);
-  va_end(args);
+    void);  // this will populate nets[]
+            // :contentReference[oaicite:2]{index=2}:contentReference[oaicite:3]{index=3}
 }
 
 #include "br.h"
 #include "osr.h"
 
-// bring in std::vector
-#include <vector>
-
 extern "C" PyMODINIT_FUNC PyInit_gnubg(void);
 
 // shorthand 26‐element board for bearoff/resign logic
-typedef short int AnalyzeBoard[26];
+typedef int16_t AnalyzeBoard[26];
 
 // The global “analyzer” used for the resign call
 namespace {
@@ -408,7 +399,8 @@ static int readPly(PyObject *obj, void *out_p) {
     return 0;
   }
 
-  long v = PyLong_AsLong(obj);
+  int32_t v = static_cast<int32_t>(PyLong_AsLong(obj));
+
   // valid if non-negative or one of our special negative codes
   if (v >= 0 || (v <= PLY_OSR && v >= PLY_1ANDHALF)) {
     *static_cast<int *>(out_p) = static_cast<int>(v);
@@ -424,14 +416,14 @@ static int readPly(PyObject *obj, void *out_p) {
 // a 26-entry AnalyzeBoard (short[26]).  Returns 1 on success, 0 on error.
 static int anyAnalyzeBoard(PyObject *o, void *out_ptr) {
   // out_ptr really points at an AnalyzeBoard:
-  short *board = static_cast<short *>(out_ptr);
+  int16_t *board = static_cast<int16_t *>(out_ptr);
 
   // Case 1: a sequence of length 26
   if (PySequence_Check(o) && PySequence_Size(o) == 26) {
     PyObject *seq = PySequence_Fast(o, "expected 26-element sequence");
     if (!seq)
       return 0;
-    long s0 = 0, s1 = 0;
+    int32_t s0 = 0, s1 = 0;
     for (Py_ssize_t k = 0; k < 26; ++k) {
       PyObject *item = PySequence_Fast_GET_ITEM(seq, k);
       if (!PyLong_Check(item)) {
@@ -439,8 +431,8 @@ static int anyAnalyzeBoard(PyObject *o, void *out_ptr) {
         Py_DECREF(seq);
         return 0;
       }
-      long v = PyLong_AsLong(item);
-      board[k] = static_cast<short>(v);
+      int32_t v = static_cast<int32_t>(PyLong_AsLong(item));
+      board[k] = static_cast<int16_t>(v);
       if (v > 0)
         s0 += v;
       else if (v < 0)
@@ -459,7 +451,7 @@ static int anyAnalyzeBoard(PyObject *o, void *out_ptr) {
   if (PyUnicode_Check(o)) {
     const char *s = PyUnicode_AsUTF8(o);
     if (!s)
-      return 0; // error already set
+      return 0;  // error already set
 
     // First decode into the 2×25 int board:
     int temp[2][25];
@@ -516,8 +508,8 @@ static int anyBoard(PyObject *obj, void *out_board) {
     }
     for (int p = 0; p < 25; ++p) {
       PyObject *v = PySequence_GetItem(row, p);
-      long x = PyLong_AsLong(v);
-      board[s][p] = (int)x;
+      int32_t x = static_cast<int32_t>(PyLong_AsLong(v));
+      board[s][p] = static_cast<int>(x);
       Py_DECREF(v);
     }
     Py_DECREF(row);
@@ -688,7 +680,7 @@ static PyObject *py_bestmove(PyObject * /*self*/, PyObject *args,
     break;
   case 0:
     xOnPlay = false;
-    break; // default
+    break;  // default
   default:
     PyErr_SetString(PyExc_ValueError, "invalid side");
     return NULL;
@@ -739,7 +731,7 @@ static PyObject *py_bestmove(PyObject * /*self*/, PyObject *args,
   if (resignInfo) {
     int r = 0;
     if (isRace(board_arr)) {
-      AnalyzeBoard b; // your short‐hand 26‐element array
+      AnalyzeBoard b;  // your short‐hand 26‐element array
       setBoard(b, board_arr);
       r = analyzer.offerResign(nPlies, 2, b, true);
     }
@@ -825,13 +817,13 @@ static int readBearoffId(PyObject *obj, void *pi) {
 
   // Case 1: a simple integer
   if (PyLong_Check(obj)) {
-    long v = PyLong_AsLong(obj);
+    int32_t v = static_cast<int32_t>(PyLong_AsLong(obj));
     if (!(1 <= v && v < 54264)) {
       PyErr_SetString(PyExc_ValueError,
                       "bearoff id outside of range [1,54264)");
       return 0;
     }
-    *out = (int)v;
+    *out = static_cast<int>(v);
     return 1;
   }
 
@@ -844,12 +836,12 @@ static int readBearoffId(PyObject *obj, void *pi) {
     int p[6];
     for (int k = 0; k < 6; ++k) {
       PyObject *item = PySequence_Fast_GET_ITEM(seq, k);
-      long x = PyLong_AsLong(item);
+      int32_t x = static_cast<int32_t>(PyLong_AsLong(item));
       if (PyErr_Occurred()) {
         Py_DECREF(seq);
         return 0;
       }
-      p[k] = (int)x;
+      p[k] = static_cast<int>(x);
     }
     Py_DECREF(seq);
 
@@ -867,7 +859,7 @@ static PyObject *py_bearoffid2pos(PyObject * /*self*/, PyObject *args) {
   int id;
   // O& with readBearoffId picks up either an integer or a length-6 sequence
   if (!PyArg_ParseTuple(args, "O&", readBearoffId, &id)) {
-    return NULL; // parse error
+    return NULL;  // parse error
   }
 
   int p[6];
@@ -1055,9 +1047,9 @@ static PyObject *py_rollout(PyObject * /*self*/, PyObject *args,
 
   if (!PyArg_ParseTupleAndKeywords(
           args, kwargs,
-          "O&|iiiii", // one converter + 5 optional ints
+          "O&|iiiii",  // one converter + 5 optional ints
           const_cast<char **>(kwlist),
-          anyAnalyzeBoard, // fills board[]
+          anyAnalyzeBoard,  // fills board[]
           &cGames, &nPlies, &level, &nTruncate, &wantSts)) {
     return NULL;
   }
@@ -1076,16 +1068,18 @@ static PyObject *py_rollout(PyObject * /*self*/, PyObject *args,
 
   // if std==0, return just the p[5]
   if (!wantSts) {
-    return Py_BuildValue("ddddd", (double)p[0], (double)p[1], (double)p[2],
-                         (double)p[3], (double)p[4]);
+    return Py_BuildValue("ddddd", static_cast<double>(p[0]),
+                         static_cast<double>(p[1]), static_cast<double>(p[2]),
+                         static_cast<double>(p[3]), static_cast<double>(p[4]));
   }
 
   // otherwise return ((p0..p4),(ars0..ars4))
-  return Py_BuildValue("((ddddd)(ddddd))", (double)p[0], (double)p[1],
-                       (double)p[2], (double)p[3], (double)p[4],
-
-                       (double)ars[0], (double)ars[1], (double)ars[2],
-                       (double)ars[3], (double)ars[4]);
+  return Py_BuildValue("((ddddd)(ddddd))", static_cast<double>(p[0]),
+                       static_cast<double>(p[1]), static_cast<double>(p[2]),
+                       static_cast<double>(p[3]), static_cast<double>(p[4]),
+                       static_cast<double>(ars[0]), static_cast<double>(ars[1]),
+                       static_cast<double>(ars[2]), static_cast<double>(ars[3]),
+                       static_cast<double>(ars[4]));
 }
 
 //-----------------------------------------------------------------------------
@@ -1173,9 +1167,8 @@ static PyObject *py_set_equities(PyObject * /*self*/, PyObject *const args) {
       PyErr_SetString(PyExc_RuntimeError, "Not a valid equities table name");
       return NULL;
     }
-  }
-  // Case 2: Two arguments (doubles for weights and growth rates)
-  else if (PyTuple_Size(args) == 2) {
+  } else if (PyTuple_Size(args) == 2) {  // Case 2: Two arguments (doubles for
+                                         // weights and growth rates)
     double w, gr;
     if (!PyArg_ParseTuple(args, "dd", &w, &gr)) {
       return NULL;
@@ -1203,7 +1196,7 @@ static PyObject *py_set_equities(PyObject * /*self*/, PyObject *const args) {
 
 // Seed function
 static PyObject *set_seed(PyObject *self, PyObject *args) {
-  unsigned long seed;
+  uint64_t seed;
   if (!PyArg_ParseTuple(args, "l", &seed)) {
     return NULL;
   }
@@ -1349,10 +1342,10 @@ static PyObject *py_onecrace(PyObject *, PyObject *const args) {
   }
 
   float stdv;
-  float v = ocr(n, &stdv); // Call the ocr function
+  float v = ocr(n, &stdv);  // Call the ocr function
 
   if (v == 0.0f) {
-    return NULL; // If OCR returns 0.0f, we return None
+    return NULL;  // If OCR returns 0.0f, we return None
   }
 
   // Return the result as a tuple of two floats (v and stdv)
@@ -1521,16 +1514,16 @@ static PyMethodDef GnubgMethods[] = {
 static PyMethodDef gnubg_equities_methods[] = {
     {"value", equities_value, METH_VARARGS,
      "Get the equities value for a given position."},
-    {NULL, NULL, 0, NULL} // Sentinel to mark the end of the method table
+    {NULL, NULL, 0, NULL}  // Sentinel to mark the end of the method table
 };
 
 // Create a PyModuleDef for the 'equities' submodule
 static PyModuleDef gnubg_equities_module = {
-    PyModuleDef_HEAD_INIT, // Standard header for all Python modules
-    "equities",            // Name of the submodule
-    "Equities-related methods for GNUBG", // Module docstring
-    -1,                    // Size of the module, -1 means no state
-    gnubg_equities_methods // Method table
+    PyModuleDef_HEAD_INIT,  // Standard header for all Python modules
+    "equities",             // Name of the submodule
+    "Equities-related methods for GNUBG",  // Module docstring
+    -1,                     // Size of the module, -1 means no state
+    gnubg_equities_methods  // Method table
 };
 
 // Define the method table for the 'set' submodule
@@ -1542,16 +1535,16 @@ static PyMethodDef gnubg_set_methods[] = {
     {"equities", py_set_equities, METH_VARARGS, "Set equities table to use"},
     {"score", set_score, METH_VARARGS, "Set match score"},
     {"cube", set_cube, METH_VARARGS, "Set match cube"},
-    {NULL, NULL, 0, NULL} // Sentinel to mark the end of the method table
+    {NULL, NULL, 0, NULL}  // Sentinel to mark the end of the method table
 };
 
 // Define the 'set' submodule
 static PyModuleDef gnubg_set_module = {
     PyModuleDef_HEAD_INIT,
-    "set",                                         // Module name
-    "Set various parameters for the GNUBG engine", // Module docstring
-    -1,               // Size of the module state, -1 means no state
-    gnubg_set_methods // Method table
+    "set",                                          // Module name
+    "Set various parameters for the GNUBG engine",  // Module docstring
+    -1,                // Size of the module state, -1 means no state
+    gnubg_set_methods  // Method table
 };
 
 static struct PyModuleDef gnubgmodule = {

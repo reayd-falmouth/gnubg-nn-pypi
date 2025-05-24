@@ -37,4 +37,4 @@ extern "C" {
 }
 #endif
 
-#endif // SRC_GNUBG_GNUBGMODULE_H_
+#endif  // SRC_GNUBG_GNUBGMODULE_H_
