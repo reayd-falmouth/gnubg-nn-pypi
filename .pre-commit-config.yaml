@@ -20,6 +20,3 @@ repos:
       entry: bash -c 'cppcheck --enable=all --inconclusive --error-exitcode=1 --suppress=missingInclude -I src/ src/'
       language: system
       files: ^src/.*\.(cpp|c|h|hpp)$
-
-
-
