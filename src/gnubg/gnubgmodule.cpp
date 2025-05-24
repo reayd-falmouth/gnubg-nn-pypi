@@ -31,6 +31,7 @@
 #include "misc.h"
 #include "player.h"
 #include "stdutil.h"
+#include <algorithm>  // for std::replace
 
 extern "C" {
 #include "eval.h"
