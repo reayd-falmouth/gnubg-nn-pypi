@@ -7,10 +7,10 @@ build-backend = "mesonpy"
 
 [project]
 name = "gnubg"
-version = "1.1.0.dev4"
+version = "1.1.0a1"
 description = "Python3 bindings for GNUBG neural evaluation"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 authors = [
     { name = "David Reay", email = "dr323090@falmouth.ac.uk" }
 ]
