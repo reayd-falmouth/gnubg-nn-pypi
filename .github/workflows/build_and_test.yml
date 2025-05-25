@@ -36,6 +36,12 @@ jobs:
             python: "cp37"
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
       - uses: ./.github/actions/build-wheel
         with:
           python: ${{ matrix.python }}
