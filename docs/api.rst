@@ -651,7 +651,7 @@ gnubg.rollout(pos, ngames=1296, n=0, level=gnubg.ro_auto, nt=500, std=False) -> 
    This function provides accurate statistical approximations of long-term game outcomes from a given position.
 
 gnubg.set
-=========
+---------
 
 The `set` submodule provides configuration methods for adjusting internal GNUBG simulation behavior and evaluation settings.
 
