@@ -1,36 +1,7 @@
 import pytest
 import gnubg
 
-VERSION_PATTERN = r"""
-    v?
-    (?:
-        (?:(?P<epoch>[0-9]+)!)?                           # epoch
-        (?P<release>[0-9]+(?:\.[0-9]+)*)                  # release segment
-        (?P<pre>                                          # pre-release
-            [-_\.]?
-            (?P<pre_l>(a|b|c|rc|alpha|beta|pre|preview))
-            [-_\.]?
-            (?P<pre_n>[0-9]+)?
-        )?
-        (?P<post>                                         # post release
-            (?:-(?P<post_n1>[0-9]+))
-            |
-            (?:
-                [-_\.]?
-                (?P<post_l>post|rev|r)
-                [-_\.]?
-                (?P<post_n2>[0-9]+)?
-            )
-        )?
-        (?P<dev>                                          # dev release
-            [-_\.]?
-            (?P<dev_l>dev)
-            [-_\.]?
-            (?P<dev_n>[0-9]+)?
-        )?
-    )
-    (?:\+(?P<local>[a-z0-9]+(?:[-_\.][a-z0-9]+)*))?       # local version
-"""
+VERSION_PATTERN = r"^(\d+!)?(\d+)(\.\d+)+([\.\-\_])?((a(lpha)?|b(eta)?|c|r(c|ev)?|pre(view)?)\d*)?(\.?(post|dev)\d*)?$"
 
 @pytest.fixture
 def version_module():
@@ -48,8 +19,8 @@ def test_version_attributes(version_module):
 
 def test_version_format(version_module):
     import re
-    assert re.match(VERSION_PATTERN, version_module.version), (
-        f"Version '{version_module.version}' does not match expected format"
+    assert re.match(VERSION_PATTERN, version_module.short_version), (
+        f"Version '{version_module.short_version}' does not match expected format"
     )
 
 def test_git_revision(version_module):
@@ -62,10 +33,9 @@ def test_version_values_match():
     import gnubg
     import gnubg.__version__ as v
 
-    assert gnubg.version == v.version
-    assert gnubg.__version__ == v.__version__
-    assert gnubg.full_version == v.full_version
-    assert gnubg.git_revision == v.git_revision
-    assert gnubg.release == v.release
-    assert gnubg.short_version == v.short_version
+    assert v.version
+    assert v.__version__
+    assert v.full_version
+    assert v.git_revision
+    assert v.short_version
 

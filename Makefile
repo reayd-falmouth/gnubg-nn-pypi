@@ -28,8 +28,7 @@ twine_windows:
 	twine upload --verbose --repository $(PYPI_REPO) dist/windows/*.whl
 
 test:
-	pip install --force-reinstall dist/*.whl
-	python3 -m unittest discover -s gnubg.tests
+	python3 -m pytest tests/
 
 patch:
 	cp -rf patches/gnubg-nn/* gnubg-nn/
