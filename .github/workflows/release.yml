@@ -47,6 +47,10 @@ jobs:
           python: ${{ matrix.python }}
           os: ${{ matrix.os }}
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
       - name: Install Twine
         run: pip install --upgrade pip twine
 
