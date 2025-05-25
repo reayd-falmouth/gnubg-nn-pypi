@@ -27,3 +27,13 @@ def test_git_revision(version_module):
     assert len(git_rev) == 40 or len(git_rev) == 0, "git_revision must be full hash or empty"
     if git_rev:
         assert all(c in '0123456789abcdef' for c in git_rev), "git_revision must be hexadecimal"
+
+def test_version_imported_into_main_package():
+    import gnubg
+
+    assert hasattr(gnubg, "version"), "gnubg.version is missing"
+    assert hasattr(gnubg, "__version__"), "gnubg.__version__ is missing"
+    assert hasattr(gnubg, "full_version"), "gnubg.full_version is missing"
+    assert hasattr(gnubg, "git_revision"), "gnubg.git_revision is missing"
+    assert hasattr(gnubg, "release"), "gnubg.release is missing"
+    assert hasattr(gnubg, "short_version"), "gnubg.short_version is missing"
