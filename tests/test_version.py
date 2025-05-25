@@ -1,6 +1,37 @@
 import pytest
 import gnubg
 
+VERSION_PATTERN = r"""
+    v?
+    (?:
+        (?:(?P<epoch>[0-9]+)!)?                           # epoch
+        (?P<release>[0-9]+(?:\.[0-9]+)*)                  # release segment
+        (?P<pre>                                          # pre-release
+            [-_\.]?
+            (?P<pre_l>(a|b|c|rc|alpha|beta|pre|preview))
+            [-_\.]?
+            (?P<pre_n>[0-9]+)?
+        )?
+        (?P<post>                                         # post release
+            (?:-(?P<post_n1>[0-9]+))
+            |
+            (?:
+                [-_\.]?
+                (?P<post_l>post|rev|r)
+                [-_\.]?
+                (?P<post_n2>[0-9]+)?
+            )
+        )?
+        (?P<dev>                                          # dev release
+            [-_\.]?
+            (?P<dev_l>dev)
+            [-_\.]?
+            (?P<dev_n>[0-9]+)?
+        )?
+    )
+    (?:\+(?P<local>[a-z0-9]+(?:[-_\.][a-z0-9]+)*))?       # local version
+"""
+
 @pytest.fixture
 def version_module():
     # Import the version module from within gnubg package
@@ -17,8 +48,7 @@ def test_version_attributes(version_module):
 
 def test_version_format(version_module):
     import re
-    pattern = r'^\d+\.\d+\.\d+(a\d+|b\d+|rc\d+|\.dev\d+)?(\+git\d{8}\.[a-f0-9]{7})?$'
-    assert re.match(pattern, version_module.version), (
+    assert re.match(VERSION_PATTERN, version_module.version), (
         f"Version '{version_module.version}' does not match expected format"
     )
 
@@ -28,12 +58,14 @@ def test_git_revision(version_module):
     if git_rev:
         assert all(c in '0123456789abcdef' for c in git_rev), "git_revision must be hexadecimal"
 
-def test_version_imported_into_main_package():
+def test_version_values_match():
     import gnubg
+    import gnubg.__version__ as v
 
-    assert hasattr(gnubg, "version"), "gnubg.version is missing"
-    assert hasattr(gnubg, "__version__"), "gnubg.__version__ is missing"
-    assert hasattr(gnubg, "full_version"), "gnubg.full_version is missing"
-    assert hasattr(gnubg, "git_revision"), "gnubg.git_revision is missing"
-    assert hasattr(gnubg, "release"), "gnubg.release is missing"
-    assert hasattr(gnubg, "short_version"), "gnubg.short_version is missing"
+    assert gnubg.version == v.version
+    assert gnubg.__version__ == v.__version__
+    assert gnubg.full_version == v.full_version
+    assert gnubg.git_revision == v.git_revision
+    assert gnubg.release == v.release
+    assert gnubg.short_version == v.short_version
+
