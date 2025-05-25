@@ -42,7 +42,7 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - uses: .github/actions/build-wheel
+      - uses: ./.github/actions/build-wheel
         with:
           python: ${{ matrix.python }}
           os: ${{ matrix.os }}
