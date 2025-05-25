@@ -1,0 +1,42 @@
+# .github/workflows/build-wheels.yml
+name: Build & test wheels
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - "ubuntu-latest"
+          - "macos-13"
+          - "macos-14"
+          - "windows-latest"
+        python:
+          - "cp37"
+          - "cp38"
+          - "cp39"
+          - "cp310"
+          - "cp311"
+          - "cp312"
+          - "cp313"
+        exclude:
+          - os: "macos-14"
+            python: "cp37"
+
+    steps:
+      - uses: ./.github/actions/build-wheel
+        with:
+          python: ${{ matrix.python }}
+          os: ${{ matrix.os }}
