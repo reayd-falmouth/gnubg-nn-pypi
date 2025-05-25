@@ -42,7 +42,8 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - uses: ./.github/actions/build-wheel
+      - name: Build wheels action
+        uses: ./.github/actions/build-wheel
         with:
           python: ${{ matrix.python }}
           os: ${{ matrix.os }}

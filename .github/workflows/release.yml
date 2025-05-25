@@ -42,7 +42,8 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - uses: ./.github/actions/build-wheel
+      - name: Build wheels action
+        uses: ./.github/actions/build-wheel
         with:
           python: ${{ matrix.python }}
           os: ${{ matrix.os }}
@@ -58,4 +59,4 @@ jobs:
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
-        run: twine upload --repository ${{ inputs.environment }} wheelhouse/*.whl
+        run: twine upload --verbose --repository ${{ inputs.environment }} wheelhouse/*.whl
