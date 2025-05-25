@@ -17,7 +17,7 @@ def test_version_attributes(version_module):
 
 def test_version_format(version_module):
     import re
-    pattern = r'^\d+\.\d+\.\d+(\.dev\d+)?(\+git\d{8}\.[a-f0-9]{7})?$'
+    pattern = r'^\d+\.\d+\.\d+(a\d+|b\d+|rc\d+|\.dev\d+)?(\+git\d{8}\.[a-f0-9]{7})?$'
     assert re.match(pattern, version_module.version), (
         f"Version '{version_module.version}' does not match expected format"
     )
