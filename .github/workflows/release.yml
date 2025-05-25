@@ -9,8 +9,8 @@ on:
         default: "testpypi"
         type: choice
         options:
-          - testpypi
-          - pypi
+          - "testpypi"
+          - "pypi"
 
 jobs:
   build:
