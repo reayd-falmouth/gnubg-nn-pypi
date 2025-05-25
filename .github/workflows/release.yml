@@ -35,6 +35,7 @@ jobs:
             python: "cp37"
 
     runs-on: ${{ matrix.os }}
+    environment: ${{ inputs.environment }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
