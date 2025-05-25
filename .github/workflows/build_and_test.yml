@@ -24,16 +24,12 @@ jobs:
           - "macos-14"
           - "windows-latest"
         python:
-          - "cp37"
           - "cp38"
           - "cp39"
           - "cp310"
           - "cp311"
           - "cp312"
           - "cp313"
-        exclude:
-          - os: "macos-14"
-            python: "cp37"
 
     steps:
       - name: Checkout code
@@ -42,7 +38,8 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - uses: ./.github/actions/build-wheel
+      - name: Build wheels action
+        uses: ./.github/actions/build-wheel
         with:
           python: ${{ matrix.python }}
           os: ${{ matrix.os }}
