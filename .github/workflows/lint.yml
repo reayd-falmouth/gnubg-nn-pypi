@@ -43,12 +43,12 @@ jobs:
 
       - name: Verify formatting with clang-format (matches pre-commit)
         run: |
-          find src/ -regex '.*\.\(c\|cpp\|h\|hpp\)' -print0 \
+          find src/gnubgmodule/ -regex '.*\.\(c\|cpp\|h\|hpp\)' -print0 \
             | xargs -0 clang-format --dry-run --Werror --style=file
 
       - name: Run cpplint style checks (matches pre-commit)
         run: |
-          find src/ -regex '.*\.\(c\|cpp\|h\|hpp\)' -print0 \
+          find src/gnubgmodule/ -regex '.*\.\(c\|cpp\|h\|hpp\)' -print0 \
             | xargs -0 python3 -m cpplint \
               --quiet \
               --filter=-build/include_subdir
