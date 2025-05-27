@@ -75,7 +75,7 @@ void initnet(
 #include "br.h"
 #include "osr.h"
 
-extern "C" PyMODINIT_FUNC PyInit_gnubg(void);
+extern "C" PyMODINIT_FUNC PyInit__gnubg(void);
 
 // shorthand 26‐element board for bearoff/resign logic
 typedef int16_t AnalyzeBoard[26];
@@ -1559,7 +1559,7 @@ static std::string find_data_dir(PyObject *module) {
   // Get handle for this module
   if (GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
                              GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
-                         (LPCSTR)&PyInit_gnubg, &h)) {
+                         (LPCSTR)&PyInit__gnubg, &h)) {
     char buf[MAX_PATH];
     if (GetModuleFileNameA(h, buf, MAX_PATH)) {
       std::string path(buf);
