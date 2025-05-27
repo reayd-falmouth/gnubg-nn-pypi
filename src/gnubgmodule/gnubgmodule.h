@@ -22,8 +22,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef SRC_GNUBG_GNUBGMODULE_H_
-#define SRC_GNUBG_GNUBGMODULE_H_
+#ifndef SRC_GNUBGMODULE_GNUBGMODULE_H_
+#define SRC_GNUBGMODULE_GNUBGMODULE_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -37,4 +37,4 @@ extern "C" {
 }
 #endif
 
-#endif  // SRC_GNUBG_GNUBGMODULE_H_
+#endif  // SRC_GNUBGMODULE_GNUBGMODULE_H_

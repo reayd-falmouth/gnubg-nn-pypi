@@ -1,44 +1,44 @@
 functions = [
-    '__doc__',
-    '__name__',
-    '__package__',
-    'bearoffid2pos',
-    'bearoffprobs',
-    'bestmove',
-    'board',
-    'boardfromkey',
-    'c_bearoff',
-    'c_contact',
-    'c_crashed',
-    'c_over',
-    'c_race',
+    "__doc__",
+    "__name__",
+    "__package__",
+    "bearoffid2pos",
+    "bearoffprobs",
+    "bestmove",
+    "board",
+    "boardfromkey",
+    "c_bearoff",
+    "c_contact",
+    "c_crashed",
+    "c_over",
+    "c_race",
     #'classify',
-    'crollout',
-    'doubleroll',
-    'equities',
+    "crollout",
+    "doubleroll",
+    "equities",
     # 'id',
-    'keyofboard',
-    'moves',
-    'net',
-    'onecrace',
-    'p_0plus1',
-    'p_1sbear',
-    'p_1srace',
-    'p_bearoff',
-    'p_osr',
-    'p_prune',
-    'p_race',
-    'probs',
+    "keyofboard",
+    "moves",
+    "net",
+    "onecrace",
+    "p_0plus1",
+    "p_1sbear",
+    "p_1srace",
+    "p_bearoff",
+    "p_osr",
+    "p_prune",
+    "p_race",
+    "probs",
     #'pubbestmove',
     # 'pubevalscore',
-    'ro_auto',
-    'ro_bearoff',
-    'ro_over',
-    'ro_race',
-    'roll',
-    'rollout',
-    'set',
-    'trainer'
+    "ro_auto",
+    "ro_bearoff",
+    "ro_over",
+    "ro_race",
+    "roll",
+    "rollout",
+    "set",
+    "trainer",
 ]
 # test_module.py
 import unittest
@@ -53,8 +53,8 @@ print(dir(gnubg))
 print()
 
 # build a simple “race” board:
-board = [[0]*25, [0]*25]
-board[0][0] = 15   # X on the bar
+board = [[0] * 25, [0] * 25]
+board[0][0] = 15  # X on the bar
 board[1][24] = 15  # O on the bar
 
 # load it through the module
@@ -63,7 +63,9 @@ print("BoardFromID:", board)
 print("Key of that board:", gnubg.position_id(board))
 d1, d2 = gnubg.roll()
 print(f"Rolled: {d1}, {d2}")
-print("Key-roundtrip -> board:", gnubg.board_from_position_key(gnubg.key_of_board(board)))
+print(
+    "Key-roundtrip -> board:", gnubg.board_from_position_key(gnubg.key_of_board(board))
+)
 print("Class:", gnubg.classify(board))
 print("PUB eval bestmove:", gnubg.pub_best_move(board, d1, d2))
 print("PUB eval score:", gnubg.pub_eval_score(board))
@@ -87,17 +89,17 @@ print("rollout(board,1)       ->", gnubg.rollout("4HPwATDgc/ABMA", 1))
 
 print()
 print("=== constants ===")
-for name in ("c_over","c_bearoff","c_race","c_crashed","c_contact"):
+for name in ("c_over", "c_bearoff", "c_race", "c_crashed", "c_contact"):
     print(f" {name} =", getattr(gnubg, name))
-for name in ("p_osr","p_bearoff","p_prune","p_race","p_1srace","p_0plus1"):
+for name in ("p_osr", "p_bearoff", "p_prune", "p_race", "p_1srace", "p_0plus1"):
     print(f" {name} =", getattr(gnubg, name))
-for name in ("ro_auto","ro_over","ro_bearoff","ro_race"):
+for name in ("ro_auto", "ro_over", "ro_bearoff", "ro_race"):
     print(f" {name} =", getattr(gnubg, name))
 
 print()
 print("=== equities submodule ===")
 print(" available tables:", dir(gnubg.equities))
-print(" equities.value(2,3) =", gnubg.equities.value(2,3))
+print(" equities.value(2,3) =", gnubg.equities.value(2, 3))
 
 print()
 print("=== set submodule ===")
@@ -107,7 +109,7 @@ gnubg.set.shortcuts(1)
 gnubg.set.osdb(0)
 gnubg.set.ps(1, 4, 0, 0.1)
 gnubg.set.score(1, 2, 0)
-gnubg.set.cube(2, b'X')
+gnubg.set.cube(2, b"X")
 print(" set.* calls completed without error")
 
 print()
@@ -122,12 +124,14 @@ try:
     # test with known position and default arguments
     result = gnubg.evaluate_cube_decision(
         pos="4HPwATDgc/ABMA",  # valid position ID
-        n=2,                  # 2-ply analysis
-        s=b'X',  # ✅ pass as byte string
-        i=1                   # verbose output
+        n=2,  # 2-ply analysis
+        s=b"X",  # ✅ pass as byte string
+        i=1,  # verbose output
     )
     print(" evaluate_cube_decision verbose =", result)
-    assert isinstance(result, tuple) and len(result) == 6, "Expected a 6-tuple from verbose output"
+    assert (
+        isinstance(result, tuple) and len(result) == 6
+    ), "Expected a 6-tuple from verbose output"
     print(" evaluate_cube_decision passed")
 except Exception as e:
     print(" evaluate_cube_decision failed:", str(e))

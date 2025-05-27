@@ -17,6 +17,6 @@ repos:
 
     - id: cppcheck
       name: cppcheck
-      entry: bash -c 'cppcheck --enable=all --inconclusive --error-exitcode=1 --suppress=missingInclude -I src/ src/'
+      entry: bash -c 'cppcheck --enable=all --inconclusive --error-exitcode=1 --suppress=missingInclude -I src/gnubgmodule src/gnubgmodule'
       language: system
       files: ^src/.*\.(cpp|c|h|hpp)$

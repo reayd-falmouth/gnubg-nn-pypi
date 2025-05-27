@@ -75,7 +75,7 @@ void initnet(
 #include "br.h"
 #include "osr.h"
 
-extern "C" PyMODINIT_FUNC PyInit_gnubg(void);
+extern "C" PyMODINIT_FUNC PyInit__gnubg(void);
 
 // shorthand 26‐element board for bearoff/resign logic
 typedef int16_t AnalyzeBoard[26];
@@ -1548,7 +1548,7 @@ static PyModuleDef gnubg_set_module = {
 };
 
 static struct PyModuleDef gnubgmodule = {
-    PyModuleDef_HEAD_INIT, "gnubg",
+    PyModuleDef_HEAD_INIT, "_gnubg",
     "Python bindings for GNUBG neural net evaluation", -1, GnubgMethods};
 
 //---------------------------------------------------------------------------
@@ -1559,7 +1559,7 @@ static std::string find_data_dir(PyObject *module) {
   // Get handle for this module
   if (GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
                              GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
-                         (LPCSTR)&PyInit_gnubg, &h)) {
+                         (LPCSTR)&PyInit__gnubg, &h)) {
     char buf[MAX_PATH];
     if (GetModuleFileNameA(h, buf, MAX_PATH)) {
       std::string path(buf);
@@ -1603,7 +1603,8 @@ static std::string find_data_dir(PyObject *module) {
 
 //---------------------------------------------------------------------------
 // Module initialization
-PyMODINIT_FUNC PyInit_gnubg(void) {
+// cppcheck-suppress unusedFunction
+PyMODINIT_FUNC PyInit__gnubg(void) {
   // Initialize the module
   PyObject *m = PyModule_Create(&gnubgmodule);
   if (m == NULL) {

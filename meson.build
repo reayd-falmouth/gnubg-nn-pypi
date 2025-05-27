@@ -29,15 +29,20 @@ generate_version = custom_target(
 
 # Install __init__.py
 install_data(
-    'src/gnubg/__init__.py',
+    'src/gnubgmodule/__init__.py',
+    install_dir: join_paths(pkgdir, 'gnubg')
+)
+# Install gnubg.pyi
+install_data(
+    'src/gnubgmodule/gnubg.pyi',
     install_dir: join_paths(pkgdir, 'gnubg')
 )
 
 install_data(
-    'src/gnubg/data/gnubg.weights',
-    'src/gnubg/data/gnubg_ts0.bd',
-    'src/gnubg/data/gnubg_os0.bd',
-    'src/gnubg/data/gnubg_os.db',
+    'src/gnubgmodule/data/gnubg.weights',
+    'src/gnubgmodule/data/gnubg_ts0.bd',
+    'src/gnubgmodule/data/gnubg_os0.bd',
+    'src/gnubgmodule/data/gnubg_os.db',
     install_dir: join_paths(pkgdir, 'gnubg', 'data')
 )
 
@@ -60,41 +65,41 @@ add_project_arguments(
 
 # Include directories
 gnubg_inc = include_directories(
-    'gnubg-nn',
-    'gnubg-nn/gnubg',
-    'gnubg-nn/gnubg/lib',
-    'gnubg-nn/analyze',
-    'gnubg-nn/py',
+    'src/gnubg-nn',
+    'src/gnubg-nn/gnubg',
+    'src/gnubg-nn/gnubg/lib',
+    'src/gnubg-nn/analyze',
+    'src/gnubg-nn/py',
 )
 
 # C sources
 c_sources = files(
-    'gnubg-nn/gnubg/bearoffdb.c',
-    'gnubg-nn/gnubg/eggmoveg.c',
-    'gnubg-nn/gnubg/eval.c',
-    'gnubg-nn/gnubg/inputs.c',
-    'gnubg-nn/gnubg/mt19937int.c',
-    'gnubg-nn/gnubg/positionid.c',
-    'gnubg-nn/gnubg/pub_eval.c',
-    'gnubg-nn/gnubg/lib/hash.c',
-    'gnubg-nn/gnubg/lib/neuralnet.c',
-    'gnubg-nn/gnubg/lib/nsse.c',
+    'src/gnubg-nn/gnubg/bearoffdb.c',
+    'src/gnubg-nn/gnubg/eggmoveg.c',
+    'src/gnubg-nn/gnubg/eval.c',
+    'src/gnubg-nn/gnubg/inputs.c',
+    'src/gnubg-nn/gnubg/mt19937int.c',
+    'src/gnubg-nn/gnubg/positionid.c',
+    'src/gnubg-nn/gnubg/pub_eval.c',
+    'src/gnubg-nn/gnubg/lib/hash.c',
+    'src/gnubg-nn/gnubg/lib/neuralnet.c',
+    'src/gnubg-nn/gnubg/lib/nsse.c',
 )
 
 # C++ sources
 cpp_sources = files(
-    'src/gnubg/gnubgmodule.cpp',
-    'gnubg-nn/analyze/analyze.cc',
-    'gnubg-nn/analyze/bm.cc',
-    'gnubg-nn/analyze/bms.cc',
-    'gnubg-nn/analyze/danalyze.cc',
-    'gnubg-nn/analyze/dice_gen.cc',
-    'gnubg-nn/analyze/equities.cc',
-    'gnubg-nn/analyze/mec.cc',
-    'gnubg-nn/analyze/player.cc',
-    'gnubg-nn/gnubg/bearoffgammon.cc',
-    'gnubg-nn/gnubg/racebg.cc',
-    'gnubg-nn/gnubg/osr.cc',
+    'src/gnubgmodule/gnubgmodule.cpp',
+    'src/gnubg-nn/analyze/analyze.cc',
+    'src/gnubg-nn/analyze/bm.cc',
+    'src/gnubg-nn/analyze/bms.cc',
+    'src/gnubg-nn/analyze/danalyze.cc',
+    'src/gnubg-nn/analyze/dice_gen.cc',
+    'src/gnubg-nn/analyze/equities.cc',
+    'src/gnubg-nn/analyze/mec.cc',
+    'src/gnubg-nn/analyze/player.cc',
+    'src/gnubg-nn/gnubg/bearoffgammon.cc',
+    'src/gnubg-nn/gnubg/racebg.cc',
+    'src/gnubg-nn/gnubg/osr.cc',
 )
 
 # Build static library bundling all GNUBG engine code
@@ -115,7 +120,7 @@ gnubg_dep = declare_dependency(
 
 # Build the Python extension
 py_ext = python3.extension_module(
-    'gnubg',
+    '_gnubg',
     [],                          # no extra sources; they live in the static lib
     dependencies : [gnubg_dep],
     install      : true,
