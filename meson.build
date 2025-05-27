@@ -32,6 +32,11 @@ install_data(
     'src/gnubg/__init__.py',
     install_dir: join_paths(pkgdir, 'gnubg')
 )
+# Install gnubg.pyi
+install_data(
+    'src/gnubg/gnubg.pyi',
+    install_dir: join_paths(pkgdir, 'gnubg')
+)
 
 install_data(
     'src/gnubg/data/gnubg.weights',
