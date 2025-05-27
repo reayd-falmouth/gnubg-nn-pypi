@@ -12,8 +12,40 @@ GNUBG
 
 GNUBG NeuralNet Python bindings bring the powerful GNUBG backgammon neural-network engine to Python 3.
 
+## Quick Start
+
+`gnubg` is a native Python extension module that wraps the GNU Backgammon neural-net evaluation engine, so you can call 
+the same position-analysis and cube-decision routines that power the GUI from any Python 3.8–3.13 script or application. It’s ideal for batch processing, data-science workflows, or building custom tools and UIs.
+
+### Installation
+
+```bash
+pip install gnubg
+````
+
+### Getting Started
+
+```python
+import gnubg
+
+# Load the engine (weights, bear-off tables, etc. are initialized)
+gnubg.initnet()
+
+# Convert a position key (20-char A–Z or 14-char Base64) to a board
+board = gnubg.boardfromkey("4HPwATDgc/ABMA")
+
+# Evaluate win/gammon/backgammon probabilities and equity at 4 plies
+win, gamm, bg, equity = gnubg.probabilities(board, 4)
+
+print(f"Win: {win:.3f}, Gammon: {gamm:.3f}, Backgammon: {bg:.3f}, Equity: {equity:.3f}")
+```
+
+That’s all you need to get up and running! For detailed API docs, advanced build options, and configuration, see the 
+sections below or visit the full documentation on [ReadTheDocs](https://gnubg.readthedocs.io/en/latest/).
+
+* **ReadTheDocs** [https://gnubg.readthedocs.io/en/latest/](https://gnubg.readthedocs.io/en/latest/)
 * **Website:** [https://www.gnu.org/software/gnubg/](https://www.gnu.org/software/gnubg/)
-* **Documentation:** [http://www.gnubg.org/documentation/doku.php?id=gnu_backgammon_faq](http://www.gnubg.org/documentation/doku.php?id=gnu_backgammon_faq)
+* **Original Documentation:** [http://www.gnubg.org/documentation/doku.php?id=gnu_backgammon_faq](http://www.gnubg.org/documentation/doku.php?id=gnu_backgammon_faq)
 * **Mailing list:** [https://lists.gnu.org/mailman/listinfo/gnubg](https://lists.gnu.org/mailman/listinfo/gnubg)
 * **Source code:** [https://github.com/reayd-falmouth/gnubg-nn-pypi](https://github.com/reayd-falmouth/gnubg-nn-pypi)
 * **GNUBG Project:** [https://git.savannah.gnu.org/cgit/gnubg/gnubg-nn.git](https://git.savannah.gnu.org/cgit/gnubg/gnubg-nn.git)
