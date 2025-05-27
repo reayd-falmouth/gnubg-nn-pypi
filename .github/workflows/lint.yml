@@ -39,7 +39,7 @@ jobs:
             --error-exitcode=1 \
             --suppress=missingInclude \
             --suppress=missingIncludeSystem \
-            -I src/ src/
+            -I src/gnubgmodule src/gnubgmodule
 
       - name: Verify formatting with clang-format (matches pre-commit)
         run: |
