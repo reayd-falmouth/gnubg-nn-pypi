@@ -1548,7 +1548,7 @@ static PyModuleDef gnubg_set_module = {
 };
 
 static struct PyModuleDef gnubgmodule = {
-    PyModuleDef_HEAD_INIT, "gnubg",
+    PyModuleDef_HEAD_INIT, "_gnubg",
     "Python bindings for GNUBG neural net evaluation", -1, GnubgMethods};
 
 //---------------------------------------------------------------------------
@@ -1603,7 +1603,8 @@ static std::string find_data_dir(PyObject *module) {
 
 //---------------------------------------------------------------------------
 // Module initialization
-PyMODINIT_FUNC PyInit_gnubg(void) {
+// cppcheck-suppress unusedFunction
+PyMODINIT_FUNC PyInit__gnubg(void) {
   // Initialize the module
   PyObject *m = PyModule_Create(&gnubgmodule);
   if (m == NULL) {
